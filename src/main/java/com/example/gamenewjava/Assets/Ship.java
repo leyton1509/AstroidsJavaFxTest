@@ -61,11 +61,11 @@ public class Ship extends DefaultAsset{
     }
 
     public Projectile fireBasicProjectile() throws FileNotFoundException {
-        return new Projectile("BasicBullet", 10, 5, "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\basicbullet.png", (int) (getImageView().getX() + getImageView().getFitWidth()  / 2), (int) (getImageView().getY() + getImageView().getFitHeight() / 2), getImageView().getRotate(), 3, basicProjectileDamge);
+        return new Projectile("Bullet", 10, 5, "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\basicbullet.png", (int) (getImageView().getX() + getImageView().getFitWidth()  / 2), (int) (getImageView().getY() + getImageView().getFitHeight() / 2), getImageView().getRotate(), 3, basicProjectileDamge);
     }
 
     public Projectile fireAdvancedProjectile() throws FileNotFoundException {
-        return new Projectile("AdvancedBullet", 25, 12, "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\advancedbullet.png", (int) (getImageView().getX() + getImageView().getFitWidth()  / 2), (int) (getImageView().getY() + getImageView().getFitHeight() / 2), getImageView().getRotate(), 1.5, advancedProjectileDamage);
+        return new Projectile("Bullet", 25, 12, "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\advancedbullet.png", (int) (getImageView().getX() + getImageView().getFitWidth()  / 2), (int) (getImageView().getY() + getImageView().getFitHeight() / 2), getImageView().getRotate(), 1.5, advancedProjectileDamage);
     }
 
     public void setTimeSinceLastFiredAdvanced(long timeSinceLastFiredAdvanced) {

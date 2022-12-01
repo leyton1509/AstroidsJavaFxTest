@@ -212,7 +212,7 @@ public class TitleScreenController {
 
                     collisionDetection(assetsList, asset, removeViews, removeAssets);
 
-                    if(asset.getName().equals("BasicBullet") || asset.getName().equals("Rock")){
+                    if(asset.getName().equals("Bullet") || asset.getName().equals("Rock")){
 
                         if(asset.getImageView().getX() < 0 || asset.getImageView().getX() > LEVEL_WIDTH || asset.getImageView().getY() < 0 || asset.getImageView().getY() > LEVEL_HEIGHT){
                             removeViews.add(asset.getImageView());
@@ -237,7 +237,7 @@ public class TitleScreenController {
             if(asset != assetInList){
                 if(asset.getImageView().intersects(assetInList.getImageView().getBoundsInLocal())){
 
-                    if(asset.getName().equals("BasicBullet")){
+                    if(asset.getName().equals("Bullet")){
                         if(assetInList.getName().equals("Rock")){
                             assetInList.setHealth(assetInList.getHealth() - asset.getDamage());
                             if(assetInList.getHealth() <= 0){
