@@ -67,6 +67,8 @@ public class TitleScreenController {
     private int currentAmountOfAstroids = 0;
 
     private int userScore = 0;
+
+    private long timeSinceLastAstroidIncrease = 0;
     
     public void generateNewAstroid() throws FileNotFoundException {
         int ranAstroid = (int) (Math.random() * (4) + 0);
@@ -226,8 +228,6 @@ public class TitleScreenController {
             }
         });
 
-
-
         new AnimationTimer()
         {
             public void handle(long currentNanoTime)
@@ -257,6 +257,7 @@ public class TitleScreenController {
                     newBox.getChildren().removeAll(removeViews);
                     assetsList.removeAll(removeAssets);
 
+
                     if(currentAmountOfAstroids < maxNumberOfAstroids){
                         try {
                             generateNewAstroid();
@@ -264,6 +265,11 @@ public class TitleScreenController {
                         } catch (FileNotFoundException e) {
                             throw new RuntimeException(e);
                         }
+                    }
+
+                    if(System.currentTimeMillis() > timeSinceLastAstroidIncrease + (15*1000)){
+                        maxNumberOfAstroids = maxNumberOfAstroids+1;
+                        timeSinceLastAstroidIncrease = System.currentTimeMillis();
                     }
 
                     lastUpdate = currentNanoTime;
