@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="10a141b0-295e-45e1-b942-d47de3b9e986" name="Changes" comment="Will now add one more astroid every 15 seconds">
+    <list default="true" id="10a141b0-295e-45e1-b942-d47de3b9e986" name="Changes" comment="Creates a pop up upon death with the users score">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Scenes/TitleScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Scenes/TitleScreenController.java" afterDir="false" />
     </list>
@@ -37,19 +37,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_directory_selection": "L:/Novus/Code/JFX/GameNewJava/src/main/java/com/example/gamenewjava",
-    "last_opened_file_path": "L:/Novus/Code/JFX/GameNewJava/src/main/resources/com/example/gamenewjava",
-    "list.type.of.created.stylesheet": "CSS",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pathVariables"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_directory_selection&quot;: &quot;L:/Novus/Code/JFX/GameNewJava/src/main/java/com/example/gamenewjava&quot;,
+    &quot;last_opened_file_path&quot;: &quot;L:/Novus/Code/JFX/GameNewJava/src/main/resources/com/example/gamenewjava&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pathVariables&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="L:\Novus\Code\JFX\GameNewJava\src\main\resources\com\example\gamenewjava" />
@@ -75,7 +75,8 @@
       <workItem from="1669825036269" duration="491000" />
       <workItem from="1669840795414" duration="13000" />
       <workItem from="1669890695848" duration="1605000" />
-      <workItem from="1669892311496" duration="32110000" />
+      <workItem from="1669892311496" duration="32177000" />
+      <workItem from="1669928467444" duration="3162000" />
     </task>
     <task id="LOCAL-00001" summary="Renamed classes, initial commit, created a title scene">
       <created>1669822735281</created>
@@ -168,7 +169,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669925614781</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Creates a pop up upon death with the users score">
+      <created>1669928181973</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1669928181973</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -207,7 +215,8 @@
     <MESSAGE value="Simplified a lot of code" />
     <MESSAGE value="Adds new astroids to the map once one clears, need to do it so it doesnt just spawn in the middle" />
     <MESSAGE value="Will now add one more astroid every 15 seconds" />
-    <option name="LAST_COMMIT_MESSAGE" value="Will now add one more astroid every 15 seconds" />
+    <MESSAGE value="Creates a pop up upon death with the users score" />
+    <option name="LAST_COMMIT_MESSAGE" value="Creates a pop up upon death with the users score" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -28,7 +28,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Popup;
@@ -61,6 +63,9 @@ public class TitleScreenController {
     private Rectangle healtbarRed = new Rectangle((LEVEL_WIDTH / 3), (LEVEL_HEIGHT / 30), Color.RED);
 
     private Rectangle healtbarWhite = new  Rectangle((LEVEL_WIDTH / 3), (LEVEL_HEIGHT / 30), Color.WHITE);
+
+    private Text userScoreText = new Text();
+
 
     private Pane newBox = new Pane();
 
@@ -113,6 +118,18 @@ public class TitleScreenController {
         return astroids;
     }
 
+    public void updateScoreText(){
+        userScoreText.setText(String.valueOf(userScore));
+    }
+
+    public void setUpScoreText(){
+        updateScoreText();
+        userScoreText.setX(LEVEL_WIDTH / 2);
+        userScoreText.setY(LEVEL_HEIGHT * 0.05);
+        userScoreText.setFill(Paint.valueOf("white"));
+        userScoreText.setFont(Font.font("Verdana", 20));
+    }
+
 
     public void setUpHealthBar(){
         healtbarRed.setX(LEVEL_WIDTH / 2 - (healtbarRed.getWidth() / 2) );
@@ -143,11 +160,13 @@ public class TitleScreenController {
         }
 
         setUpHealthBar();
+        setUpScoreText();
 
         assetsList.add(ship);
         newBox.getChildren().add(ship.getImageView());
         newBox.getChildren().add(healtbarWhite);
         newBox.getChildren().add(healtbarRed);
+        newBox.getChildren().add(userScoreText);
 
         scene = new Scene(newBox, LEVEL_WIDTH, LEVEL_HEIGHT);
         stage.setTitle("Level One");
@@ -167,155 +186,148 @@ public class TitleScreenController {
 
     @FXML
     protected void play(Event event) throws IOException {
-
-        // while(run) {
-
-            initialSetUpOfScene();
-            scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-                @Override
-                public void handle(KeyEvent event) {
-                    switch (event.getCode()) {
-                        case LEFT:
-                            leftPressed.set(true);
-                            break;
-                        case RIGHT:
-                            rightPressed.set(true);
-                            break;
-                        case UP:
-                            upPressed.set(true);
-                            break;
-                        case DOWN:
-                            downPressed.set(true);
-                            break;
-                        case SHIFT:
-                            try {
-                                if (System.currentTimeMillis() > (ship.getTimeSinceLastFiredAdvanced() + (1.5 * 1000))) {
-                                    Projectile proj = ship.fireAdvancedProjectile();
-                                    assetsList.add(proj);
-                                    newBox.getChildren().add(proj.getImageView());
-                                    ship.setTimeSinceLastFiredAdvanced(System.currentTimeMillis());
-                                }
-
-                            } catch (FileNotFoundException e) {
-                                throw new RuntimeException(e);
-                            }
-                            break;
-
-                        case SPACE:
-                            try {
-                                Projectile proj = ship.fireBasicProjectile();
+        initialSetUpOfScene();
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                switch (event.getCode()) {
+                    case LEFT:
+                        leftPressed.set(true);
+                        break;
+                    case RIGHT:
+                        rightPressed.set(true);
+                        break;
+                    case UP:
+                        upPressed.set(true);
+                        break;
+                    case DOWN:
+                        downPressed.set(true);
+                        break;
+                    case SHIFT:
+                        try {
+                            if (System.currentTimeMillis() > (ship.getTimeSinceLastFiredAdvanced() + (1.5 * 1000))) {
+                                Projectile proj = ship.fireAdvancedProjectile();
                                 assetsList.add(proj);
                                 newBox.getChildren().add(proj.getImageView());
+                                ship.setTimeSinceLastFiredAdvanced(System.currentTimeMillis());
+                            }
 
+                        } catch (FileNotFoundException e) {
+                            throw new RuntimeException(e);
+                        }
+                        break;
+
+                    case SPACE:
+                        try {
+                            Projectile proj = ship.fireBasicProjectile();
+                            assetsList.add(proj);
+                            newBox.getChildren().add(proj.getImageView());
+
+                        } catch (FileNotFoundException e) {
+                            throw new RuntimeException(e);
+                        }
+                }
+
+                if (leftPressed.get()) {
+                    ship.rotateLeft();
+                }
+                if (rightPressed.get()) {
+                    ship.rotateRight();
+                }
+                if (upPressed.get()) {
+                    ship.moveForward();
+                }
+                if (downPressed.get()) {
+                    ship.moveBackwards();
+                }
+
+            }
+        });
+
+        scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                switch (event.getCode()) {
+                    case LEFT:
+                        leftPressed.set(false);
+                        break;
+                    case RIGHT:
+                        rightPressed.set(false);
+                        break;
+                    case UP:
+                        upPressed.set(false);
+                        break;
+                    case DOWN:
+                        downPressed.set(false);
+                        break;
+                    // case SHIFT: running = true; break;
+                }
+            }
+        });
+
+
+        new AnimationTimer() {
+            public void handle(long currentNanoTime) {
+
+                if(run){
+                    if (currentNanoTime - lastUpdate > 2_000_000) {
+                        LinkedList<ImageView> removeViews = new LinkedList<>();
+                        LinkedList<DefaultAsset> removeAssets = new LinkedList<>();
+                        for (DefaultAsset asset : assetsList) {
+
+                            run = collisionDetection(assetsList, asset, removeViews, removeAssets);
+
+                            if(!run){
+                                System.out.println("You died!");
+                                createDeathPopUp();
+
+                                newBox.getChildren().removeAll(newBox.getChildren());
+                                currentAmountOfAstroids = 1000;
+
+                            }
+
+                            if (asset.getName().equals("Bullet") || asset.getName().equals("Rock")) {
+
+                                if (asset.getImageView().getX() < -100 || asset.getImageView().getX() > LEVEL_WIDTH + 100 || asset.getImageView().getY() < -100 || asset.getImageView().getY() > LEVEL_HEIGHT + 100) {
+                                    removeViews.add(asset.getImageView());
+                                    removeAssets.add(asset);
+
+                                    if (asset.getName().equals("Rock")) {
+                                        currentAmountOfAstroids--;
+                                        userScore++;
+                                    }
+                                }
+
+                            }
+                            asset.onGameTick();
+                        }
+                        newBox.getChildren().removeAll(removeViews);
+                        assetsList.removeAll(removeAssets);
+
+
+                        if (currentAmountOfAstroids < maxNumberOfAstroids) {
+                            try {
+                                generateNewAstroid();
+                                currentAmountOfAstroids++;
                             } catch (FileNotFoundException e) {
                                 throw new RuntimeException(e);
                             }
-                    }
-
-                    if (leftPressed.get()) {
-                        ship.rotateLeft();
-                    }
-                    if (rightPressed.get()) {
-                        ship.rotateRight();
-                    }
-                    if (upPressed.get()) {
-                        ship.moveForward();
-                    }
-                    if (downPressed.get()) {
-                        ship.moveBackwards();
-                    }
-
-                }
-            });
-
-            scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
-                @Override
-                public void handle(KeyEvent event) {
-                    switch (event.getCode()) {
-                        case LEFT:
-                            leftPressed.set(false);
-                            break;
-                        case RIGHT:
-                            rightPressed.set(false);
-                            break;
-                        case UP:
-                            upPressed.set(false);
-                            break;
-                        case DOWN:
-                            downPressed.set(false);
-                            break;
-                        // case SHIFT: running = true; break;
-                    }
-                }
-            });
-
-
-            new AnimationTimer() {
-                public void handle(long currentNanoTime) {
-
-                    if(run){
-                        if (currentNanoTime - lastUpdate > 2_000_000) {
-                            LinkedList<ImageView> removeViews = new LinkedList<>();
-                            LinkedList<DefaultAsset> removeAssets = new LinkedList<>();
-                            for (DefaultAsset asset : assetsList) {
-
-                                run = collisionDetection(assetsList, asset, removeViews, removeAssets);
-
-                                if(!run){
-                                    System.out.println("You died!");
-                                    createDeathPopUp();
-
-                                    newBox.getChildren().removeAll(newBox.getChildren());
-                                    currentAmountOfAstroids = 1000;
-
-
-                                    // Platform.exit();
-                                }
-
-                                if (asset.getName().equals("Bullet") || asset.getName().equals("Rock")) {
-
-                                    if (asset.getImageView().getX() < -100 || asset.getImageView().getX() > LEVEL_WIDTH + 100 || asset.getImageView().getY() < -100 || asset.getImageView().getY() > LEVEL_HEIGHT + 100) {
-                                        removeViews.add(asset.getImageView());
-                                        removeAssets.add(asset);
-
-                                        if (asset.getName().equals("Rock")) {
-                                            currentAmountOfAstroids--;
-                                        }
-                                    }
-
-                                }
-                                asset.onGameTick();
-                            }
-                            newBox.getChildren().removeAll(removeViews);
-                            assetsList.removeAll(removeAssets);
-
-
-                            if (currentAmountOfAstroids < maxNumberOfAstroids) {
-                                try {
-                                    generateNewAstroid();
-                                    currentAmountOfAstroids++;
-                                } catch (FileNotFoundException e) {
-                                    throw new RuntimeException(e);
-                                }
-                            }
-
-                            if (System.currentTimeMillis() > timeSinceLastAstroidIncrease + (15 * 1000)) {
-                                maxNumberOfAstroids = maxNumberOfAstroids + 1;
-                                timeSinceLastAstroidIncrease = System.currentTimeMillis();
-                            }
-
-                            lastUpdate = currentNanoTime;
                         }
 
+                        updateScoreText();
+
+                        if (System.currentTimeMillis() > timeSinceLastAstroidIncrease + (15 * 1000)) {
+                            maxNumberOfAstroids = maxNumberOfAstroids + 1;
+                            timeSinceLastAstroidIncrease = System.currentTimeMillis();
+                        }
+
+                        lastUpdate = currentNanoTime;
+
                     }
-
-
-
                 }
-            }.start();
-
+            }
+        }.start();
         //}
-
     }
 
 
@@ -330,6 +342,7 @@ public class TitleScreenController {
                                 removeViews.add(assetInList.getImageView());
                                 removeAssets.add(assetInList);
                                 currentAmountOfAstroids--;
+                                userScore = userScore + assetInList.getWidth();
                             }
                             removeViews.add(asset.getImageView());
                             removeAssets.add(asset);
