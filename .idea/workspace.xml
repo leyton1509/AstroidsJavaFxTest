@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="10a141b0-295e-45e1-b942-d47de3b9e986" name="Changes" comment="Working collision system, kind of breaks with high number of astroids">
+    <list default="true" id="10a141b0-295e-45e1-b942-d47de3b9e986" name="Changes" comment="Has a working health bar">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/DefaultAsset.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/DefaultAsset.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Projectile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Projectile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Rock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Rock.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Ship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Ship.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Scenes/TitleScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Scenes/TitleScreenController.java" afterDir="false" />
@@ -76,7 +75,7 @@
       <workItem from="1669825036269" duration="491000" />
       <workItem from="1669840795414" duration="13000" />
       <workItem from="1669890695848" duration="1605000" />
-      <workItem from="1669892311496" duration="23687000" />
+      <workItem from="1669892311496" duration="26704000" />
     </task>
     <task id="LOCAL-00001" summary="Renamed classes, initial commit, created a title scene">
       <created>1669822735281</created>
@@ -127,7 +126,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669912838374</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Collision detection working for bullets">
+      <created>1669919777385</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1669919777385</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -158,7 +164,10 @@
     <MESSAGE value="Fixed the error of concurrent removing" />
     <MESSAGE value="Working on collision detecting added movement speed" />
     <MESSAGE value="Working collision system, kind of breaks with high number of astroids" />
-    <option name="LAST_COMMIT_MESSAGE" value="Working collision system, kind of breaks with high number of astroids" />
+    <MESSAGE value="Collision detection working for bullets" />
+    <MESSAGE value="Ship now takes damage from astroids relative to the size of the astroid" />
+    <MESSAGE value="Has a working health bar" />
+    <option name="LAST_COMMIT_MESSAGE" value="Has a working health bar" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

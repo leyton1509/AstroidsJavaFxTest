@@ -22,6 +22,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
@@ -40,13 +42,17 @@ public class TitleScreenController {
     private final int LEVEL_HEIGHT = 600;
     private final int LEVEL_WIDTH = 900;
 
-    private int numberOfAstroids = 10;
+    private int numberOfAstroids = 30;
 
     final BooleanProperty leftPressed = new SimpleBooleanProperty(false);
     final BooleanProperty rightPressed = new SimpleBooleanProperty(false);
 
     final BooleanProperty upPressed = new SimpleBooleanProperty(false);
     final BooleanProperty downPressed = new SimpleBooleanProperty(false);
+
+    private Rectangle healtbarRed = new Rectangle((LEVEL_WIDTH / 3), (LEVEL_HEIGHT / 30), Color.RED);
+
+    private Rectangle healtbarWhite = new  Rectangle((LEVEL_WIDTH / 3), (LEVEL_HEIGHT / 30), Color.WHITE);
 
     @FXML
     protected void play(Event event) throws IOException {
@@ -103,13 +109,20 @@ public class TitleScreenController {
         assetsList.add(ship);
         newBox.getChildren().add(ship.getImageView());
 
+        healtbarRed.setX(LEVEL_WIDTH / 2 - (healtbarRed.getWidth() / 2) );
+        healtbarWhite.setX(LEVEL_WIDTH / 2 - (healtbarWhite.getWidth() / 2));
+        healtbarRed.setY(LEVEL_HEIGHT * 0.95);
+        healtbarWhite.setY(LEVEL_HEIGHT * 0.95);
+
+
+        newBox.getChildren().add(healtbarWhite);
+        newBox.getChildren().add(healtbarRed);
+
 
         Scene scene = new Scene(newBox, LEVEL_WIDTH, LEVEL_HEIGHT);
         stage.setTitle("Level One");
         stage.setScene(scene);
         stage.show();
-
-
 
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
@@ -127,7 +140,20 @@ public class TitleScreenController {
                     case DOWN:
                         downPressed.set(true);
                         break;
-                    // case SHIFT: running = true; break;
+                    case SHIFT:
+                        try {
+                            if(System.currentTimeMillis() > (ship.getTimeSinceLastFiredAdvanced() + (1.5*1000))){
+                                Projectile proj = ship.fireAdvancedProjectile();
+                                assetsList.add(proj);
+                                newBox.getChildren().add(proj.getImageView());
+                                ship.setTimeSinceLastFiredAdvanced(System.currentTimeMillis());
+                            }
+
+                        } catch (FileNotFoundException e) {
+                            throw new RuntimeException(e);
+                        }
+                        break;
+
                     case SPACE:
                         try {
                             Projectile proj = ship.fireBasicProjectile();
@@ -206,7 +232,7 @@ public class TitleScreenController {
 
     }
 
-    public void collisionDetection(LinkedList<DefaultAsset> assetList, DefaultAsset asset, LinkedList<ImageView> removeViews, LinkedList<DefaultAsset> removeAssets){
+    public boolean collisionDetection(LinkedList<DefaultAsset> assetList, DefaultAsset asset, LinkedList<ImageView> removeViews, LinkedList<DefaultAsset> removeAssets){
         for (DefaultAsset assetInList: assetList){
             if(asset != assetInList){
                 if(asset.getImageView().intersects(assetInList.getImageView().getBoundsInLocal())){
@@ -223,6 +249,30 @@ public class TitleScreenController {
                         }
                         
                     } else if (asset.getName().equals("Ship")) {
+                        if(assetInList.getName().equals("Rock")){
+                            if(System.currentTimeMillis() > (asset.getTimeLast() + (1.5*1000))){
+                                asset.setHealth(asset.getHealth() - assetInList.getDamage());
+                                if(assetInList.getHealth() <= 0){
+                                    return true;
+                                }
+                                System.out.println("Current health : " + asset.getHealth());
+
+                                double angleRock1 = asset.getImageView().getRotate();
+                                double speedRock2 = assetInList.getMoveSpeed();
+
+                                assetInList.setMoveSpeed(speedRock2 * 0.9 );
+                                assetInList.getImageView().setRotate(angleRock1);
+
+                                double percentage = (asset.getHealth() / asset.getMaxHealth());
+                                healtbarRed.setWidth(healtbarRed.getWidth() * percentage);
+
+                                asset.setTimeLast(System.currentTimeMillis());
+
+                            }
+
+
+
+                        }
                         
                     }
                     else if (asset.getName().equals("Rock")){
@@ -232,8 +282,6 @@ public class TitleScreenController {
                             double angleRock2 = assetInList.getImageView().getRotate();
                             double speedRock1 = asset.getMoveSpeed();
                             double speedRock2 = assetInList.getMoveSpeed();
-                            double sizeRock1 = asset.getWidth();
-                            double sizeRock2 = assetInList.getWidth();
 
                             assetInList.setMoveSpeed(speedRock2 * 0.9 );
                             asset.setMoveSpeed(speedRock1 * 0.9 );
@@ -249,6 +297,7 @@ public class TitleScreenController {
                 }
             }
         }
+        return false;
 
     }
 }

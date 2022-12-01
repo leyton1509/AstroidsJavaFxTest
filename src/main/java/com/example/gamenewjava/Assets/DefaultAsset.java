@@ -22,6 +22,18 @@ public class DefaultAsset {
 
     private double health = 0;
 
+    private double maxHealth = 0;
+
+    public long getTimeLast() {
+        return timeSinceLastHit;
+    }
+
+    public void setTimeLast(long test) {
+        this.timeSinceLastHit = test;
+    }
+
+    private long timeSinceLastHit = System.currentTimeMillis();
+
     public double getHealth() {
         return health;
     }
@@ -32,6 +44,18 @@ public class DefaultAsset {
 
     public double getDamage() {
         return damage;
+    }
+
+    public void setDamage(double damage) {
+        this.damage = damage;
+    }
+
+    public double getMaxHealth(){
+        return maxHealth;
+    }
+
+    public void setMaxHealth(double health) {
+        this.maxHealth = health;
     }
 
     public DefaultAsset(String _name, int _height, int _width, String _filepath, int _startX, int _startY) throws FileNotFoundException {

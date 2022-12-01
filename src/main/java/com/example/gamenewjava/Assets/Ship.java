@@ -7,13 +7,16 @@ public class Ship extends DefaultAsset{
 
     private int degreeOfRotation = 10;
     private double amountRotated = 0;
+    private double basicProjectileDamge = 40;
+    private double advancedProjectileDamage = 120;
 
-    private double basicProjectileDamge = 100;
+    private long timeSinceLastFiredAdvanced = System.currentTimeMillis();
 
 
     public Ship(String _name, int _height, int _width, String _filepath, int _startX, int _startY, double _moveSpeed) throws FileNotFoundException {
         super(_name, _height, _width, _filepath, _startX, _startY,_moveSpeed);
         setHealth(1000);
+        setMaxHealth(1000);
     }
 
 
@@ -61,6 +64,17 @@ public class Ship extends DefaultAsset{
         return new Projectile("BasicBullet", 10, 5, "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\basicbullet.png", (int) (getImageView().getX() + getImageView().getFitWidth()  / 2), (int) (getImageView().getY() + getImageView().getFitHeight() / 2), getImageView().getRotate(), 3, basicProjectileDamge);
     }
 
+    public Projectile fireAdvancedProjectile() throws FileNotFoundException {
+        return new Projectile("AdvancedBullet", 25, 12, "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\advancedbullet.png", (int) (getImageView().getX() + getImageView().getFitWidth()  / 2), (int) (getImageView().getY() + getImageView().getFitHeight() / 2), getImageView().getRotate(), 1.5, advancedProjectileDamage);
+    }
+
+    public void setTimeSinceLastFiredAdvanced(long timeSinceLastFiredAdvanced) {
+        this.timeSinceLastFiredAdvanced = timeSinceLastFiredAdvanced;
+    }
+
+    public long getTimeSinceLastFiredAdvanced(){
+        return timeSinceLastFiredAdvanced;
+    }
 
 
 }

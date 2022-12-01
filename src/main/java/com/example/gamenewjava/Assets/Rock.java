@@ -4,13 +4,12 @@ import java.io.FileNotFoundException;
 
 public class Rock extends DefaultAsset {
 
-
-
     public Rock(String _name, int _height, int _width, String _filepath, int _startX, int _startY,double _moveSpeed) throws FileNotFoundException {
         super(_name, _height, _width, _filepath, _startX, _startY);
         getImageView().setRotate((Math.random() * (360 - (-360)) + (-360)));
         setMoveSpeed(_moveSpeed);
-        setHealth(100);
+        setHealth(getWidth() * 4);
+        setDamage(getWidth() * 5);
     }
 
     public void moveForward(){
