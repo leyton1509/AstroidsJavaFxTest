@@ -2,6 +2,7 @@ package com.example.gamenewjava.Scenes;
 
 import com.example.gamenewjava.Assets.DefaultAsset;
 import com.example.gamenewjava.Assets.Projectile;
+import com.example.gamenewjava.Assets.Rock;
 import com.example.gamenewjava.Assets.Ship;
 import com.example.gamenewjava.Driver;
 import javafx.animation.AnimationTimer;
@@ -36,7 +37,7 @@ public class TitleScreenController {
     private VBox mainVBox;
 
     private final int LEVEL_HEIGHT = 600;
-    private final int LEVEL_WIDTH = 600;
+    private final int LEVEL_WIDTH = 900;
 
     final BooleanProperty leftPressed = new SimpleBooleanProperty(false);
     final BooleanProperty rightPressed = new SimpleBooleanProperty(false);
@@ -52,22 +53,55 @@ public class TitleScreenController {
         LinkedList<DefaultAsset> assetsList = new LinkedList<>();
         Ship ship;
         DefaultAsset background;
+        LinkedList<Rock> astroids = new LinkedList<>();
         try {
             ship = new Ship("Ship", 75, 75, "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\ship.png", (LEVEL_WIDTH / 2) -(75/2), (LEVEL_HEIGHT / 2) -(75/2));
             background = new DefaultAsset("Background", LEVEL_HEIGHT, LEVEL_WIDTH, "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\bg.png", 0, 0);
+            for (int i = 0; i < 5; i++) {
+                int ranAstroid = (int) (Math.random() * (4 - 0) + 0);
+                String filepath;
+
+                switch (ranAstroid){
+                    case 0:
+                        filepath = "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\astroid1.png";
+                        break;
+                    case 1:
+                        filepath = "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\astroid2.png";
+                        break;
+                    case 2:
+                        filepath = "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\astroid3.png";
+                        break;
+                    case 3:
+                        filepath = "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\astroid4.png";
+                        break;
+                    default:
+                        filepath = "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\astroid1.png";
+
+                }
+
+                int ranSize = (int) (Math.random() * (40 - 10) + 10);
+                astroids.add(new Rock("Rock", ranSize, ranSize, filepath,(int) (Math.random() * (LEVEL_WIDTH - ((LEVEL_WIDTH * 0.1) -1)) + 1), (int) (Math.random() * (LEVEL_HEIGHT - (LEVEL_HEIGHT * 0.1)) -1 + 1)));
+
+            }
+
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
 
         assetsList.add(background);
-        assetsList.add(ship);
-        // Group assets = new Group(background.getImageView(), ship.getImageView());
-
         newBox.getChildren().add(background.getImageView());
+
+
+        for (Rock ast: astroids) {
+            assetsList.add(ast);
+            newBox.getChildren().add(ast.getImageView());
+        }
+
+        assetsList.add(ship);
         newBox.getChildren().add(ship.getImageView());
 
 
-        Scene scene = new Scene(newBox, 600, 600);
+        Scene scene = new Scene(newBox, LEVEL_WIDTH, LEVEL_HEIGHT);
         stage.setTitle("Level One");
         stage.setScene(scene);
         stage.show();
@@ -145,7 +179,7 @@ public class TitleScreenController {
             {
                 for (DefaultAsset asset:assetsList) {
 
-                    if(asset.getName().equals("BasicBullet")){
+                    if(asset.getName().equals("BasicBullet") || asset.getName().equals("Rock")){
 
                         if(asset.getImageView().getX() < 0 || asset.getImageView().getX() > LEVEL_WIDTH || asset.getImageView().getY() < 0 || asset.getImageView().getY() > LEVEL_HEIGHT){
 
