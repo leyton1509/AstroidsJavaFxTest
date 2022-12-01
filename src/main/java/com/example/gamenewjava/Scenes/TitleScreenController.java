@@ -92,7 +92,6 @@ public class TitleScreenController {
                         break;
                     // case SHIFT: running = true; break;
                     case SPACE:
-                        System.out.println("Space clicked");
                         try {
                             Projectile proj = ship.fireBasicProjectile();
                             assetsList.add(proj);
@@ -145,8 +144,20 @@ public class TitleScreenController {
             public void handle(long currentNanoTime)
             {
                 for (DefaultAsset asset:assetsList) {
+
+                    if(asset.getName().equals("BasicBullet")){
+
+                        if(asset.getImageView().getX() < 0 || asset.getImageView().getX() > LEVEL_WIDTH || asset.getImageView().getY() < 0 || asset.getImageView().getY() > LEVEL_HEIGHT){
+
+                            newBox.getChildren().remove(asset.getImageView());
+                            assetsList.remove(asset);
+
+                        }
+                    }
+
                     asset.onGameTick();
                 }
+                //System.out.println(newBox.getChildren().toString());
             }
         }.start();
 
