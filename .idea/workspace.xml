@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="10a141b0-295e-45e1-b942-d47de3b9e986" name="Changes" comment="Adds new astroids to the map once one clears, need to do it so it doesnt just spawn in the middle">
+    <list default="true" id="10a141b0-295e-45e1-b942-d47de3b9e986" name="Changes" comment="Will now add one more astroid every 15 seconds">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Scenes/TitleScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Scenes/TitleScreenController.java" afterDir="false" />
     </list>
@@ -75,7 +75,7 @@
       <workItem from="1669825036269" duration="491000" />
       <workItem from="1669840795414" duration="13000" />
       <workItem from="1669890695848" duration="1605000" />
-      <workItem from="1669892311496" duration="29555000" />
+      <workItem from="1669892311496" duration="32110000" />
     </task>
     <task id="LOCAL-00001" summary="Renamed classes, initial commit, created a title scene">
       <created>1669822735281</created>
@@ -161,7 +161,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669925209466</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Will now add one more astroid every 15 seconds">
+      <created>1669925614781</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1669925614781</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -199,7 +206,8 @@
     <MESSAGE value="Added advanced bullet collision detection" />
     <MESSAGE value="Simplified a lot of code" />
     <MESSAGE value="Adds new astroids to the map once one clears, need to do it so it doesnt just spawn in the middle" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adds new astroids to the map once one clears, need to do it so it doesnt just spawn in the middle" />
+    <MESSAGE value="Will now add one more astroid every 15 seconds" />
+    <option name="LAST_COMMIT_MESSAGE" value="Will now add one more astroid every 15 seconds" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
