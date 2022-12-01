@@ -42,7 +42,7 @@ public class TitleScreenController {
     private final int LEVEL_HEIGHT = 600;
     private final int LEVEL_WIDTH = 900;
 
-    private int numberOfAstroids = 20;
+    private int maxNumberOfAstroids = 6;
 
     final BooleanProperty leftPressed = new SimpleBooleanProperty(false);
     final BooleanProperty rightPressed = new SimpleBooleanProperty(false);
@@ -62,9 +62,31 @@ public class TitleScreenController {
 
     private Scene scene;
 
+    private long lastUpdate = 0;
+
+    private int currentAmountOfAstroids = 0;
+
+    private int userScore = 0;
+    
+    public void generateNewAstroid() throws FileNotFoundException {
+        int ranAstroid = (int) (Math.random() * (4) + 0);
+        String filepath = switch (ranAstroid) {
+            case 0 -> "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\astroid1.png";
+            case 1 -> "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\astroid2.png";
+            case 2 -> "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\astroid3.png";
+            case 3 -> "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\astroid4.png";
+            default -> "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\astroid1.png";
+        };
+        int ranSize = (int) (Math.random() * (40 - 10) + 10);
+        Rock rock =  new Rock("Rock", ranSize, ranSize, filepath,(int) (Math.random() * (LEVEL_WIDTH - ((LEVEL_WIDTH * 0.1) -1)) + 1), (int) (Math.random() * (LEVEL_HEIGHT - (LEVEL_HEIGHT * 0.1)) -1 + 1), 0.5);
+        assetsList.add(rock);
+        newBox.getChildren().add(rock.getImageView());
+
+    }
+
     public LinkedList<Rock> generateRandomAstroids(int numberToGenerate) throws FileNotFoundException {
         LinkedList<Rock> astroids = new LinkedList<>();
-        for (int i = 0; i < numberOfAstroids; i++) {
+        for (int i = 0; i < maxNumberOfAstroids; i++) {
             int ranAstroid = (int) (Math.random() * (4) + 0);
             String filepath = switch (ranAstroid) {
                 case 0 -> "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\astroid1.png";
@@ -94,7 +116,8 @@ public class TitleScreenController {
         try {
             ship = new Ship("Ship", 75, 75, "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\ship.png", (LEVEL_WIDTH / 2) -(75/2), (LEVEL_HEIGHT / 2) -(75/2), 8);
             background = new DefaultAsset("Background", LEVEL_HEIGHT, LEVEL_WIDTH, "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\bg.png", 0, 0);
-            astroids = generateRandomAstroids(numberOfAstroids);
+            astroids = generateRandomAstroids(maxNumberOfAstroids);
+            currentAmountOfAstroids = currentAmountOfAstroids + maxNumberOfAstroids;
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -203,49 +226,70 @@ public class TitleScreenController {
             }
         });
 
+
+
         new AnimationTimer()
         {
             public void handle(long currentNanoTime)
             {
-                LinkedList<ImageView> removeViews = new LinkedList<>();
-                LinkedList<DefaultAsset> removeAssets = new LinkedList<>();
-                for (DefaultAsset asset:assetsList) {
 
-                    collisionDetection(assetsList, asset, removeViews, removeAssets);
+                if(currentNanoTime - lastUpdate > 2_000_000){
+                    LinkedList<ImageView> removeViews = new LinkedList<>();
+                    LinkedList<DefaultAsset> removeAssets = new LinkedList<>();
+                    for (DefaultAsset asset:assetsList) {
 
-                    if(asset.getName().equals("Bullet") || asset.getName().equals("Rock")){
+                        collisionDetection(assetsList, asset, removeViews, removeAssets);
 
-                        if(asset.getImageView().getX() < 0 || asset.getImageView().getX() > LEVEL_WIDTH || asset.getImageView().getY() < 0 || asset.getImageView().getY() > LEVEL_HEIGHT){
-                            removeViews.add(asset.getImageView());
-                            removeAssets.add(asset);
+                        if(asset.getName().equals("Bullet") || asset.getName().equals("Rock")){
+
+                            if(asset.getImageView().getX() < -100 || asset.getImageView().getX() > LEVEL_WIDTH+100 || asset.getImageView().getY() < -100 || asset.getImageView().getY() > LEVEL_HEIGHT+100){
+                                removeViews.add(asset.getImageView());
+                                removeAssets.add(asset);
+
+                                if(asset.getName().equals("Rock")){
+                                    currentAmountOfAstroids--;
+                                }
+                            }
+
                         }
-
+                        asset.onGameTick();
                     }
-                    asset.onGameTick();
+                    newBox.getChildren().removeAll(removeViews);
+                    assetsList.removeAll(removeAssets);
+
+                    if(currentAmountOfAstroids < maxNumberOfAstroids){
+                        try {
+                            generateNewAstroid();
+                            currentAmountOfAstroids++;
+                        } catch (FileNotFoundException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+
+                    lastUpdate = currentNanoTime;
                 }
-                newBox.getChildren().removeAll(removeViews);
-                assetsList.removeAll(removeAssets);
+
             }
         }.start();
 
     }
 
+
     public boolean collisionDetection(LinkedList<DefaultAsset> assetList, DefaultAsset asset, LinkedList<ImageView> removeViews, LinkedList<DefaultAsset> removeAssets){
         for (DefaultAsset assetInList: assetList){
             if(asset != assetInList){
                 if(asset.getImageView().intersects(assetInList.getImageView().getBoundsInLocal())){
-
                     if(asset.getName().equals("Bullet")){
                         if(assetInList.getName().equals("Rock")){
                             assetInList.setHealth(assetInList.getHealth() - asset.getDamage());
                             if(assetInList.getHealth() <= 0){
                                 removeViews.add(assetInList.getImageView());
                                 removeAssets.add(assetInList);
+                                currentAmountOfAstroids--;
                             }
                             removeViews.add(asset.getImageView());
                             removeAssets.add(asset);
                         }
-                        
                     } else if (asset.getName().equals("Ship")) {
                         if(assetInList.getName().equals("Rock")){
                             if(System.currentTimeMillis() > (asset.getTimeLast() + (0.7*1000))){
@@ -263,9 +307,7 @@ public class TitleScreenController {
                                 asset.setTimeLast(System.currentTimeMillis());
 
                             }
-
                         }
-
                     }
                     else if (asset.getName().equals("Rock")){
                         if(assetInList.getName().equals("Rock")){
