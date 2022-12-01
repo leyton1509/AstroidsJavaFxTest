@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="10a141b0-295e-45e1-b942-d47de3b9e986" name="Changes" comment="Added some rocks that are going to serve as the enemy">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Rock.java" afterDir="false" />
+    <list default="true" id="10a141b0-295e-45e1-b942-d47de3b9e986" name="Changes" comment="Working collision system, kind of breaks with high number of astroids">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Driver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/DefaultAsset.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/DefaultAsset.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Projectile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Projectile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Rock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Rock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Ship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Ship.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Scenes/TitleScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Scenes/TitleScreenController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -74,7 +76,7 @@
       <workItem from="1669825036269" duration="491000" />
       <workItem from="1669840795414" duration="13000" />
       <workItem from="1669890695848" duration="1605000" />
-      <workItem from="1669892311496" duration="18219000" />
+      <workItem from="1669892311496" duration="23687000" />
     </task>
     <task id="LOCAL-00001" summary="Renamed classes, initial commit, created a title scene">
       <created>1669822735281</created>
@@ -118,7 +120,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669910105846</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Rocks now move around the screen and are different colours">
+      <created>1669912838374</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1669912838374</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -145,7 +154,11 @@
     <MESSAGE value="Can now succesfully fire missles from the ship" />
     <MESSAGE value="Removes the bullets once out of bonds but does cause an exception (does not crash)" />
     <MESSAGE value="Added some rocks that are going to serve as the enemy" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added some rocks that are going to serve as the enemy" />
+    <MESSAGE value="Rocks now move around the screen and are different colours" />
+    <MESSAGE value="Fixed the error of concurrent removing" />
+    <MESSAGE value="Working on collision detecting added movement speed" />
+    <MESSAGE value="Working collision system, kind of breaks with high number of astroids" />
+    <option name="LAST_COMMIT_MESSAGE" value="Working collision system, kind of breaks with high number of astroids" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

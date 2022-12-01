@@ -16,7 +16,23 @@ public class DefaultAsset {
     private double xCoordinate;
     private double yCoordinate;
     private ImageView imageView;
+    private double moveSpeed = 0;
 
+    private double damage = 0;
+
+    private double health = 0;
+
+    public double getHealth() {
+        return health;
+    }
+
+    public void setHealth(double health) {
+        this.health = health;
+    }
+
+    public double getDamage() {
+        return damage;
+    }
 
     public DefaultAsset(String _name, int _height, int _width, String _filepath, int _startX, int _startY) throws FileNotFoundException {
         name = _name;
@@ -32,6 +48,25 @@ public class DefaultAsset {
         imageView.setY(yCoordinate);
         imageView.setFitHeight(height);
         imageView.setFitWidth(width);
+
+    }
+
+    public DefaultAsset(String _name, int _height, int _width, String _filepath, int _startX, int _startY, double _moveSpeed) throws FileNotFoundException {
+        name = _name;
+        height = _height;
+        width = _width;
+        filePath = _filepath;
+        image = new Image(new FileInputStream(filePath));
+        imageView = new ImageView(image);
+        xCoordinate = _startX;
+        yCoordinate = _startY;
+
+        imageView.setX(xCoordinate);
+        imageView.setY(yCoordinate);
+        imageView.setFitHeight(height);
+        imageView.setFitWidth(width);
+
+        setMoveSpeed(_moveSpeed);
 
     }
 
@@ -83,4 +118,13 @@ public class DefaultAsset {
         this.imageView = imageView;
     }
 
+    public double getMoveSpeed() {
+        return moveSpeed;
+    }
+
+    public void setMoveSpeed(double moveSpeed) {
+        if(moveSpeed !=0 && moveSpeed > 0.1) {
+            this.moveSpeed = moveSpeed;
+        }
+    }
 }
