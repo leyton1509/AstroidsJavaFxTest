@@ -42,7 +42,7 @@ public class TitleScreenController {
     private final int LEVEL_HEIGHT = 600;
     private final int LEVEL_WIDTH = 900;
 
-    private int numberOfAstroids = 30;
+    private int numberOfAstroids = 20;
 
     final BooleanProperty leftPressed = new SimpleBooleanProperty(false);
     final BooleanProperty rightPressed = new SimpleBooleanProperty(false);
@@ -54,45 +54,47 @@ public class TitleScreenController {
 
     private Rectangle healtbarWhite = new  Rectangle((LEVEL_WIDTH / 3), (LEVEL_HEIGHT / 30), Color.WHITE);
 
-    @FXML
-    protected void play(Event event) throws IOException {
-        Pane newBox = new Pane();
-        Stage stage = (Stage) startButton.getScene().getWindow();  //Pulls in the details of the current stage using the location
-        // mainVBox.getChildren().remove(startButton);
-        LinkedList<DefaultAsset> assetsList = new LinkedList<>();
-        Ship ship;
-        DefaultAsset background;
+    private Pane newBox = new Pane();
+
+    private Ship ship;
+
+    private LinkedList<DefaultAsset> assetsList = new LinkedList<>();
+
+    private Scene scene;
+
+    public LinkedList<Rock> generateRandomAstroids(int numberToGenerate) throws FileNotFoundException {
         LinkedList<Rock> astroids = new LinkedList<>();
+        for (int i = 0; i < numberOfAstroids; i++) {
+            int ranAstroid = (int) (Math.random() * (4) + 0);
+            String filepath = switch (ranAstroid) {
+                case 0 -> "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\astroid1.png";
+                case 1 -> "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\astroid2.png";
+                case 2 -> "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\astroid3.png";
+                case 3 -> "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\astroid4.png";
+                default -> "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\astroid1.png";
+            };
+            int ranSize = (int) (Math.random() * (40 - 10) + 10);
+            astroids.add(new Rock("Rock", ranSize, ranSize, filepath,(int) (Math.random() * (LEVEL_WIDTH - ((LEVEL_WIDTH * 0.1) -1)) + 1), (int) (Math.random() * (LEVEL_HEIGHT - (LEVEL_HEIGHT * 0.1)) -1 + 1), 0.5));
+        }
+        return astroids;
+    }
+
+
+    public void setUpHealthBar(){
+        healtbarRed.setX(LEVEL_WIDTH / 2 - (healtbarRed.getWidth() / 2) );
+        healtbarWhite.setX(LEVEL_WIDTH / 2 - (healtbarWhite.getWidth() / 2));
+        healtbarRed.setY(LEVEL_HEIGHT * 0.95);
+        healtbarWhite.setY(LEVEL_HEIGHT * 0.95);
+    }
+
+    public void initialSetUpOfScene(){
+        Stage stage = (Stage) startButton.getScene().getWindow();  //Pulls in the details of the current stage using the location
+        DefaultAsset background;
+        LinkedList<Rock> astroids;
         try {
             ship = new Ship("Ship", 75, 75, "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\ship.png", (LEVEL_WIDTH / 2) -(75/2), (LEVEL_HEIGHT / 2) -(75/2), 8);
             background = new DefaultAsset("Background", LEVEL_HEIGHT, LEVEL_WIDTH, "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\bg.png", 0, 0);
-            for (int i = 0; i < numberOfAstroids; i++) {
-                int ranAstroid = (int) (Math.random() * (4 - 0) + 0);
-                String filepath;
-
-                switch (ranAstroid){
-                    case 0:
-                        filepath = "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\astroid1.png";
-                        break;
-                    case 1:
-                        filepath = "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\astroid2.png";
-                        break;
-                    case 2:
-                        filepath = "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\astroid3.png";
-                        break;
-                    case 3:
-                        filepath = "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\astroid4.png";
-                        break;
-                    default:
-                        filepath = "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\astroid1.png";
-
-                }
-
-                int ranSize = (int) (Math.random() * (40 - 10) + 10);
-                astroids.add(new Rock("Rock", ranSize, ranSize, filepath,(int) (Math.random() * (LEVEL_WIDTH - ((LEVEL_WIDTH * 0.1) -1)) + 1), (int) (Math.random() * (LEVEL_HEIGHT - (LEVEL_HEIGHT * 0.1)) -1 + 1), 0.5));
-
-            }
-
+            astroids = generateRandomAstroids(numberOfAstroids);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -100,30 +102,29 @@ public class TitleScreenController {
         assetsList.add(background);
         newBox.getChildren().add(background.getImageView());
 
-
         for (Rock ast: astroids) {
             assetsList.add(ast);
             newBox.getChildren().add(ast.getImageView());
         }
 
+        setUpHealthBar();
+
         assetsList.add(ship);
         newBox.getChildren().add(ship.getImageView());
-
-        healtbarRed.setX(LEVEL_WIDTH / 2 - (healtbarRed.getWidth() / 2) );
-        healtbarWhite.setX(LEVEL_WIDTH / 2 - (healtbarWhite.getWidth() / 2));
-        healtbarRed.setY(LEVEL_HEIGHT * 0.95);
-        healtbarWhite.setY(LEVEL_HEIGHT * 0.95);
-
-
         newBox.getChildren().add(healtbarWhite);
         newBox.getChildren().add(healtbarRed);
 
-
-        Scene scene = new Scene(newBox, LEVEL_WIDTH, LEVEL_HEIGHT);
+        scene = new Scene(newBox, LEVEL_WIDTH, LEVEL_HEIGHT);
         stage.setTitle("Level One");
         stage.setScene(scene);
         stage.show();
 
+    }
+
+    @FXML
+    protected void play(Event event) throws IOException {
+
+        initialSetUpOfScene();
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
@@ -204,7 +205,7 @@ public class TitleScreenController {
 
         new AnimationTimer()
         {
-            public void handle(long currentNanoTsime)
+            public void handle(long currentNanoTime)
             {
                 LinkedList<ImageView> removeViews = new LinkedList<>();
                 LinkedList<DefaultAsset> removeAssets = new LinkedList<>();
@@ -220,13 +221,10 @@ public class TitleScreenController {
                         }
 
                     }
-
                     asset.onGameTick();
                 }
                 newBox.getChildren().removeAll(removeViews);
                 assetsList.removeAll(removeAssets);
-
-                //System.out.println(newBox.getChildren().toString());
             }
         }.start();
 
@@ -250,30 +248,24 @@ public class TitleScreenController {
                         
                     } else if (asset.getName().equals("Ship")) {
                         if(assetInList.getName().equals("Rock")){
-                            if(System.currentTimeMillis() > (asset.getTimeLast() + (1.5*1000))){
+                            if(System.currentTimeMillis() > (asset.getTimeLast() + (0.7*1000))){
                                 asset.setHealth(asset.getHealth() - assetInList.getDamage());
                                 if(assetInList.getHealth() <= 0){
                                     return true;
                                 }
                                 System.out.println("Current health : " + asset.getHealth());
 
-                                double angleRock1 = asset.getImageView().getRotate();
-                                double speedRock2 = assetInList.getMoveSpeed();
+                                assetInList.setMoveSpeed(assetInList.getMoveSpeed() * 2 );
+                                assetInList.getImageView().setRotate( asset.getImageView().getRotate());
 
-                                assetInList.setMoveSpeed(speedRock2 * 0.9 );
-                                assetInList.getImageView().setRotate(angleRock1);
-
-                                double percentage = (asset.getHealth() / asset.getMaxHealth());
-                                healtbarRed.setWidth(healtbarRed.getWidth() * percentage);
+                                healtbarRed.setWidth(healtbarRed.getWidth() * (asset.getHealth() / asset.getMaxHealth()));
 
                                 asset.setTimeLast(System.currentTimeMillis());
 
                             }
 
-
-
                         }
-                        
+
                     }
                     else if (asset.getName().equals("Rock")){
                         if(assetInList.getName().equals("Rock")){
@@ -298,6 +290,5 @@ public class TitleScreenController {
             }
         }
         return false;
-
     }
 }

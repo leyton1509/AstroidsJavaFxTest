@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="10a141b0-295e-45e1-b942-d47de3b9e986" name="Changes" comment="Added an advanced missle thats fired every 1.5 seconds">
+    <list default="true" id="10a141b0-295e-45e1-b942-d47de3b9e986" name="Changes" comment="Added advanced bullet collision detection">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Ship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Ship.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Scenes/TitleScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Scenes/TitleScreenController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -73,7 +72,7 @@
       <workItem from="1669825036269" duration="491000" />
       <workItem from="1669840795414" duration="13000" />
       <workItem from="1669890695848" duration="1605000" />
-      <workItem from="1669892311496" duration="26868000" />
+      <workItem from="1669892311496" duration="28019000" />
     </task>
     <task id="LOCAL-00001" summary="Renamed classes, initial commit, created a title scene">
       <created>1669822735281</created>
@@ -138,7 +137,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669922777382</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Added advanced bullet collision detection">
+      <created>1669922955337</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1669922955337</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -173,7 +179,8 @@
     <MESSAGE value="Ship now takes damage from astroids relative to the size of the astroid" />
     <MESSAGE value="Has a working health bar" />
     <MESSAGE value="Added an advanced missle thats fired every 1.5 seconds" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added an advanced missle thats fired every 1.5 seconds" />
+    <MESSAGE value="Added advanced bullet collision detection" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added advanced bullet collision detection" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
