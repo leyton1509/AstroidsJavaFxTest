@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="10a141b0-295e-45e1-b942-d47de3b9e986" name="Changes" comment="Fixed a lot of warnings">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/AstroidController.java" afterDir="false" />
+    <list default="true" id="10a141b0-295e-45e1-b942-d47de3b9e986" name="Changes" comment="Seperated all astroid components into its own class">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Scenes/TitleScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Scenes/TitleScreenController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/AstroidController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/AstroidController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +77,7 @@
       <workItem from="1669892311496" duration="32177000" />
       <workItem from="1669928467444" duration="3175000" />
       <workItem from="1669971605705" duration="708000" />
-      <workItem from="1669982973474" duration="5458000" />
+      <workItem from="1669982973474" duration="7070000" />
     </task>
     <task id="LOCAL-00001" summary="Renamed classes, initial commit, created a title scene">
       <created>1669822735281</created>
@@ -213,7 +212,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669999784241</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Seperated all astroid components into its own class">
+      <created>1670001253512</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1670001253512</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -231,7 +237,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added a defaul asset class" />
     <MESSAGE value="Added methods to default asset" />
     <MESSAGE value="Added functionality for a ship and background, can currently move ship but not well" />
     <MESSAGE value="Added movement and rotation in all directions to the ship" />
@@ -256,7 +261,8 @@
     <MESSAGE value="Seperated out get astroid filepath to its own method" />
     <MESSAGE value="Removed the two lines of code which stopped generating as the stage.close() covers this" />
     <MESSAGE value="Fixed a lot of warnings" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed a lot of warnings" />
+    <MESSAGE value="Seperated all astroid components into its own class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Seperated all astroid components into its own class" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
