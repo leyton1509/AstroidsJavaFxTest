@@ -7,9 +7,11 @@ import com.example.gamenewjava.Assets.Ship;
 import com.example.gamenewjava.AstroidController;
 import com.example.gamenewjava.Driver;
 import javafx.animation.AnimationTimer;
+import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,6 +33,7 @@ import java.util.LinkedList;
 
 public class TitleScreenController {
 
+    public Button exitButton;
     @FXML
     private Button startButton;
 
@@ -79,6 +82,10 @@ public class TitleScreenController {
         userScoreText.setY((float)LEVEL_HEIGHT * 0.05);
         userScoreText.setFill(Paint.valueOf("white"));
         userScoreText.setFont(Font.font("Verdana", 20));
+    }
+
+    public void exit(){
+        Platform.exit();
     }
 
 

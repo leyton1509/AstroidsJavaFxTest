@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="10a141b0-295e-45e1-b942-d47de3b9e986" name="Changes" comment="added code to the randomness of the intial astroid creation">
+    <list default="true" id="10a141b0-295e-45e1-b942-d47de3b9e986" name="Changes" comment="New astroids generated now only generate off screen and move inwards">
+      <change afterPath="$PROJECT_DIR$/src/main/java/css/BackGround.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/AstroidController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/AstroidController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Driver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Scenes/TitleScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Scenes/TitleScreenController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/gamenewjava/TitleScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/gamenewjava/TitleScreen.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,9 +19,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="CSS File" />
         <option value="FxmlFile" />
         <option value="Class" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -37,28 +40,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_directory_selection": "L:/Novus/Code/JFX/GameNewJava/src/main/java/com/example/gamenewjava",
-    "last_opened_file_path": "L:/Novus/Code/JFX/GameNewJava",
-    "list.type.of.created.stylesheet": "CSS",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pathVariables"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;18&quot;,
+    &quot;last_directory_selection&quot;: &quot;L:/Novus/Code/JFX/GameNewJava/src/main/java/com/example/gamenewjava&quot;,
+    &quot;last_opened_file_path&quot;: &quot;L:/Novus/Code/JFX/GameNewJava&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propCompiler&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="L:\Novus\Code\JFX\GameNewJava\src\main\resources\com\example\gamenewjava" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="L:\Novus\Code\JFX\GameNewJava\src\main\java" />
       <recent name="L:\Novus\Code\JFX\GameNewJava\src\main\resources\com\example\gamenewjava" />
       <recent name="L:\Novus\Code\JFX\GameNewJava\src\main\java\com\example\gamenewjava\Scenes\Title" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
+      <recent name="com.example.gamenewjava" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -77,7 +83,12 @@
       <workItem from="1669892311496" duration="32177000" />
       <workItem from="1669928467444" duration="3175000" />
       <workItem from="1669971605705" duration="708000" />
-      <workItem from="1669982973474" duration="10547000" />
+      <workItem from="1669982973474" duration="12970000" />
+      <workItem from="1670008606586" duration="31000" />
+      <workItem from="1670008644593" duration="776000" />
+      <workItem from="1670009429216" duration="86000" />
+      <workItem from="1670009522584" duration="13000" />
+      <workItem from="1670009544063" duration="1130000" />
     </task>
     <task id="LOCAL-00001" summary="Renamed classes, initial commit, created a title scene">
       <created>1669822735281</created>
@@ -226,7 +237,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670002716545</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="New astroids generated now only generate off screen and move inwards">
+      <created>1670006195647</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1670006195647</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -244,7 +262,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added functionality for a ship and background, can currently move ship but not well" />
     <MESSAGE value="Added movement and rotation in all directions to the ship" />
     <MESSAGE value="Can now succesfully fire missles from the ship" />
     <MESSAGE value="Removes the bullets once out of bonds but does cause an exception (does not crash)" />
@@ -269,7 +286,8 @@
     <MESSAGE value="Fixed a lot of warnings" />
     <MESSAGE value="Seperated all astroid components into its own class" />
     <MESSAGE value="added code to the randomness of the intial astroid creation" />
-    <option name="LAST_COMMIT_MESSAGE" value="added code to the randomness of the intial astroid creation" />
+    <MESSAGE value="New astroids generated now only generate off screen and move inwards" />
+    <option name="LAST_COMMIT_MESSAGE" value="New astroids generated now only generate off screen and move inwards" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

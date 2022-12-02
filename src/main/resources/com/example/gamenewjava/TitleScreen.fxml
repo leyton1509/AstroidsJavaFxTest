@@ -1,13 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 
-<VBox fx:id="mainVBox" alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gamenewjava.Scenes.TitleScreenController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-    </padding>
-   <Button fx:id="startButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"  text="START" onAction="#play" />
-
-</VBox>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="401.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gamenewjava.Scenes.TitleScreenController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#01203d" height="413.0" layoutX="-12.0" layoutY="-8.0" stroke="BLACK" strokeType="INSIDE" width="612.0" />
+       <Button fx:id="startButton" alignment="CENTER" contentDisplay="CENTER" layoutX="212.0" layoutY="162.0" mnemonicParsing="false" onAction="#play" prefHeight="28.0" prefWidth="175.0" text="START" />
+      <Button fx:id="exitButton" layoutX="215.0" layoutY="210.0" mnemonicParsing="false" onAction="#exit" prefHeight="28.0" prefWidth="169.0" text="EXIT" />
+      <Polygon fill="#194266" layoutY="24.0" rotate="3.2" scaleX="3.0" stroke="#ffffff31" strokeType="INSIDE">
+        <points>
+          <Double fx:value="-50.0" />
+          <Double fx:value="40.0" />
+          <Double fx:value="50.0" />
+          <Double fx:value="40.0" />
+          <Double fx:value="0.0" />
+          <Double fx:value="-60.0" />
+        </points>
+      </Polygon>
+      <Polygon fill="#134779" layoutY="365.0" stroke="#bdbdbd56" strokeType="INSIDE">
+        <points>
+          <Double fx:value="-50.0" />
+          <Double fx:value="40.0" />
+          <Double fx:value="50.0" />
+          <Double fx:value="40.0" />
+          <Double fx:value="0.0" />
+          <Double fx:value="-60.0" />
+        </points>
+      </Polygon>
+      <Polygon fill="#194266" layoutX="602.0" layoutY="-48.0" points="-2.00006103515625, 42.649391174316406, -2.55718994140625, 111.6493911743164, -102.55718994140625, 169.57142639160156" stroke="#ffffff49" strokeType="INSIDE" />
+   </children>
+</Pane>
