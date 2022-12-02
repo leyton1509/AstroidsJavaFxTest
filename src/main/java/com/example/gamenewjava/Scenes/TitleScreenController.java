@@ -6,24 +6,16 @@ import com.example.gamenewjava.Assets.Rock;
 import com.example.gamenewjava.Assets.Ship;
 import com.example.gamenewjava.Driver;
 import javafx.animation.AnimationTimer;
-import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Group;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -32,14 +24,11 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.stage.Modality;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.LinkedList;
-import java.util.Objects;
 
 public class TitleScreenController {
 
@@ -175,13 +164,30 @@ public class TitleScreenController {
 
     }
 
-    public void createDeathPopUp(){
+    public EventHandler<ActionEvent> returnToTileScreen() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Driver.class.getResource("TitleScreen.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 900, 600);
+        Stage stage = new Stage();
+        stage.setTitle("Hello!");
+        stage.setScene(scene);
+        stage.show();
+
+        return null;
+    }
+
+    public void createDeathPopUp() throws IOException {
+
         final Stage dialog = new Stage();
         VBox dialogVbox = new VBox(20);
         dialogVbox.getChildren().add(new Text("Score : " + userScore));
+        Button okButton = new Button();
+        okButton.setText("Finish");
+        okButton.setOnAction(returnToTileScreen());
         Scene dialogScene = new Scene(dialogVbox, 100, 50);
         dialog.setScene(dialogScene);
         dialog.show();
+
+
     }
 
     @FXML
@@ -279,7 +285,21 @@ public class TitleScreenController {
 
                             if(!run){
                                 System.out.println("You died!");
-                                createDeathPopUp();
+                                try {
+
+
+                                    this.stop();
+                                    Stage stage = (Stage) scene.getWindow();
+                                    stage.close();
+                                    createDeathPopUp();
+
+
+
+
+
+                                } catch (IOException e) {
+                                    throw new RuntimeException(e);
+                                }
 
                                 newBox.getChildren().removeAll(newBox.getChildren());
                                 currentAmountOfAstroids = 1000;
