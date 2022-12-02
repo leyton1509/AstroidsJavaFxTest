@@ -1,9 +1,6 @@
 package com.example.gamenewjava.Scenes;
 
-import com.example.gamenewjava.Assets.DefaultAsset;
-import com.example.gamenewjava.Assets.Projectile;
-import com.example.gamenewjava.Assets.Rock;
-import com.example.gamenewjava.Assets.Ship;
+import com.example.gamenewjava.Assets.*;
 import com.example.gamenewjava.AstroidController;
 import com.example.gamenewjava.Driver;
 import com.example.gamenewjava.GraphicInterface;
@@ -73,17 +70,19 @@ public class TitleScreenController {
     }
 
 
-    public void initialSetUpOfScene(){
+    public void initialSetUpOfScene() throws FileNotFoundException {
         Stage stage = (Stage) startButton.getScene().getWindow();  //Pulls in the details of the current stage using the location
         DefaultAsset background;
         astroidController = new AstroidController(LEVEL_WIDTH, LEVEL_HEIGHT);
         LinkedList<Rock> astroids;
+        EnemyShip es;
         try {
             ship = new Ship("Ship", 75, 75, "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\ship.png", (LEVEL_WIDTH / 2) -(75/2), (LEVEL_HEIGHT / 2) -(75/2), 8);
             background = new DefaultAsset("Background", LEVEL_HEIGHT, LEVEL_WIDTH, "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\bg.png", 0, 0);
             astroids = astroidController.generateRandomAstroids(astroidController.getMaxNumberOfAstroids());
             astroidController.setCurrentAmountOfAstroids(astroidController.getCurrentAmountOfAstroids() + astroidController.getMaxNumberOfAstroids());
             System.out.println("Astroid num creation : " + astroidController.getCurrentAmountOfAstroids());
+            es = new EnemyShip("EnemyShip", 75, 75, "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\enemyShip.png", 3, ship, LEVEL_WIDTH, LEVEL_HEIGHT);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -110,6 +109,10 @@ public class TitleScreenController {
         stage.setScene(scene);
         stage.show();
 
+
+        assetsList.add(es);
+        newBox.getChildren().add(es.getImageView());
+
     }
 
     public EventHandler<ActionEvent> returnToTileScreen() throws IOException {
@@ -135,7 +138,7 @@ public class TitleScreenController {
     }
 
     @FXML
-    protected void play() {
+    protected void play() throws FileNotFoundException {
         initialSetUpOfScene();
         scene.setOnKeyPressed(event -> {
             switch (event.getCode()) {
@@ -208,6 +211,9 @@ public class TitleScreenController {
                     if (currentNanoTime - lastUpdate > 2_000_000) {
                         LinkedList<ImageView> removeViews = new LinkedList<>();
                         LinkedList<DefaultAsset> removeAssets = new LinkedList<>();
+                        LinkedList<DefaultAsset> addAssets = new LinkedList<>();
+                        LinkedList<ImageView> addViews = new LinkedList<>();
+
                         for (DefaultAsset asset : assetsList) {
 
                             run = collisionDetection(assetsList, asset, removeViews, removeAssets);
@@ -224,7 +230,7 @@ public class TitleScreenController {
                                 }
                             }
 
-                            if (asset.getName().equals("Bullet") || asset.getName().equals("Rock")) {
+                            if (asset.getName().equals("Bullet") || asset.getName().equals("Rock") || asset.getName().equals("EnemyBullet")) {
                                 if (asset.getImageView().getX() < -100 || asset.getImageView().getX() > LEVEL_WIDTH + 100 || asset.getImageView().getY() < -100 || asset.getImageView().getY() > LEVEL_HEIGHT + 100) {
                                     removeViews.add(asset.getImageView());
                                     removeAssets.add(asset);
@@ -235,10 +241,30 @@ public class TitleScreenController {
                                     }
                                 }
                             }
+
+                            if(asset.getName().equals("EnemyShip")){
+                                EnemyShip esp = (EnemyShip) asset;
+                                if(System.currentTimeMillis() > esp.getTimeSinceLastFire() + 2 * 1000){
+                                    try {
+                                        Projectile proj = esp.fireBasicProjectile();
+                                        addAssets.add(proj);
+                                        addViews.add(proj.getImageView());
+                                        esp.setTimeSinceLastFire(System.currentTimeMillis());
+                                    } catch (FileNotFoundException e) {
+                                        throw new RuntimeException(e);
+                                    }
+                                }
+                            }
+
                             asset.onGameTick();
+
                         }
                         newBox.getChildren().removeAll(removeViews);
                         assetsList.removeAll(removeAssets);
+                        assetsList.addAll(addAssets);
+                        newBox.getChildren().addAll(addViews);
+
+
                         if (astroidController.getCurrentAmountOfAstroids() < astroidController.getMaxNumberOfAstroids()) {
                             try {
                                 Rock r = astroidController.generateNewAstroid();
