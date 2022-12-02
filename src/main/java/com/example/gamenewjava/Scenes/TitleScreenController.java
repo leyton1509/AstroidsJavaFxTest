@@ -6,6 +6,7 @@ import com.example.gamenewjava.Assets.Rock;
 import com.example.gamenewjava.Assets.Ship;
 import com.example.gamenewjava.AstroidController;
 import com.example.gamenewjava.Driver;
+import com.example.gamenewjava.GraphicInterface;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
@@ -49,13 +50,6 @@ public class TitleScreenController {
     final BooleanProperty upPressed = new SimpleBooleanProperty(false);
     final BooleanProperty downPressed = new SimpleBooleanProperty(false);
 
-    private Rectangle healthBarRed = new Rectangle((float)(LEVEL_WIDTH / 3), (float)(LEVEL_HEIGHT / 30), Color.RED);
-
-    private Rectangle healthBarWhite = new  Rectangle((float)(LEVEL_WIDTH / 3), (float)(LEVEL_HEIGHT / 30), Color.WHITE);
-
-    private Text userScoreText = new Text();
-
-
     private Pane newBox = new Pane();
 
     private Ship ship;
@@ -72,29 +66,12 @@ public class TitleScreenController {
 
     private boolean run = true;
 
-    public void updateScoreText(){
-        userScoreText.setText(String.valueOf(userScore));
-    }
-
-    public void setUpScoreText(){
-        updateScoreText();
-        userScoreText.setX((float)LEVEL_WIDTH / 2);
-        userScoreText.setY((float)LEVEL_HEIGHT * 0.05);
-        userScoreText.setFill(Paint.valueOf("white"));
-        userScoreText.setFont(Font.font("Verdana", 20));
-    }
+    private GraphicInterface gi = new GraphicInterface(LEVEL_WIDTH,LEVEL_HEIGHT);
 
     public void exit(){
         Platform.exit();
     }
 
-
-    public void setUpHealthBar(){
-        healthBarRed.setX((float)LEVEL_WIDTH / 2 - (healthBarRed.getWidth() / 2) );
-        healthBarWhite.setX((float)LEVEL_WIDTH / 2 - (healthBarWhite.getWidth() / 2));
-        healthBarRed.setY(LEVEL_HEIGHT * 0.95);
-        healthBarWhite.setY(LEVEL_HEIGHT * 0.95);
-    }
 
     public void initialSetUpOfScene(){
         Stage stage = (Stage) startButton.getScene().getWindow();  //Pulls in the details of the current stage using the location
@@ -119,14 +96,14 @@ public class TitleScreenController {
             newBox.getChildren().add(ast.getImageView());
         }
 
-        setUpHealthBar();
-        setUpScoreText();
+        gi.setUpHealthBars();
+        gi.setUpScoreText();
 
         assetsList.add(ship);
         newBox.getChildren().add(ship.getImageView());
-        newBox.getChildren().add(healthBarWhite);
-        newBox.getChildren().add(healthBarRed);
-        newBox.getChildren().add(userScoreText);
+        newBox.getChildren().add(gi.getHealthBarWhite());
+        newBox.getChildren().add(gi.getHealthBarRed());
+        newBox.getChildren().add(gi.getUserScoreText());
 
         scene = new Scene(newBox, LEVEL_WIDTH, LEVEL_HEIGHT);
         stage.setTitle("Level One");
@@ -248,26 +225,20 @@ public class TitleScreenController {
                             }
 
                             if (asset.getName().equals("Bullet") || asset.getName().equals("Rock")) {
-
                                 if (asset.getImageView().getX() < -100 || asset.getImageView().getX() > LEVEL_WIDTH + 100 || asset.getImageView().getY() < -100 || asset.getImageView().getY() > LEVEL_HEIGHT + 100) {
                                     removeViews.add(asset.getImageView());
                                     removeAssets.add(asset);
-
                                     if (asset.getName().equals("Rock")) {
                                         astroidController.decreaseAstroidCount();
                                         System.out.println("Astroid num creation : " + astroidController.getCurrentAmountOfAstroids());
-
                                         userScore++;
                                     }
                                 }
-
                             }
                             asset.onGameTick();
                         }
                         newBox.getChildren().removeAll(removeViews);
                         assetsList.removeAll(removeAssets);
-
-
                         if (astroidController.getCurrentAmountOfAstroids() < astroidController.getMaxNumberOfAstroids()) {
                             try {
                                 Rock r = astroidController.generateNewAstroid();
@@ -279,15 +250,13 @@ public class TitleScreenController {
                             }
                         }
 
-                        updateScoreText();
+                        gi.updateScoreText(userScore);
 
                         if (System.currentTimeMillis() > astroidController.getTimeSinceLastAstroidIncrease() + (15 * 1000)) {
                             astroidController.increaseMaxNumberOfAstroids();
                             astroidController.setTimeSinceLastAstroidIncrease(System.currentTimeMillis());
                         }
-
                         lastUpdate = currentNanoTime;
-
                     }
                 }
             }
@@ -324,7 +293,7 @@ public class TitleScreenController {
                                 assetInList.setMoveSpeed(assetInList.getMoveSpeed() * 2 );
                                 assetInList.getImageView().setRotate( asset.getImageView().getRotate());
 
-                                healthBarRed.setWidth(healthBarRed.getWidth() * (asset.getHealth() / asset.getMaxHealth()));
+                                gi.getHealthBarRed().setWidth(gi.getHealthBarRed().getWidth() * (asset.getHealth() / asset.getMaxHealth()));
 
                                 asset.setTimeLast(System.currentTimeMillis());
 

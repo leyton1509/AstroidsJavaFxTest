@@ -17,9 +17,6 @@ import java.nio.file.Paths;
 public class Driver extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        Path currentRelativePath = Paths.get("");
-        String s = ((Path) currentRelativePath).toAbsolutePath().toString();
-        System.out.println("Current absolute path is: " + s);
         FXMLLoader fxmlLoader = new FXMLLoader(Driver.class.getResource("TitleScreen.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         stage.setScene(scene);
