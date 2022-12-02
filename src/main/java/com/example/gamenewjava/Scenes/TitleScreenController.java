@@ -169,12 +169,10 @@ public class TitleScreenController {
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
-
         return null;
     }
 
     public void createDeathPopUp() throws IOException {
-
         final Stage dialog = new Stage();
         VBox dialogVbox = new VBox(20);
         dialogVbox.getChildren().add(new Text("Score : " + userScore));
@@ -184,8 +182,6 @@ public class TitleScreenController {
         Scene dialogScene = new Scene(dialogVbox, 100, 50);
         dialog.setScene(dialogScene);
         dialog.show();
-
-
     }
 
     @FXML
@@ -284,24 +280,13 @@ public class TitleScreenController {
                             if(!run){
                                 System.out.println("You died!");
                                 try {
-
-
                                     this.stop();
                                     Stage stage = (Stage) scene.getWindow();
                                     stage.close();
                                     createDeathPopUp();
-
-
-
-
-
                                 } catch (IOException e) {
                                     throw new RuntimeException(e);
                                 }
-
-                                newBox.getChildren().removeAll(newBox.getChildren());
-                                currentAmountOfAstroids = 1000;
-
                             }
 
                             if (asset.getName().equals("Bullet") || asset.getName().equals("Rock")) {
