@@ -10,11 +10,18 @@ public class AstroidController {
     private final int LEVEL_WIDTH;
     private final int LEVEL_HEIGHT;
 
+    private final int maxAstroidSize = 60;
+
+    private final int minAstroidSize = 5;
+
+
+
+
     private long timeSinceLastAstroidIncrease = 0;
 
     private int currentAmountOfAstroids = 0;
 
-    private int maxNumberOfAstroids = 30;
+    private int maxNumberOfAstroids = 6;
 
     public int getMaxNumberOfAstroids() {
         return maxNumberOfAstroids;
@@ -68,31 +75,64 @@ public class AstroidController {
 
     public Rock generateNewAstroid() throws FileNotFoundException {
         String filepath = getAstroidFilePath();
-        int ranSize = (int) (Math.random() * (40 - 10) + 10);
-        int ranX = (int) (Math.random() * (LEVEL_WIDTH - ((LEVEL_WIDTH * 0.1) -1)) + 1);
-        int ranY =  (int) (Math.random() * (LEVEL_HEIGHT - (LEVEL_HEIGHT * 0.1)) -1 + 1);
+        int ranSize = (int) (Math.random() * (maxAstroidSize - 15) + 15);
+
+        int ranX = 0;
+        int ranY = 0;
+
+        ranX = (int) (Math.random() * ((LEVEL_WIDTH + 100) - (-100)) + (-100) );
+
+        if(ranX < 0 || ranX > LEVEL_WIDTH){
+            ranY =  (int) (Math.random() * ((LEVEL_HEIGHT + 90) - 90)-90);
+        }
+        else{
+            if((int) Math.round(Math.random()) == 0){
+                ranY =  (int) (Math.random() * ((LEVEL_HEIGHT + 90) - LEVEL_HEIGHT) + LEVEL_HEIGHT);
+            }
+            else{
+                ranY = (int) (Math.random() * (90));
+                ranY = ranY - 90;
+            }
+
+        }
+
         Rock rock =  new Rock("Rock", ranSize, ranSize, filepath,ranX,ranY,  0.5);
+
+        if(ranX < LEVEL_WIDTH/2 && ranY < LEVEL_HEIGHT / 2){
+            rock.getImageView().setRotate((int)(Math.random() * (170-100)+100));
+        }
+        else if(ranX > LEVEL_WIDTH/2 && ranY < LEVEL_HEIGHT / 2){
+            rock.getImageView().setRotate((int)(Math.random() * (260-190)+190));
+        }
+        else if(ranX < LEVEL_WIDTH/2 && ranY > LEVEL_HEIGHT/2){
+            rock.getImageView().setRotate((int)(Math.random() * (80-10)+80));
+        }
+        else if(ranX > LEVEL_WIDTH/2 && ranY > LEVEL_HEIGHT/2){
+            rock.getImageView().setRotate((int)(Math.random() * (350 - 260)+260));
+        }
+
+
         return rock;
     }
+
+
 
     public LinkedList<Rock> generateRandomAstroids(int numberToGenerate) throws FileNotFoundException {
         LinkedList<Rock> astroids = new LinkedList<>();
         for (int i = 0; i < numberToGenerate; i++) {
             String filepath = getAstroidFilePath();
-            int ranSize = (int) (Math.random() * (40 - 10) + 10);
-            int lowerOrHigherX = (int) Math.round(Math.random());
-            int lowerOrHigherY = (int) Math.round(Math.random());
+            int ranSize = (int) (Math.random() * (maxAstroidSize - 15) + 15);
             int ranX;
             int ranY;
 
-            if(lowerOrHigherX == 0){
+            if((int) Math.round(Math.random()) == 0){
                 ranX = (int) (Math.random() * ((LEVEL_WIDTH - ((LEVEL_WIDTH * 0.35)) -90)) - 90);
             }
             else{
                 ranX = (int) (Math.random() * (LEVEL_WIDTH - ((LEVEL_WIDTH * 0.35))) + (LEVEL_WIDTH * 0.6));
             }
 
-            if(lowerOrHigherY == 0){
+            if((int) Math.round(Math.random()) == 0){
                 ranY =  (int) (Math.random() * (LEVEL_HEIGHT - ((LEVEL_HEIGHT * 0.35)) -90) -90);
             }
             else{
