@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="10a141b0-295e-45e1-b942-d47de3b9e986" name="Changes" comment="Removed the two lines of code which stopped generating as the stage.close() covers this">
+    <list default="true" id="10a141b0-295e-45e1-b942-d47de3b9e986" name="Changes" comment="Fixed a lot of warnings">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/AstroidController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Ship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Ship.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Scenes/TitleScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Scenes/TitleScreenController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -42,7 +42,6 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "last_directory_selection": "L:/Novus/Code/JFX/GameNewJava/src/main/java/com/example/gamenewjava",
     "last_opened_file_path": "L:/Novus/Code/JFX/GameNewJava",
@@ -79,7 +78,7 @@
       <workItem from="1669892311496" duration="32177000" />
       <workItem from="1669928467444" duration="3175000" />
       <workItem from="1669971605705" duration="708000" />
-      <workItem from="1669982973474" duration="4092000" />
+      <workItem from="1669982973474" duration="5458000" />
     </task>
     <task id="LOCAL-00001" summary="Renamed classes, initial commit, created a title scene">
       <created>1669822735281</created>
@@ -207,7 +206,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669998043350</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Fixed a lot of warnings">
+      <created>1669999784241</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1669999784241</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -225,7 +231,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added the ability to load level once the play button is clicked" />
     <MESSAGE value="Added a defaul asset class" />
     <MESSAGE value="Added methods to default asset" />
     <MESSAGE value="Added functionality for a ship and background, can currently move ship but not well" />
@@ -250,7 +255,8 @@
     <MESSAGE value="Program now ends and shows the users core returns to title screen" />
     <MESSAGE value="Seperated out get astroid filepath to its own method" />
     <MESSAGE value="Removed the two lines of code which stopped generating as the stage.close() covers this" />
-    <option name="LAST_COMMIT_MESSAGE" value="Removed the two lines of code which stopped generating as the stage.close() covers this" />
+    <MESSAGE value="Fixed a lot of warnings" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed a lot of warnings" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

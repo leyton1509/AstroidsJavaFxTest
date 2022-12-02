@@ -4,6 +4,7 @@ import com.example.gamenewjava.Assets.DefaultAsset;
 import com.example.gamenewjava.Assets.Projectile;
 import com.example.gamenewjava.Assets.Rock;
 import com.example.gamenewjava.Assets.Ship;
+import com.example.gamenewjava.AstroidController;
 import com.example.gamenewjava.Driver;
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.BooleanProperty;
@@ -39,8 +40,6 @@ public class TitleScreenController {
     private final int LEVEL_HEIGHT = 600;
     private final int LEVEL_WIDTH = 900;
 
-    private int maxNumberOfAstroids = 6;
-
     final BooleanProperty leftPressed = new SimpleBooleanProperty(false);
     final BooleanProperty rightPressed = new SimpleBooleanProperty(false);
 
@@ -64,42 +63,11 @@ public class TitleScreenController {
 
     private long lastUpdate = 0;
 
-    private int currentAmountOfAstroids = 0;
-
     private int userScore = 0;
 
-    private long timeSinceLastAstroidIncrease = 0;
+    private AstroidController astroidController;
 
     private boolean run = true;
-
-    public String getAstroidFilePath(){
-        int ranAstroid = (int) (Math.random() * (4) + 0);
-        return switch (ranAstroid) {
-            case 1 -> "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\astroid2.png";
-            case 2 -> "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\astroid3.png";
-            case 3 -> "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\astroid4.png";
-            default -> "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\astroid1.png";
-        };
-    }
-    
-    public void generateNewAstroid() throws FileNotFoundException {
-        String filepath = getAstroidFilePath();
-        int ranSize = (int) (Math.random() * (40 - 10) + 10);
-        Rock rock =  new Rock("Rock", ranSize, ranSize, filepath,(int) (Math.random() * (LEVEL_WIDTH - ((LEVEL_WIDTH * 0.1) -1)) + 1), (int) (Math.random() * (LEVEL_HEIGHT - (LEVEL_HEIGHT * 0.1)) -1 + 1), 0.5);
-        assetsList.add(rock);
-        newBox.getChildren().add(rock.getImageView());
-
-    }
-
-    public LinkedList<Rock> generateRandomAstroids(int numberToGenerate) throws FileNotFoundException {
-        LinkedList<Rock> astroids = new LinkedList<>();
-        for (int i = 0; i < numberToGenerate; i++) {
-            String filepath = getAstroidFilePath();
-            int ranSize = (int) (Math.random() * (40 - 10) + 10);
-            astroids.add(new Rock("Rock", ranSize, ranSize, filepath,(int) (Math.random() * (LEVEL_WIDTH - ((LEVEL_WIDTH * 0.1) -1)) + 1), (int) (Math.random() * (LEVEL_HEIGHT - (LEVEL_HEIGHT * 0.1)) -1 + 1), 0.5));
-        }
-        return astroids;
-    }
 
     public void updateScoreText(){
         userScoreText.setText(String.valueOf(userScore));
@@ -124,12 +92,14 @@ public class TitleScreenController {
     public void initialSetUpOfScene(){
         Stage stage = (Stage) startButton.getScene().getWindow();  //Pulls in the details of the current stage using the location
         DefaultAsset background;
+        astroidController = new AstroidController(LEVEL_WIDTH, LEVEL_HEIGHT);
         LinkedList<Rock> astroids;
         try {
             ship = new Ship("Ship", 75, 75, "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\ship.png", (LEVEL_WIDTH / 2) -(75/2), (LEVEL_HEIGHT / 2) -(75/2), 8);
             background = new DefaultAsset("Background", LEVEL_HEIGHT, LEVEL_WIDTH, "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\bg.png", 0, 0);
-            astroids = generateRandomAstroids(maxNumberOfAstroids);
-            currentAmountOfAstroids = currentAmountOfAstroids + maxNumberOfAstroids;
+            astroids = astroidController.generateRandomAstroids(astroidController.getMaxNumberOfAstroids());
+            astroidController.setCurrentAmountOfAstroids(astroidController.getCurrentAmountOfAstroids() + astroidController.getMaxNumberOfAstroids());
+            System.out.println("Astroid num creation : " + astroidController.getCurrentAmountOfAstroids());
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -277,7 +247,9 @@ public class TitleScreenController {
                                     removeAssets.add(asset);
 
                                     if (asset.getName().equals("Rock")) {
-                                        currentAmountOfAstroids--;
+                                        astroidController.decreaseAstroidCount();
+                                        System.out.println("Astroid num creation : " + astroidController.getCurrentAmountOfAstroids());
+
                                         userScore++;
                                     }
                                 }
@@ -289,10 +261,12 @@ public class TitleScreenController {
                         assetsList.removeAll(removeAssets);
 
 
-                        if (currentAmountOfAstroids < maxNumberOfAstroids) {
+                        if (astroidController.getCurrentAmountOfAstroids() < astroidController.getMaxNumberOfAstroids()) {
                             try {
-                                generateNewAstroid();
-                                currentAmountOfAstroids++;
+                                Rock r = astroidController.generateNewAstroid();
+                                assetsList.add(r);
+                                newBox.getChildren().add(r.getImageView());
+                                astroidController.increaseAstroidCount();
                             } catch (FileNotFoundException e) {
                                 throw new RuntimeException(e);
                             }
@@ -300,9 +274,9 @@ public class TitleScreenController {
 
                         updateScoreText();
 
-                        if (System.currentTimeMillis() > timeSinceLastAstroidIncrease + (15 * 1000)) {
-                            maxNumberOfAstroids = maxNumberOfAstroids + 1;
-                            timeSinceLastAstroidIncrease = System.currentTimeMillis();
+                        if (System.currentTimeMillis() > astroidController.getTimeSinceLastAstroidIncrease() + (15 * 1000)) {
+                            astroidController.increaseMaxNumberOfAstroids();
+                            astroidController.setTimeSinceLastAstroidIncrease(System.currentTimeMillis());
                         }
 
                         lastUpdate = currentNanoTime;
@@ -325,7 +299,7 @@ public class TitleScreenController {
                             if(assetInList.getHealth() <= 0){
                                 removeViews.add(assetInList.getImageView());
                                 removeAssets.add(assetInList);
-                                currentAmountOfAstroids--;
+                                astroidController.decreaseAstroidCount();
                                 userScore = userScore + assetInList.getWidth();
                             }
                             removeViews.add(asset.getImageView());
