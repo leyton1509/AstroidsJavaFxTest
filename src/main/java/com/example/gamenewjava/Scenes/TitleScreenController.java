@@ -9,14 +9,12 @@ import javafx.animation.AnimationTimer;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -49,9 +47,9 @@ public class TitleScreenController {
     final BooleanProperty upPressed = new SimpleBooleanProperty(false);
     final BooleanProperty downPressed = new SimpleBooleanProperty(false);
 
-    private Rectangle healtbarRed = new Rectangle((LEVEL_WIDTH / 3), (LEVEL_HEIGHT / 30), Color.RED);
+    private Rectangle healthBarRed = new Rectangle((float)(LEVEL_WIDTH / 3), (float)(LEVEL_HEIGHT / 30), Color.RED);
 
-    private Rectangle healtbarWhite = new  Rectangle((LEVEL_WIDTH / 3), (LEVEL_HEIGHT / 30), Color.WHITE);
+    private Rectangle healthBarWhite = new  Rectangle((float)(LEVEL_WIDTH / 3), (float)(LEVEL_HEIGHT / 30), Color.WHITE);
 
     private Text userScoreText = new Text();
 
@@ -76,14 +74,12 @@ public class TitleScreenController {
 
     public String getAstroidFilePath(){
         int ranAstroid = (int) (Math.random() * (4) + 0);
-        String filepath = switch (ranAstroid) {
-            case 0 -> "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\astroid1.png";
+        return switch (ranAstroid) {
             case 1 -> "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\astroid2.png";
             case 2 -> "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\astroid3.png";
             case 3 -> "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\astroid4.png";
             default -> "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\astroid1.png";
         };
-        return filepath;
     }
     
     public void generateNewAstroid() throws FileNotFoundException {
@@ -97,7 +93,7 @@ public class TitleScreenController {
 
     public LinkedList<Rock> generateRandomAstroids(int numberToGenerate) throws FileNotFoundException {
         LinkedList<Rock> astroids = new LinkedList<>();
-        for (int i = 0; i < maxNumberOfAstroids; i++) {
+        for (int i = 0; i < numberToGenerate; i++) {
             String filepath = getAstroidFilePath();
             int ranSize = (int) (Math.random() * (40 - 10) + 10);
             astroids.add(new Rock("Rock", ranSize, ranSize, filepath,(int) (Math.random() * (LEVEL_WIDTH - ((LEVEL_WIDTH * 0.1) -1)) + 1), (int) (Math.random() * (LEVEL_HEIGHT - (LEVEL_HEIGHT * 0.1)) -1 + 1), 0.5));
@@ -111,18 +107,18 @@ public class TitleScreenController {
 
     public void setUpScoreText(){
         updateScoreText();
-        userScoreText.setX(LEVEL_WIDTH / 2);
-        userScoreText.setY(LEVEL_HEIGHT * 0.05);
+        userScoreText.setX((float)LEVEL_WIDTH / 2);
+        userScoreText.setY((float)LEVEL_HEIGHT * 0.05);
         userScoreText.setFill(Paint.valueOf("white"));
         userScoreText.setFont(Font.font("Verdana", 20));
     }
 
 
     public void setUpHealthBar(){
-        healtbarRed.setX(LEVEL_WIDTH / 2 - (healtbarRed.getWidth() / 2) );
-        healtbarWhite.setX(LEVEL_WIDTH / 2 - (healtbarWhite.getWidth() / 2));
-        healtbarRed.setY(LEVEL_HEIGHT * 0.95);
-        healtbarWhite.setY(LEVEL_HEIGHT * 0.95);
+        healthBarRed.setX((float)LEVEL_WIDTH / 2 - (healthBarRed.getWidth() / 2) );
+        healthBarWhite.setX((float)LEVEL_WIDTH / 2 - (healthBarWhite.getWidth() / 2));
+        healthBarRed.setY(LEVEL_HEIGHT * 0.95);
+        healthBarWhite.setY(LEVEL_HEIGHT * 0.95);
     }
 
     public void initialSetUpOfScene(){
@@ -151,8 +147,8 @@ public class TitleScreenController {
 
         assetsList.add(ship);
         newBox.getChildren().add(ship.getImageView());
-        newBox.getChildren().add(healtbarWhite);
-        newBox.getChildren().add(healtbarRed);
+        newBox.getChildren().add(healthBarWhite);
+        newBox.getChildren().add(healthBarRed);
         newBox.getChildren().add(userScoreText);
 
         scene = new Scene(newBox, LEVEL_WIDTH, LEVEL_HEIGHT);
@@ -185,83 +181,68 @@ public class TitleScreenController {
     }
 
     @FXML
-    protected void play(Event event) throws IOException {
+    protected void play() {
         initialSetUpOfScene();
-        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                switch (event.getCode()) {
-                    case LEFT:
-                        leftPressed.set(true);
-                        break;
-                    case RIGHT:
-                        rightPressed.set(true);
-                        break;
-                    case UP:
-                        upPressed.set(true);
-                        break;
-                    case DOWN:
-                        downPressed.set(true);
-                        break;
-                    case SHIFT:
-                        try {
-                            if (System.currentTimeMillis() > (ship.getTimeSinceLastFiredAdvanced() + (1.5 * 1000))) {
-                                Projectile proj = ship.fireAdvancedProjectile();
-                                assetsList.add(proj);
-                                newBox.getChildren().add(proj.getImageView());
-                                ship.setTimeSinceLastFiredAdvanced(System.currentTimeMillis());
-                            }
-
-                        } catch (FileNotFoundException e) {
-                            throw new RuntimeException(e);
-                        }
-                        break;
-
-                    case SPACE:
-                        try {
-                            Projectile proj = ship.fireBasicProjectile();
+        scene.setOnKeyPressed(event -> {
+            switch (event.getCode()) {
+                case LEFT:
+                    leftPressed.set(true);
+                    break;
+                case RIGHT:
+                    rightPressed.set(true);
+                    break;
+                case UP:
+                    upPressed.set(true);
+                    break;
+                case DOWN:
+                    downPressed.set(true);
+                    break;
+                case SHIFT:
+                    try {
+                        if (System.currentTimeMillis() > (ship.getTimeSinceLastFiredAdvanced() + (1.5 * 1000))) {
+                            Projectile proj = ship.fireAdvancedProjectile();
                             assetsList.add(proj);
                             newBox.getChildren().add(proj.getImageView());
-
-                        } catch (FileNotFoundException e) {
-                            throw new RuntimeException(e);
+                            ship.setTimeSinceLastFiredAdvanced(System.currentTimeMillis());
                         }
-                }
 
-                if (leftPressed.get()) {
-                    ship.rotateLeft();
-                }
-                if (rightPressed.get()) {
-                    ship.rotateRight();
-                }
-                if (upPressed.get()) {
-                    ship.moveForward();
-                }
-                if (downPressed.get()) {
-                    ship.moveBackwards();
-                }
+                    } catch (FileNotFoundException e) {
+                        throw new RuntimeException(e);
+                    }
+                    break;
 
+                case SPACE:
+                    try {
+                        Projectile proj = ship.fireBasicProjectile();
+                        assetsList.add(proj);
+                        newBox.getChildren().add(proj.getImageView());
+
+                    } catch (FileNotFoundException e) {
+                        throw new RuntimeException(e);
+                    }
             }
+
+            if (leftPressed.get()) {
+                ship.rotateLeft();
+            }
+            if (rightPressed.get()) {
+                ship.rotateRight();
+            }
+            if (upPressed.get()) {
+                ship.moveForward();
+            }
+            if (downPressed.get()) {
+                ship.moveBackwards();
+            }
+
         });
 
-        scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                switch (event.getCode()) {
-                    case LEFT:
-                        leftPressed.set(false);
-                        break;
-                    case RIGHT:
-                        rightPressed.set(false);
-                        break;
-                    case UP:
-                        upPressed.set(false);
-                        break;
-                    case DOWN:
-                        downPressed.set(false);
-                        break;
-                    // case SHIFT: running = true; break;
-                }
+        scene.setOnKeyReleased(event -> {
+            switch (event.getCode()) {
+                case LEFT -> leftPressed.set(false);
+                case RIGHT -> rightPressed.set(false);
+                case UP -> upPressed.set(false);
+                case DOWN -> downPressed.set(false);
             }
         });
 
@@ -362,7 +343,7 @@ public class TitleScreenController {
                                 assetInList.setMoveSpeed(assetInList.getMoveSpeed() * 2 );
                                 assetInList.getImageView().setRotate( asset.getImageView().getRotate());
 
-                                healtbarRed.setWidth(healtbarRed.getWidth() * (asset.getHealth() / asset.getMaxHealth()));
+                                healthBarRed.setWidth(healthBarRed.getWidth() * (asset.getHealth() / asset.getMaxHealth()));
 
                                 asset.setTimeLast(System.currentTimeMillis());
 

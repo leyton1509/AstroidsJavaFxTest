@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="10a141b0-295e-45e1-b942-d47de3b9e986" name="Changes" comment="Seperated out get astroid filepath to its own method">
+    <list default="true" id="10a141b0-295e-45e1-b942-d47de3b9e986" name="Changes" comment="Removed the two lines of code which stopped generating as the stage.close() covers this">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Ship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Ship.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Scenes/TitleScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Scenes/TitleScreenController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -78,7 +79,7 @@
       <workItem from="1669892311496" duration="32177000" />
       <workItem from="1669928467444" duration="3175000" />
       <workItem from="1669971605705" duration="708000" />
-      <workItem from="1669982973474" duration="2658000" />
+      <workItem from="1669982973474" duration="4092000" />
     </task>
     <task id="LOCAL-00001" summary="Renamed classes, initial commit, created a title scene">
       <created>1669822735281</created>
@@ -199,7 +200,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669997876946</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Removed the two lines of code which stopped generating as the stage.close() covers this">
+      <created>1669998043350</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1669998043350</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -217,7 +225,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Renamed classes, initial commit, created a title scene" />
     <MESSAGE value="Added the ability to load level once the play button is clicked" />
     <MESSAGE value="Added a defaul asset class" />
     <MESSAGE value="Added methods to default asset" />
@@ -242,7 +249,8 @@
     <MESSAGE value="Added a score to the game" />
     <MESSAGE value="Program now ends and shows the users core returns to title screen" />
     <MESSAGE value="Seperated out get astroid filepath to its own method" />
-    <option name="LAST_COMMIT_MESSAGE" value="Seperated out get astroid filepath to its own method" />
+    <MESSAGE value="Removed the two lines of code which stopped generating as the stage.close() covers this" />
+    <option name="LAST_COMMIT_MESSAGE" value="Removed the two lines of code which stopped generating as the stage.close() covers this" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
