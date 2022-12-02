@@ -73,8 +73,8 @@ public class TitleScreenController {
     private long timeSinceLastAstroidIncrease = 0;
 
     private boolean run = true;
-    
-    public void generateNewAstroid() throws FileNotFoundException {
+
+    public String getAstroidFilePath(){
         int ranAstroid = (int) (Math.random() * (4) + 0);
         String filepath = switch (ranAstroid) {
             case 0 -> "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\astroid1.png";
@@ -83,6 +83,11 @@ public class TitleScreenController {
             case 3 -> "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\astroid4.png";
             default -> "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\astroid1.png";
         };
+        return filepath;
+    }
+    
+    public void generateNewAstroid() throws FileNotFoundException {
+        String filepath = getAstroidFilePath();
         int ranSize = (int) (Math.random() * (40 - 10) + 10);
         Rock rock =  new Rock("Rock", ranSize, ranSize, filepath,(int) (Math.random() * (LEVEL_WIDTH - ((LEVEL_WIDTH * 0.1) -1)) + 1), (int) (Math.random() * (LEVEL_HEIGHT - (LEVEL_HEIGHT * 0.1)) -1 + 1), 0.5);
         assetsList.add(rock);
@@ -93,14 +98,7 @@ public class TitleScreenController {
     public LinkedList<Rock> generateRandomAstroids(int numberToGenerate) throws FileNotFoundException {
         LinkedList<Rock> astroids = new LinkedList<>();
         for (int i = 0; i < maxNumberOfAstroids; i++) {
-            int ranAstroid = (int) (Math.random() * (4) + 0);
-            String filepath = switch (ranAstroid) {
-                case 0 -> "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\astroid1.png";
-                case 1 -> "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\astroid2.png";
-                case 2 -> "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\astroid3.png";
-                case 3 -> "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\astroid4.png";
-                default -> "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\astroid1.png";
-            };
+            String filepath = getAstroidFilePath();
             int ranSize = (int) (Math.random() * (40 - 10) + 10);
             astroids.add(new Rock("Rock", ranSize, ranSize, filepath,(int) (Math.random() * (LEVEL_WIDTH - ((LEVEL_WIDTH * 0.1) -1)) + 1), (int) (Math.random() * (LEVEL_HEIGHT - (LEVEL_HEIGHT * 0.1)) -1 + 1), 0.5));
         }
