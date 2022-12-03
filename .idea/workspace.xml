@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="10a141b0-295e-45e1-b942-d47de3b9e986" name="Changes" comment="Changed advanced projectile property">
+    <list default="true" id="10a141b0-295e-45e1-b942-d47de3b9e986" name="Changes" comment="Added a timer to basic projectile stop spinning in a circle tactic">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Ship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Ship.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Scenes/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Scenes/GameController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -87,14 +86,7 @@
       <workItem from="1670009429216" duration="86000" />
       <workItem from="1670009522584" duration="13000" />
       <workItem from="1670009544063" duration="14454000" />
-      <workItem from="1670065200427" duration="30791000" />
-    </task>
-    <task id="LOCAL-00004" summary="Added movement and rotation in all directions to the ship">
-      <created>1669899538735</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1669899538735</updated>
+      <workItem from="1670065200427" duration="30993000" />
     </task>
     <task id="LOCAL-00005" summary="Can now succesfully fire missles from the ship">
       <created>1669909367849</created>
@@ -432,7 +424,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670101402268</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="Added a timer to basic projectile stop spinning in a circle tactic">
+      <created>1670102036287</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1670102036287</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -450,7 +449,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added an enemy ship controller which generates enemy ships" />
     <MESSAGE value="Ship now moves with gravity" />
     <MESSAGE value="Added the splitting of astroids, need to work on collision between them" />
     <MESSAGE value="Better splitting of rocks" />
@@ -475,7 +473,8 @@
     <MESSAGE value="missed a t in bullet" />
     <MESSAGE value="Changed the advanced projectile to be able to be shot while moving" />
     <MESSAGE value="Changed advanced projectile property" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed advanced projectile property" />
+    <MESSAGE value="Added a timer to basic projectile stop spinning in a circle tactic" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added a timer to basic projectile stop spinning in a circle tactic" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

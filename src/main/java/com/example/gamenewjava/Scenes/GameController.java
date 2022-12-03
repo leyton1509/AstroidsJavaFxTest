@@ -318,7 +318,7 @@ public class GameController {
             if(shiftPressed.get()){
                 try {
                     // Loads and fires a missile
-                    if (System.currentTimeMillis() > (ship.getTimeSinceLastFiredAdvanced() + (1.5 * 1000))) {
+                    if (System.currentTimeMillis() > (ship.getTimeSinceLastFiredAdvanced() + (1.2 * 1000))) {
                         Projectile proj = ship.fireAdvancedProjectile();
                         assetsList.add(proj);
                         newBox.getChildren().add(proj.getImageView());
