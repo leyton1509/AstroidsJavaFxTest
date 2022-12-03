@@ -51,6 +51,12 @@ public class EnemyShipController {
      */
     private double currentMaxMoveSpeed = 0.3;
 
+
+    /**
+     * Boolean for if a ship should be created
+     */
+    private boolean shouldGenerateShips = true;
+
     /**
      * @param _playerShip The players ship
      * @param _LEVEL_WIDTH The width of level
@@ -136,4 +142,17 @@ public class EnemyShipController {
     }
 
 
+    /**
+     * @return Whether to create ship or not
+     */
+    public boolean isShouldGenerateShips() {
+        return shouldGenerateShips;
+    }
+
+    /**
+     * @param shouldGenerateShips Set should generate ships
+     */
+    public void setShouldGenerateShips(boolean shouldGenerateShips) {
+        this.shouldGenerateShips = shouldGenerateShips;
+    }
 }

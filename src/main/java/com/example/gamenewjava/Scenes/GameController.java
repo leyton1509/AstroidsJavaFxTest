@@ -465,7 +465,7 @@ public class GameController {
 
                         // If a new astroid needs to be generated create it
 
-                        if (astroidController.getCurrentAmountOfAstroids() < astroidController.getMaxNumberOfAstroids()) {
+                        if (astroidController.getCurrentAmountOfAstroids() < astroidController.getMaxNumberOfAstroids() && astroidController.isShouldGenerateAsteroids()) {
                             try {
                                 Rock r = astroidController.generateNewAstroid();
                                 assetsList.add(r);
@@ -477,7 +477,7 @@ public class GameController {
                         }
 
                         // If an enemy ship needs to be created, create it
-                        if (enemyShipC.getCurrentAmountOfEnemyShips() < enemyShipC.getMaxNumberOfEnemyShips()) {
+                        if (enemyShipC.getCurrentAmountOfEnemyShips() < enemyShipC.getMaxNumberOfEnemyShips() && enemyShipC.isShouldGenerateShips()) {
                             try {
                                 EnemyShip s = enemyShipC.createNewShip();
                                 assetsList.add(s);

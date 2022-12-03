@@ -42,6 +42,11 @@ public class AstroidController {
     private int maxNumberOfAstroids = 6;
 
     /**
+     * Boolean for if astroids should be created
+     */
+    private boolean shouldGenerateAsteroids = true;
+
+    /**
      * @return The max number of astroids
      */
     public int getMaxNumberOfAstroids() {
@@ -259,4 +264,17 @@ public class AstroidController {
         return splitRocks;
     }
 
+    /**
+     * @return Whether to generate an astroid
+     */
+    public boolean isShouldGenerateAsteroids() {
+        return shouldGenerateAsteroids;
+    }
+
+    /**
+     * @param shouldGenerateAsteroids Set whether to generate astroid
+     */
+    public void setShouldGenerateAsteroids(boolean shouldGenerateAsteroids) {
+        this.shouldGenerateAsteroids = shouldGenerateAsteroids;
+    }
 }
