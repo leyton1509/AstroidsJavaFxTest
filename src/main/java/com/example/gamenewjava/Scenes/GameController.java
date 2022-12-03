@@ -76,9 +76,14 @@ public class GameController {
     final BooleanProperty downPressed = new SimpleBooleanProperty(false);
 
     /**
-     * Boolean for if down key is pressed
+     * Boolean for if space key is pressed
      */
     final BooleanProperty spacePressed = new SimpleBooleanProperty(false);
+
+    /**
+     * Boolean for if shift key is pressed
+     */
+    final BooleanProperty shiftPressed = new SimpleBooleanProperty(false);
 
     /**
      * The main pane for the game
@@ -274,18 +279,7 @@ public class GameController {
 
                      break;
                 case SHIFT:
-                    try {
-                        // Loads and fires a missile
-                        if (System.currentTimeMillis() > (ship.getTimeSinceLastFiredAdvanced() + (1.5 * 1000))) {
-                            Projectile proj = ship.fireAdvancedProjectile();
-                            assetsList.add(proj);
-                            newBox.getChildren().add(proj.getImageView());
-                            ship.setTimeSinceLastFiredAdvanced(System.currentTimeMillis());
-                        }
-
-                    } catch (FileNotFoundException e) {
-                        throw new RuntimeException(e);
-                    }
+                    shiftPressed.set(true);
                     break;
 
                 case SPACE:
@@ -318,6 +312,21 @@ public class GameController {
                 }
             }
 
+            if(shiftPressed.get()){
+                try {
+                    // Loads and fires a missile
+                    if (System.currentTimeMillis() > (ship.getTimeSinceLastFiredAdvanced() + (1.5 * 1000))) {
+                        Projectile proj = ship.fireAdvancedProjectile();
+                        assetsList.add(proj);
+                        newBox.getChildren().add(proj.getImageView());
+                        ship.setTimeSinceLastFiredAdvanced(System.currentTimeMillis());
+                    }
+
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
         });
 
         // Sets keys to false once released
@@ -329,6 +338,7 @@ public class GameController {
                 case UP -> upPressed.set(false);
                 case DOWN -> downPressed.set(false);
                 case SPACE -> spacePressed.set(false);
+                case SHIFT -> shiftPressed.set(false);
             }
         });
 
