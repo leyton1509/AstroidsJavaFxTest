@@ -2,25 +2,52 @@ package com.example.gamenewjava.Assets;
 
 import java.io.FileNotFoundException;
 
+/**
+ * Represents an enemy ship
+ */
 public class EnemyShip extends DefaultAsset{
 
-    private double amountRotated = 0;
-    private int degreeOfRotation = 10;
 
-    private Ship ship;
+    /**
+     * The player ship to track
+     */
+    private final Ship ship;
 
+    /**
+     * Time since last fired
+     */
     private long timeSinceLastFire = 0;
 
+    /**
+     * @return the time since last fired
+     */
     public long getTimeSinceLastFire() {
         return timeSinceLastFire;
     }
 
+    /**
+     * @param timeSinceLastFire Sets the time since last fired
+     */
     public void setTimeSinceLastFire(long timeSinceLastFire) {
         this.timeSinceLastFire = timeSinceLastFire;
     }
 
+    /**
+     * The integer of the coloured bullet to use
+     */
     private final int ranBullet;
 
+    /**
+     * @param _name the name of asset
+     * @param _height the height of asset
+     * @param _width the width of asset
+     * @param _filepath the filepath of image
+     * @param _moveSpeed the speed of the asset
+     * @param playerShip the player ship to track
+     * @param LEVEL_WIDTH the width of level
+     * @param LEVEL_HEIGHT the height of level
+     * @throws FileNotFoundException e
+     */
     public EnemyShip(String _name, int _height, int _width, String _filepath, double _moveSpeed, Ship playerShip, int LEVEL_WIDTH, int LEVEL_HEIGHT) throws FileNotFoundException {
         super(_name, _height, _width, _filepath, 0, 0);
         getRandomStartPosition(LEVEL_WIDTH, LEVEL_HEIGHT);
@@ -32,6 +59,11 @@ public class EnemyShip extends DefaultAsset{
         ranBullet = (int) (Math.random() * (3) + 0);
     }
 
+    /**
+     * Generates a random start position out off screen
+     * @param LEVEL_WIDTH The height of level
+     * @param LEVEL_HEIGHT The width of level
+     */
     private void getRandomStartPosition(int LEVEL_WIDTH, int LEVEL_HEIGHT){
         int ranX = 0;
         int ranY = 0;
@@ -56,41 +88,19 @@ public class EnemyShip extends DefaultAsset{
 
     }
 
+
+    /**
+     * Moves the ship forward
+     */
     public void moveForward(){
         getImageView().setY(getImageView().getY() - Math.cos(Math.toRadians(getImageView().getRotate())) * getMoveSpeed());
         getImageView().setX(getImageView().getX() + Math.sin(Math.toRadians(getImageView().getRotate())) * getMoveSpeed());
     }
 
-    public void rotateRight(){
-        getImageView().setRotate(getImageView().getRotate() + degreeOfRotation);
-        updateRotation(degreeOfRotation, true);
-    }
 
-    public void rotateLeft(){
-        getImageView().setRotate(getImageView().getRotate() - degreeOfRotation);
-        updateRotation(degreeOfRotation, false);
-    }
-
-    public void updateRotation(double amount, boolean positive){
-
-        if(positive){
-            if(amountRotated + amount > 360){
-                amountRotated = 360 - amountRotated + amount;
-            }
-            else{
-                amountRotated = amountRotated + amount;
-            }
-        }else{
-            if(amountRotated - amount < -360){
-                amountRotated = 0 - (-360 + Math.abs(amountRotated)) - amount;
-            }
-            else{
-                amountRotated = amountRotated - amount;
-            }
-        }
-
-    }
-
+    /**
+     * Updates the angle of the ship to find the player
+     */
     public void updateAngleToFindPlayer(){
         double theta = Math.atan2(ship.getImageView().getY() - getImageView().getY(), ship.getImageView().getX() - getImageView().getX());
         theta += Math.PI/2.0;
@@ -101,12 +111,18 @@ public class EnemyShip extends DefaultAsset{
         getImageView().setRotate(angle);
     }
 
+    /**
+     * On game tick adjust angle and move
+     */
     public void onGameTick(){
         //System.out.println("Angle : " + getImageView().getRotate() + " X : " + getImageView().getX() + " Y : " + getImageView().getY());
         updateAngleToFindPlayer();
         moveForward();
     }
 
+    /**
+     * @return String of the bullet filepath
+     */
     public String getShipFilePath(){
         return switch (ranBullet) {
             case 1 -> "imgs/enemyBullet.png";
@@ -115,6 +131,10 @@ public class EnemyShip extends DefaultAsset{
         };
     }
 
+    /**
+     * @return Projectile enemy bullet that can damage the player
+     * @throws FileNotFoundException e
+     */
     public Projectile fireBasicProjectile() throws FileNotFoundException {
         double basicProjectileDamage = 4;
         return new Projectile("EnemyBullet", 12, 5, getShipFilePath(), (int) (getImageView().getX() + getImageView().getFitWidth()  / 2), (int) (getImageView().getY() + getImageView().getFitHeight() / 2), getImageView().getRotate(), 0.8, basicProjectileDamage);

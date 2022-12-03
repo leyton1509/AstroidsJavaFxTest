@@ -14,6 +14,9 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * Driver class to run program
+ */
 public class Driver extends Application {
     @Override
     public void start(Stage stage) throws IOException {
