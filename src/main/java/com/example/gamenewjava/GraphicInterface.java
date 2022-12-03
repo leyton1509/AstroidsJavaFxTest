@@ -17,11 +17,18 @@ public class GraphicInterface {
 
     private Text userScoreText = new Text("0");
 
+    private double maxWidth;
+
+    public double getMaxWidth() {
+        return maxWidth;
+    }
+
     public GraphicInterface(int width, int height){
         LEVEL_WIDTH = width;
         LEVEL_HEIGHT = height;
         healthBarRed = new Rectangle((float)(LEVEL_WIDTH / 3), (float)(LEVEL_HEIGHT / 30), Color.RED);
         healthBarWhite = new  Rectangle((float)(LEVEL_WIDTH / 3), (float)(LEVEL_HEIGHT / 30), Color.WHITE);
+        maxWidth = (float)(LEVEL_WIDTH / 3);
         setUpScoreText();
         setUpHealthBars();
     }

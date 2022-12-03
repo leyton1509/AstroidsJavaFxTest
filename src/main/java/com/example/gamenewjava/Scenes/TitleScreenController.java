@@ -343,7 +343,7 @@ public class TitleScreenController {
             gi.getHealthBarRed().setWidth(0);
         }
         else{
-            gi.getHealthBarRed().setWidth((int) gi.getHealthBarRed().getWidth() * (ship.getHealth() / ship.getMaxHealth()));
+            gi.getHealthBarRed().setWidth((int) gi.getMaxWidth() * (ship.getHealth() / ship.getMaxHealth()));
         }
     }
 
