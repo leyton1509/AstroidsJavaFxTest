@@ -77,7 +77,7 @@ public class TitleScreenController {
         LinkedList<Rock> astroids;
         EnemyShip es;
         try {
-            ship = new Ship("Ship", 75, 75, "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\ship.png", (LEVEL_WIDTH / 2) -(75/2), (LEVEL_HEIGHT / 2) -(75/2), 8);
+            ship = new Ship("Ship", 75, 75, "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\newUserShip.png", (LEVEL_WIDTH / 2) -(75/2), (LEVEL_HEIGHT / 2) -(75/2), 8);
             background = new DefaultAsset("Background", LEVEL_HEIGHT, LEVEL_WIDTH, "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\bg.png", 0, 0);
             astroids = astroidController.generateRandomAstroids(astroidController.getMaxNumberOfAstroids());
             astroidController.setCurrentAmountOfAstroids(astroidController.getCurrentAmountOfAstroids() + astroidController.getMaxNumberOfAstroids());
@@ -318,7 +318,20 @@ public class TitleScreenController {
                             }
                             removeViews.add(asset.getImageView());
                             removeAssets.add(asset);
+
+                        } else if (assetInList.getName().equals("EnemyShip")) {
+                        {
+                            assetInList.decreaseHealth(asset.getDamage());
+                            if (assetInList.getHealth() <= 0) {
+                                removeViews.add(assetInList.getImageView());
+                                removeAssets.add(assetInList);
+                            }
+                            removeViews.add(asset.getImageView());
+                            removeAssets.add(asset);
                         }
+                    }
+
+
                     } else if (asset.getName().equals("Ship")) {
                         if(assetInList.getName().equals("Rock")){
                             if(System.currentTimeMillis() > (asset.getTimeLast() + (0.7*1000))){
@@ -336,13 +349,13 @@ public class TitleScreenController {
                                 asset.setTimeLast(System.currentTimeMillis());
 
                             }
-                        } else if (assetInList.getName().equals("EnemyShip")) {
+                        } else if (assetInList.getName().equals("EnemyShip") || assetInList.getName().equals("EnemyBullet")) {
                             asset.decreaseHealth(assetInList.getDamage());
                             removeViews.add(assetInList.getImageView());
                             removeAssets.add(assetInList);
                             damageTaken();
-
                         }
+
                     }
                     else if (asset.getName().equals("Rock")){
                         if(assetInList.getName().equals("Rock")){

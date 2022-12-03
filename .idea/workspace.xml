@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="10a141b0-295e-45e1-b942-d47de3b9e986" name="Changes" comment="Made changes to the health system">
+    <list default="true" id="10a141b0-295e-45e1-b942-d47de3b9e986" name="Changes" comment="Fixed the health system">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/DefaultAsset.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/DefaultAsset.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/EnemyShip.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/EnemyShip.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Rock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Rock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Ship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Ship.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Scenes/TitleScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Scenes/TitleScreenController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -90,7 +87,7 @@
       <workItem from="1670009429216" duration="86000" />
       <workItem from="1670009522584" duration="13000" />
       <workItem from="1670009544063" duration="14454000" />
-      <workItem from="1670065200427" duration="739000" />
+      <workItem from="1670065200427" duration="2011000" />
     </task>
     <task id="LOCAL-00001" summary="Renamed classes, initial commit, created a title scene">
       <created>1669822735281</created>
@@ -274,7 +271,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670026018226</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Fixed the health system">
+      <created>1670066179136</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1670066179136</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -292,7 +296,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Rocks now move around the screen and are different colours" />
     <MESSAGE value="Fixed the error of concurrent removing" />
     <MESSAGE value="Working on collision detecting added movement speed" />
     <MESSAGE value="Working collision system, kind of breaks with high number of astroids" />
@@ -317,7 +320,8 @@
     <MESSAGE value="Put a lot of the GUI into a class called GraphicalInterface" />
     <MESSAGE value="Added an enemy ship that tracks user and fires bullets, needs tweaking" />
     <MESSAGE value="Made changes to the health system" />
-    <option name="LAST_COMMIT_MESSAGE" value="Made changes to the health system" />
+    <MESSAGE value="Fixed the health system" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed the health system" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -326,11 +330,6 @@
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="1" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Scenes/TitleScreenController.java</url>
-          <line>328</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

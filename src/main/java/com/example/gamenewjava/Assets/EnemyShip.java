@@ -106,7 +106,7 @@ public class EnemyShip extends DefaultAsset{
 
     public Projectile fireBasicProjectile() throws FileNotFoundException {
         double basicProjectileDamage = 4;
-        return new Projectile("EnemyBullet", 10, 5, "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\basicbullet.png", (int) (getImageView().getX() + getImageView().getFitWidth()  / 2), (int) (getImageView().getY() + getImageView().getFitHeight() / 2), getImageView().getRotate(), 0.8, basicProjectileDamage);
+        return new Projectile("EnemyBullet", 12, 5, "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\enemybullet.png", (int) (getImageView().getX() + getImageView().getFitWidth()  / 2), (int) (getImageView().getY() + getImageView().getFitHeight() / 2), getImageView().getRotate(), 0.8, basicProjectileDamage);
     }
 
 }
