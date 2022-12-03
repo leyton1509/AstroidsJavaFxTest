@@ -152,8 +152,7 @@ public class Ship extends DefaultAsset{
      * @throws FileNotFoundException e
      */
     public Projectile fireBasicProjectile() throws FileNotFoundException {
-        double basicProjectileDamage = 5;
-        return new Projectile("Bullet", 10, 4, "imgs/basicbullet.png", (int) (getImageView().getX() + getImageView().getFitWidth()  / 2), (int) (getImageView().getY() + getImageView().getFitHeight() / 2), getImageView().getRotate(), 3, basicProjectileDamage);
+        return new Projectile("Bullet", 10, 4, "imgs/basicbullet.png", (int) (getImageView().getX() + getImageView().getFitWidth()  / 2), (int) (getImageView().getY() + getImageView().getFitHeight() / 2), getImageView().getRotate(), 3, 5);
     }
 
     /**
@@ -162,8 +161,7 @@ public class Ship extends DefaultAsset{
      * @throws FileNotFoundException e
      */
     public Projectile fireAdvancedProjectile() throws FileNotFoundException {
-        double advancedProjectileDamage = 30;
-        return new Projectile("Bullet", 18, 8, "imgs/advancedbullet.png", (int) (getImageView().getX() + getImageView().getFitWidth()  / 2), (int) (getImageView().getY() + getImageView().getFitHeight() / 2), getImageView().getRotate(), 1.5, advancedProjectileDamage);
+        return new Projectile("Bullet", 18, 8, "imgs/advancedbullet.png", (int) (getImageView().getX() + getImageView().getFitWidth()  / 2), (int) (getImageView().getY() + getImageView().getFitHeight() / 2), getImageView().getRotate(), 6, 40);
     }
 
     /**
