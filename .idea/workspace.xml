@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="10a141b0-295e-45e1-b942-d47de3b9e986" name="Changes" comment="Ship now will come back on screen if you go off">
+    <list default="true" id="10a141b0-295e-45e1-b942-d47de3b9e986" name="Changes" comment="Improved collision between rocks">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Scenes/TitleScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Scenes/TitleScreenController.java" afterDir="false" />
     </list>
@@ -86,7 +86,7 @@
       <workItem from="1670009429216" duration="86000" />
       <workItem from="1670009522584" duration="13000" />
       <workItem from="1670009544063" duration="14454000" />
-      <workItem from="1670065200427" duration="12145000" />
+      <workItem from="1670065200427" duration="14868000" />
     </task>
     <task id="LOCAL-00001" summary="Renamed classes, initial commit, created a title scene">
       <created>1669822735281</created>
@@ -312,7 +312,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670076622349</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="Ship now will come back on screen if you go off">
+      <created>1670077360523</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1670077360523</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -330,8 +337,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added an advanced missle thats fired every 1.5 seconds" />
-    <MESSAGE value="Added advanced bullet collision detection" />
     <MESSAGE value="Simplified a lot of code" />
     <MESSAGE value="Adds new astroids to the map once one clears, need to do it so it doesnt just spawn in the middle" />
     <MESSAGE value="Will now add one more astroid every 15 seconds" />
@@ -355,7 +360,9 @@
     <MESSAGE value="Added the splitting of astroids, need to work on collision between them" />
     <MESSAGE value="Better splitting of rocks" />
     <MESSAGE value="Ship now will come back on screen if you go off" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ship now will come back on screen if you go off" />
+    <MESSAGE value="Im" />
+    <MESSAGE value="Improved collision between rocks" />
+    <option name="LAST_COMMIT_MESSAGE" value="Improved collision between rocks" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -364,6 +371,11 @@
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="1" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Scenes/TitleScreenController.java</url>
+          <line>387</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

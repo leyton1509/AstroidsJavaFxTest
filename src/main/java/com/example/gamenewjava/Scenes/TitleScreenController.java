@@ -398,10 +398,14 @@ public class TitleScreenController {
                                 if(asset.getHealth() <= 0){
                                     return false;
                                 }
-                                System.out.println("Current health : " + asset.getHealth());
                                 assetInList.setMoveSpeed(assetInList.getMoveSpeed() * 2 );
-                                assetInList.getImageView().setRotate( asset.getImageView().getRotate());
-
+                                double angleOfCollisionRad = Math.atan2(assetInList.getImageView().getY() - ship.getImageView().getY(), assetInList.getImageView().getX() - ship.getImageView().getX());
+                                angleOfCollisionRad += Math.PI/2.0;
+                                double angleOfCollision = Math.toDegrees(angleOfCollisionRad);
+                                if (angleOfCollision < 0) {
+                                    angleOfCollision += 360;
+                                }
+                                assetInList.getImageView().setRotate(angleOfCollision);
                                 asset.setTimeLast(System.currentTimeMillis());
 
                             }
@@ -415,26 +419,12 @@ public class TitleScreenController {
                     }
                     else if (asset.getName().equals("Rock") ){
                         if(assetInList.getName().equals("Rock")){
-                            double angleRock1 = asset.getImageView().getRotate();
-                            double angleRock2 = assetInList.getImageView().getRotate();
-                            double speedRock1 = asset.getMoveSpeed();
-                            double speedRock2 = assetInList.getMoveSpeed();
-                            assetInList.setMoveSpeed(speedRock2 * 0.9 );
-                            asset.setMoveSpeed(speedRock1 * 0.9 );
-                            assetInList.getImageView().setRotate(angleRock1);
-                            asset.getImageView().setRotate(angleRock2);
+                            circleCollision((Rock)asset, (Rock) assetInList);
                         }
                     }
                     else if (asset.getName().equals("SplitRock") ){
                         if(assetInList.getName().equals("SplitRock") || assetInList.getName().equals("Rock")){
-                            double angleRock1 = asset.getImageView().getRotate();
-                            double angleRock2 = assetInList.getImageView().getRotate();
-                            double speedRock1 = asset.getMoveSpeed();
-                            double speedRock2 = assetInList.getMoveSpeed();
-                            assetInList.setMoveSpeed(speedRock2 * 0.9 );
-                            asset.setMoveSpeed(speedRock1 * 0.9 );
-                            assetInList.getImageView().setRotate(angleRock1);
-                            asset.getImageView().setRotate(angleRock2);
+                            circleCollision((Rock)asset, (Rock) assetInList);
                         }
                     }
 
@@ -443,5 +433,35 @@ public class TitleScreenController {
             }
         }
         return true;
+    }
+
+
+    public void circleCollision(Rock rock1, Rock rock2){
+        double angleOfCollisionRad = Math.atan2(rock1.getImageView().getY() - rock2.getImageView().getY(), rock1.getImageView().getX() - rock2.getImageView().getX());
+        angleOfCollisionRad += Math.PI/2.0;
+        double angleOfCollision = Math.toDegrees(angleOfCollisionRad);
+        if (angleOfCollision < 0) {
+            angleOfCollision += 360;
+        }
+
+        if(rock2.getSize() < rock1.getSize() / 2){
+            rock1.setMoveSpeed(rock1.getMoveSpeed() * 0.9 );
+            rock2.setMoveSpeed(rock2.getMoveSpeed() * 1.2 );
+        }
+        else if(rock1.getSize() < rock2.getSize() / 2){
+            rock1.setMoveSpeed(rock1.getMoveSpeed() * 1.2 );
+            rock2.setMoveSpeed(rock2.getMoveSpeed() * 0.9 );
+        }
+        else{
+            rock1.setMoveSpeed(rock1.getMoveSpeed() * 0.5);
+            rock2.setMoveSpeed(rock2.getMoveSpeed() * 0.5);
+        }
+        rock1.getImageView().setRotate(angleOfCollision);
+        rock2.getImageView().setRotate(angleOfCollision-180);
+
+
+
+
+
     }
 }
