@@ -14,9 +14,6 @@ public class AstroidController {
 
     private final int minAstroidSize = 5;
 
-
-
-
     private long timeSinceLastAstroidIncrease = 0;
 
     private int currentAmountOfAstroids = 0;
@@ -26,7 +23,6 @@ public class AstroidController {
     public int getMaxNumberOfAstroids() {
         return maxNumberOfAstroids;
     }
-
 
 
     public void increaseMaxNumberOfAstroids(){

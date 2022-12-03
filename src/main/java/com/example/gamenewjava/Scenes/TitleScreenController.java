@@ -3,6 +3,7 @@ package com.example.gamenewjava.Scenes;
 import com.example.gamenewjava.Assets.*;
 import com.example.gamenewjava.AstroidController;
 import com.example.gamenewjava.Driver;
+import com.example.gamenewjava.EnemyShipController;
 import com.example.gamenewjava.GraphicInterface;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
@@ -65,6 +66,8 @@ public class TitleScreenController {
 
     private GraphicInterface gi = new GraphicInterface(LEVEL_WIDTH,LEVEL_HEIGHT);
 
+    private EnemyShipController enemyShipC;
+
     public void exit(){
         Platform.exit();
     }
@@ -75,17 +78,17 @@ public class TitleScreenController {
         DefaultAsset background;
         astroidController = new AstroidController(LEVEL_WIDTH, LEVEL_HEIGHT);
         LinkedList<Rock> astroids;
-        EnemyShip es;
+
         try {
             ship = new Ship("Ship", 75, 75, "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\newUserShip.png", (LEVEL_WIDTH / 2) -(75/2), (LEVEL_HEIGHT / 2) -(75/2), 8);
             background = new DefaultAsset("Background", LEVEL_HEIGHT, LEVEL_WIDTH, "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\bg.png", 0, 0);
             astroids = astroidController.generateRandomAstroids(astroidController.getMaxNumberOfAstroids());
             astroidController.setCurrentAmountOfAstroids(astroidController.getCurrentAmountOfAstroids() + astroidController.getMaxNumberOfAstroids());
-            System.out.println("Astroid num creation : " + astroidController.getCurrentAmountOfAstroids());
-            es = new EnemyShip("EnemyShip", 25, 25, "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\enemyShip.png", 0.3, ship, LEVEL_WIDTH, LEVEL_HEIGHT);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
+
+        enemyShipC = new EnemyShipController(ship, LEVEL_WIDTH, LEVEL_HEIGHT);
 
         assetsList.add(background);
         newBox.getChildren().add(background.getImageView());
@@ -108,10 +111,6 @@ public class TitleScreenController {
         stage.setTitle("Level One");
         stage.setScene(scene);
         stage.show();
-
-
-        assetsList.add(es);
-        newBox.getChildren().add(es.getImageView());
 
     }
 
@@ -276,15 +275,29 @@ public class TitleScreenController {
                             }
                         }
 
+                        if (enemyShipC.getCurrentAmountOfEnemyShips() < enemyShipC.getMaxNumberOfEnemyShips()) {
+                            try {
+                                EnemyShip s = enemyShipC.createNewShip();
+                                assetsList.add(s);
+                                newBox.getChildren().add(s.getImageView());
+                            } catch (FileNotFoundException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+
                         gi.updateScoreText(userScore);
-
-
 
 
                         if (System.currentTimeMillis() > astroidController.getTimeSinceLastAstroidIncrease() + (15 * 1000)) {
                             astroidController.increaseMaxNumberOfAstroids();
                             astroidController.setTimeSinceLastAstroidIncrease(System.currentTimeMillis());
                         }
+
+                        if (System.currentTimeMillis() > enemyShipC.getTimeSinceLastShipIncrease() + (10 * 1000)) {
+                            enemyShipC.increaseMaxShips();
+                            enemyShipC.setTimeSinceLastShipIncrease(System.currentTimeMillis());
+                        }
+
                         lastUpdate = currentNanoTime;
                     }
                 }
@@ -325,6 +338,7 @@ public class TitleScreenController {
                             if (assetInList.getHealth() <= 0) {
                                 removeViews.add(assetInList.getImageView());
                                 removeAssets.add(assetInList);
+                                userScore = userScore + assetInList.getWidth();
                             }
                             removeViews.add(asset.getImageView());
                             removeAssets.add(asset);
@@ -341,10 +355,8 @@ public class TitleScreenController {
                                     return false;
                                 }
                                 System.out.println("Current health : " + asset.getHealth());
-
                                 assetInList.setMoveSpeed(assetInList.getMoveSpeed() * 2 );
                                 assetInList.getImageView().setRotate( asset.getImageView().getRotate());
-
 
                                 asset.setTimeLast(System.currentTimeMillis());
 
