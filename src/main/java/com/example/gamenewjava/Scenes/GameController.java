@@ -163,7 +163,7 @@ public class GameController {
         // Loads the images in one try as it needs to catch file not found error
 
         try {
-            ship = new Ship("Ship", 75, 75, "imgs/newUserShip.png", (LEVEL_WIDTH / 2) -(75/2), (LEVEL_HEIGHT / 2) -(75/2), 2);
+            ship = new Ship("Ship", 35, 35, "imgs/newUserShip.png", (LEVEL_WIDTH / 2) -(75/2), (LEVEL_HEIGHT / 2) -(75/2), 2);
             background = new DefaultAsset("Background", LEVEL_HEIGHT, LEVEL_WIDTH, "imgs/bg.png", 0, 0);
             astroids = astroidController.generateRandomAstroids(astroidController.getMaxNumberOfAstroids());
             astroidController.setCurrentAmountOfAstroids(astroidController.getCurrentAmountOfAstroids() + astroidController.getMaxNumberOfAstroids());
