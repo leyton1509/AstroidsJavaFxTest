@@ -64,10 +64,10 @@ public class AstroidController {
     public String getAstroidFilePath(){
         int ranAstroid = (int) (Math.random() * (4) + 0);
         return switch (ranAstroid) {
-            case 1 -> "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\astroid2.png";
-            case 2 -> "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\astroid3.png";
-            case 3 -> "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\astroid4.png";
-            default -> "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\astroid1.png";
+            case 1 -> "imgs/astroid2.png";
+            case 2 -> "imgs/astroid3.png";
+            case 3 -> "imgs/astroid4.png";
+            default -> "imgs/astroid1.png";
         };
     }
 

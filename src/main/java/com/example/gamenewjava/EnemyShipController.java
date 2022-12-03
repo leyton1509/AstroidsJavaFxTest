@@ -37,7 +37,7 @@ public class EnemyShipController {
         currentAmountOfEnemyShips++;
         Random r = new Random();
         double randomSpeed = currentMoveSpeed + (currentMaxMoveSpeed - currentMoveSpeed) * r.nextDouble();
-        return new EnemyShip("EnemyShip", 25, 25, "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\enemyShip.png", randomSpeed, playerShip, LEVEL_WIDTH, LEVEL_HEIGHT);
+        return new EnemyShip("EnemyShip", 25, 25, "imgs/enemyShip.png", randomSpeed, playerShip, LEVEL_WIDTH, LEVEL_HEIGHT);
 
     }
 

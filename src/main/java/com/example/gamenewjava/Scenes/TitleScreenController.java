@@ -84,8 +84,8 @@ public class TitleScreenController {
         LinkedList<Rock> astroids;
 
         try {
-            ship = new Ship("Ship", 75, 75, "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\newUserShip.png", (LEVEL_WIDTH / 2) -(75/2), (LEVEL_HEIGHT / 2) -(75/2), 2);
-            background = new DefaultAsset("Background", LEVEL_HEIGHT, LEVEL_WIDTH, "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\bg.png", 0, 0);
+            ship = new Ship("Ship", 75, 75, "imgs/newUserShip.png", (LEVEL_WIDTH / 2) -(75/2), (LEVEL_HEIGHT / 2) -(75/2), 2);
+            background = new DefaultAsset("Background", LEVEL_HEIGHT, LEVEL_WIDTH, "imgs/bg.png", 0, 0);
             astroids = astroidController.generateRandomAstroids(astroidController.getMaxNumberOfAstroids());
             astroidController.setCurrentAmountOfAstroids(astroidController.getCurrentAmountOfAstroids() + astroidController.getMaxNumberOfAstroids());
         } catch (FileNotFoundException e) {
