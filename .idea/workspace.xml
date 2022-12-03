@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="10a141b0-295e-45e1-b942-d47de3b9e986" name="Changes" comment="Added health kits which every 15 seconds will spawn">
+    <list default="true" id="10a141b0-295e-45e1-b942-d47de3b9e986" name="Changes" comment="Added boolean values to whether to generate new enemies or not">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/AssetControllers/AstroidController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/AssetControllers/AstroidController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/AssetControllers/EnemyShipController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/AssetControllers/EnemyShipController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Scenes/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Scenes/GameController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -91,14 +89,7 @@
       <workItem from="1670009429216" duration="86000" />
       <workItem from="1670009522584" duration="13000" />
       <workItem from="1670009544063" duration="14454000" />
-      <workItem from="1670065200427" duration="35937000" />
-    </task>
-    <task id="LOCAL-00009" summary="Added an advanced missle thats fired every 1.5 seconds">
-      <created>1669922777382</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1669922777382</updated>
+      <workItem from="1670065200427" duration="36054000" />
     </task>
     <task id="LOCAL-00010" summary="Added advanced bullet collision detection">
       <created>1669922955337</created>
@@ -436,7 +427,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670107394406</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="Added boolean values to whether to generate new enemies or not">
+      <created>1670108071404</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1670108071404</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -454,7 +452,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Ship now will come back on screen if you go off" />
     <MESSAGE value="Im" />
     <MESSAGE value="Improved collision between rocks" />
     <MESSAGE value="Better collisionm between ship and astroid" />
@@ -479,7 +476,8 @@
     <MESSAGE value="Adv Proj can now be fired quicker" />
     <MESSAGE value="Changed ship size to be smaller" />
     <MESSAGE value="Added health kits which every 15 seconds will spawn" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added health kits which every 15 seconds will spawn" />
+    <MESSAGE value="Added boolean values to whether to generate new enemies or not" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added boolean values to whether to generate new enemies or not" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
