@@ -9,7 +9,7 @@ Survive
 
 Controls:
 
-| UP ARROW : Move forward |
+| UP ARROW : Move forward | \n
 | DOWN ARROW : Move backward |
 | LEFT ARROW : Rotate left |
 | RIGHT ARROW : Rotate right | 
