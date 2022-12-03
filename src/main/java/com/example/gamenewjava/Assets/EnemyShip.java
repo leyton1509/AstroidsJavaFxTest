@@ -11,7 +11,7 @@ public class EnemyShip extends DefaultAsset{
     /**
      * Random speed that the projectile of this ship will fire at
      */
-    private double projSpeed;
+    private final double projSpeed;
     /**
      * The player ship to track
      */
