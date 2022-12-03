@@ -99,7 +99,7 @@ public class EnemyShipController {
         currentAmountOfEnemyShips++;
         Random r = new Random();
         double randomSpeed = currentMoveSpeed + (currentMaxMoveSpeed - currentMoveSpeed) * r.nextDouble();
-        return new EnemyShip("EnemyShip", 25, 25, getShipFilePath(), randomSpeed, playerShip, LEVEL_WIDTH, LEVEL_HEIGHT);
+        return new EnemyShip("EnemyShip", 35, 35, getShipFilePath(), randomSpeed, playerShip, LEVEL_WIDTH, LEVEL_HEIGHT);
 
     }
 

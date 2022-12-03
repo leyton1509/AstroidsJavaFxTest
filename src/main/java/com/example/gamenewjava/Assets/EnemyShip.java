@@ -9,6 +9,10 @@ public class EnemyShip extends DefaultAsset{
 
 
     /**
+     * Random speed that the projectile of this ship will fire at
+     */
+    private double projSpeed;
+    /**
      * The player ship to track
      */
     private final Ship ship;
@@ -53,10 +57,11 @@ public class EnemyShip extends DefaultAsset{
         getRandomStartPosition(LEVEL_WIDTH, LEVEL_HEIGHT);
         getImageView().setRotate((Math.random() * (360 - (-360)) + (-360)));
         setMoveSpeed(_moveSpeed);
-        setHealth(getWidth() * 0.8);
+        setHealth(getWidth() * 0.9);
         setDamage(getWidth() * 0.4);
         ship = playerShip;
         ranBullet = (int) (Math.random() * (3) + 0);
+        projSpeed = (double) (Math.random() * (1.9) + 0.7);
     }
 
     /**
@@ -137,7 +142,7 @@ public class EnemyShip extends DefaultAsset{
      */
     public Projectile fireBasicProjectile() throws FileNotFoundException {
         double basicProjectileDamage = 4;
-        return new Projectile("EnemyBullet", 12, 5, getShipFilePath(), (int) (getImageView().getX() + getImageView().getFitWidth()  / 2), (int) (getImageView().getY() + getImageView().getFitHeight() / 2), getImageView().getRotate(), 0.8, basicProjectileDamage);
+        return new Projectile("EnemyBullet", 20, 8, getShipFilePath(), (int) (getImageView().getX() + getImageView().getFitWidth()  / 2), (int) (getImageView().getY() + getImageView().getFitHeight() / 2), getImageView().getRotate(),  projSpeed, basicProjectileDamage);
     }
 
 }
