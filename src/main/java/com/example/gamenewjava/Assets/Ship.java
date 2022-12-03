@@ -1,6 +1,7 @@
 package com.example.gamenewjava.Assets;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 /**
  * Represents player ship
@@ -33,6 +34,12 @@ public class Ship extends DefaultAsset{
      * The acceleration of ship
      */
     private double acceleration = 0.1;
+
+
+    /**
+     * The time since last ultimate fired
+     */
+    private long timeSinceUltimateFired = System.currentTimeMillis() - 30 * 1000;
 
 
     /**
@@ -146,7 +153,7 @@ public class Ship extends DefaultAsset{
      */
     public Projectile fireBasicProjectile() throws FileNotFoundException {
         double basicProjectileDamage = 5;
-        return new Projectile("Bullet", 10, 5, "imgs/basicbullet.png", (int) (getImageView().getX() + getImageView().getFitWidth()  / 2), (int) (getImageView().getY() + getImageView().getFitHeight() / 2), getImageView().getRotate(), 3, basicProjectileDamage);
+        return new Projectile("Bullet", 10, 4, "imgs/basicbullet.png", (int) (getImageView().getX() + getImageView().getFitWidth()  / 2), (int) (getImageView().getY() + getImageView().getFitHeight() / 2), getImageView().getRotate(), 3, basicProjectileDamage);
     }
 
     /**
@@ -202,5 +209,32 @@ public class Ship extends DefaultAsset{
 
     }
 
+    /**
+     * Fires projectiles in a 360 degree field
+     * Ultimate of ship
+     * @return An array list of projectiles
+     * @throws FileNotFoundException e
+     */
+    public ArrayList<Projectile> ultimateFired() throws FileNotFoundException {
+        ArrayList<Projectile> projs = new ArrayList<>();
+        for (int i = 0; i < 360; i = i+4) {
+            projs.add(new Projectile("Bullet", 10, 4, "imgs/basicbullet.png", (int) (getImageView().getX() + getImageView().getFitWidth()  / 2), (int) (getImageView().getY() + getImageView().getFitHeight() / 2), i, 1.5, 5));
+        }
+        return  projs;
+    }
 
+
+    /**
+     * @return The time since ultimate fired
+     */
+    public long getTimeSinceUltimateFired() {
+        return timeSinceUltimateFired;
+    }
+
+    /**
+     * @param timeSinceUltimateFired Set the time since ultimate fired
+     */
+    public void setTimeSinceUltimateFired(long timeSinceUltimateFired) {
+        this.timeSinceUltimateFired = timeSinceUltimateFired;
+    }
 }

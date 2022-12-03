@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="10a141b0-295e-45e1-b942-d47de3b9e986" name="Changes" comment="Made some balancing changes">
+    <list default="true" id="10a141b0-295e-45e1-b942-d47de3b9e986" name="Changes" comment="Can now die of enemy bullets">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/imgs/basicbullet.png" beforeDir="false" afterPath="$PROJECT_DIR$/imgs/basicbullet.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Ship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Ship.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Scenes/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Scenes/GameController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -86,7 +88,7 @@
       <workItem from="1670009429216" duration="86000" />
       <workItem from="1670009522584" duration="13000" />
       <workItem from="1670009544063" duration="14454000" />
-      <workItem from="1670065200427" duration="27626000" />
+      <workItem from="1670065200427" duration="28642000" />
     </task>
     <task id="LOCAL-00001" summary="Renamed classes, initial commit, created a title scene">
       <created>1669822735281</created>
@@ -396,7 +398,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670098801784</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="Can now die of enemy bullets">
+      <created>1670098891650</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1670098891650</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -414,7 +423,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="New astroids generated now only generate off screen and move inwards" />
     <MESSAGE value="Made the title screen nicer" />
     <MESSAGE value="Put a lot of the GUI into a class called GraphicalInterface" />
     <MESSAGE value="Added an enemy ship that tracks user and fires bullets, needs tweaking" />
@@ -439,7 +447,8 @@
     <MESSAGE value="Images" />
     <MESSAGE value="Made some balanacing changes" />
     <MESSAGE value="Made some balancing changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Made some balancing changes" />
+    <MESSAGE value="Can now die of enemy bullets" />
+    <option name="LAST_COMMIT_MESSAGE" value="Can now die of enemy bullets" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

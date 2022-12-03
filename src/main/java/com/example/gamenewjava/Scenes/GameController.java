@@ -256,6 +256,23 @@ public class GameController {
                 case DOWN:
                     downPressed.set(true);
                     break;
+                case X:
+                    try {
+                        // Loads ultimate
+                        if (System.currentTimeMillis() > (ship.getTimeSinceUltimateFired() + (5 * 1000))) {
+                            ArrayList<Projectile> projs = ship.ultimateFired();
+                            for (Projectile proj: projs) {
+                                assetsList.add(proj);
+                                newBox.getChildren().add(proj.getImageView());
+                            }
+                            ship.setTimeSinceUltimateFired(System.currentTimeMillis());
+                        }
+
+                    } catch (FileNotFoundException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                     break;
                 case SHIFT:
                     try {
                         // Loads and fires a missile
