@@ -303,9 +303,12 @@ public class GameController {
             }
             if(spacePressed.get()){
                 try {
-                    Projectile proj = ship.fireBasicProjectile();
-                    assetsList.add(proj);
-                    newBox.getChildren().add(proj.getImageView());
+                    if (System.currentTimeMillis() > (ship.getTimeSinceBasicBulletFired() + (0.04 * 1000))) {
+                        Projectile proj = ship.fireBasicProjectile();
+                        assetsList.add(proj);
+                        newBox.getChildren().add(proj.getImageView());
+                        ship.setTimeSinceBasicBulletFired(System.currentTimeMillis());
+                    }
 
                 } catch (FileNotFoundException e) {
                     throw new RuntimeException(e);

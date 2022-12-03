@@ -41,6 +41,11 @@ public class Ship extends DefaultAsset{
      */
     private long timeSinceUltimateFired = System.currentTimeMillis() - 30 * 1000;
 
+    /**
+     * The time since last basic fired
+     */
+    private long timeSinceBasicBulletFired = System.currentTimeMillis() - 30 * 1000;
+
 
     /**
      * @param _name The name of asset
@@ -234,5 +239,20 @@ public class Ship extends DefaultAsset{
      */
     public void setTimeSinceUltimateFired(long timeSinceUltimateFired) {
         this.timeSinceUltimateFired = timeSinceUltimateFired;
+    }
+
+    /**
+     * @return The time since basic bullet fired
+     */
+    public long getTimeSinceBasicBulletFired() {
+        return timeSinceBasicBulletFired;
+    }
+
+
+    /**
+     * @param timeSinceBasicBulletFired Set the time of basic bullet firing
+     */
+    public void setTimeSinceBasicBulletFired(long timeSinceBasicBulletFired) {
+        this.timeSinceBasicBulletFired = timeSinceBasicBulletFired;
     }
 }
