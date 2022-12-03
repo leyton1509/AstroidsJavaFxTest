@@ -256,10 +256,10 @@ public class GameController {
                 case DOWN:
                     downPressed.set(true);
                     break;
-                case X:
+                case Z:
                     try {
                         // Loads ultimate
-                        if (System.currentTimeMillis() > (ship.getTimeSinceUltimateFired() + (5 * 1000))) {
+                        if (System.currentTimeMillis() > (ship.getTimeSinceUltimateFired() + (6 * 1000))) {
                             ArrayList<Projectile> projs = ship.ultimateFired();
                             for (Projectile proj: projs) {
                                 assetsList.add(proj);
