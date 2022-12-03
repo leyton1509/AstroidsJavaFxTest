@@ -1,8 +1,10 @@
 package com.example.gamenewjava;
 
 import com.example.gamenewjava.Assets.Rock;
+import com.example.gamenewjava.Assets.SplitAstroid;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class AstroidController {
@@ -12,7 +14,7 @@ public class AstroidController {
 
     private final int maxAstroidSize = 60;
 
-    private final int minAstroidSize = 5;
+    private final int minSplitAstroidSize = 20;
 
     private long timeSinceLastAstroidIncrease = 0;
 
@@ -139,6 +141,30 @@ public class AstroidController {
             astroids.add(new Rock("Rock", ranSize, ranSize, filepath,ranX,ranY,  0.5));
         }
         return astroids;
+    }
+
+    public SplitAstroid generateSplitAstroid(double angle, int x, int y, int size, double speed, String filepath) throws FileNotFoundException {
+        return new SplitAstroid("SplitRock", size, size, filepath, x, y,  speed);
+    }
+
+
+    public ArrayList<SplitAstroid> checkForSplitAstroid(Rock astroid) throws FileNotFoundException {
+        ArrayList<SplitAstroid> splitRocks = new ArrayList<>();
+
+        if(((int)astroid.getSize() / minSplitAstroidSize * 4)   > 0){
+
+            double astroidX = astroid.getImageView().getX();
+            double astroidY = astroid.getImageView().getY();
+
+            double speed = 0.4;
+
+            splitRocks.add(generateSplitAstroid(270.0, (int) (astroidX - astroid.getSize()/4),(int) astroidY - astroid.getSize()/4, (int) (astroid.getSize() * 0.8), speed, astroid.getFilePath()));
+            splitRocks.add(generateSplitAstroid(90, (int) astroidX + astroid.getSize()/4, (int) astroidY + astroid.getSize()/4, (int) (astroid.getSize() * 0.8) , speed, astroid.getFilePath()));
+
+
+        }
+
+        return splitRocks;
     }
 
 }

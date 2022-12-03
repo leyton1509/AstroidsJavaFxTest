@@ -28,6 +28,7 @@ import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class TitleScreenController {
@@ -67,6 +68,9 @@ public class TitleScreenController {
     private GraphicInterface gi = new GraphicInterface(LEVEL_WIDTH,LEVEL_HEIGHT);
 
     private EnemyShipController enemyShipC;
+
+    private ArrayList<SplitAstroid> splitAstroids = new ArrayList<>();
+
 
     public void exit(){
         Platform.exit();
@@ -215,7 +219,11 @@ public class TitleScreenController {
 
                         for (DefaultAsset asset : assetsList) {
 
-                            run = collisionDetection(assetsList, asset, removeViews, removeAssets);
+                            try {
+                                run = collisionDetection(assetsList, asset, removeViews, removeAssets);
+                            } catch (FileNotFoundException e) {
+                                throw new RuntimeException(e);
+                            }
 
                             if(!run){
                                 System.out.println("You died!");
@@ -258,11 +266,23 @@ public class TitleScreenController {
                             asset.onGameTick();
 
                         }
+
+
+
+                        ArrayList<SplitAstroid> removeAstroidList = new ArrayList<>();
+
+                        for(SplitAstroid rock : splitAstroids) {
+                            assetsList.add(rock);
+                            newBox.getChildren().addAll(rock.getImageView());
+                            removeAstroidList.add(rock);
+                        }
+
+                        splitAstroids.removeAll(removeAstroidList);
+
                         newBox.getChildren().removeAll(removeViews);
                         assetsList.removeAll(removeAssets);
                         assetsList.addAll(addAssets);
                         newBox.getChildren().addAll(addViews);
-
 
                         if (astroidController.getCurrentAmountOfAstroids() < astroidController.getMaxNumberOfAstroids()) {
                             try {
@@ -316,7 +336,7 @@ public class TitleScreenController {
     }
 
 
-    public boolean collisionDetection(LinkedList<DefaultAsset> assetList, DefaultAsset asset, LinkedList<ImageView> removeViews, LinkedList<DefaultAsset> removeAssets){
+    public boolean collisionDetection(LinkedList<DefaultAsset> assetList, DefaultAsset asset, LinkedList<ImageView> removeViews, LinkedList<DefaultAsset> removeAssets) throws FileNotFoundException {
         for (DefaultAsset assetInList: assetList){
             if(asset != assetInList){
                 if(asset.getImageView().intersects(assetInList.getImageView().getBoundsInLocal())){
@@ -328,12 +348,13 @@ public class TitleScreenController {
                                 removeAssets.add(assetInList);
                                 astroidController.decreaseAstroidCount();
                                 userScore = userScore + assetInList.getWidth();
+                                splitAstroids.addAll(astroidController.checkForSplitAstroid((Rock) assetInList)) ;
                             }
                             removeViews.add(asset.getImageView());
                             removeAssets.add(asset);
 
-                        } else if (assetInList.getName().equals("EnemyShip")) {
-                        {
+                        }
+                        else if (assetInList.getName().equals("EnemyShip")) {
                             assetInList.decreaseHealth(asset.getDamage());
                             if (assetInList.getHealth() <= 0) {
                                 removeViews.add(assetInList.getImageView());
@@ -343,10 +364,22 @@ public class TitleScreenController {
                             removeViews.add(asset.getImageView());
                             removeAssets.add(asset);
                         }
-                    }
+                        else if(assetInList.getName().equals("SplitRock")){
+                            assetInList.decreaseHealth(asset.getDamage());
+                            if(assetInList.getHealth() <= 0){
+                                removeViews.add(assetInList.getImageView());
+                                removeAssets.add(assetInList);
+                                userScore = userScore + assetInList.getWidth();
+                                splitAstroids.addAll(astroidController.checkForSplitAstroid((Rock) assetInList)) ;
+                            }
+                            removeViews.add(asset.getImageView());
+                            removeAssets.add(asset);
+                        }
+
+
 
                     } else if (asset.getName().equals("Ship")) {
-                        if(assetInList.getName().equals("Rock")){
+                        if(assetInList.getName().equals("Rock") || assetInList.getName().equals("SplitRock")){
                             if(System.currentTimeMillis() > (asset.getTimeLast() + (0.7*1000))){
                                 asset.decreaseHealth(assetInList.getDamage());
                                 damageTaken();
@@ -368,22 +401,30 @@ public class TitleScreenController {
                         }
 
                     }
-                    else if (asset.getName().equals("Rock")){
+                    else if (asset.getName().equals("Rock") ){
                         if(assetInList.getName().equals("Rock")){
 
                             double angleRock1 = asset.getImageView().getRotate();
                             double angleRock2 = assetInList.getImageView().getRotate();
                             double speedRock1 = asset.getMoveSpeed();
                             double speedRock2 = assetInList.getMoveSpeed();
-
                             assetInList.setMoveSpeed(speedRock2 * 0.9 );
                             asset.setMoveSpeed(speedRock1 * 0.9 );
                             assetInList.getImageView().setRotate(angleRock1);
                             asset.getImageView().setRotate(angleRock2);
-
-
                         }
-
+                    }
+                    else if (asset.getName().equals("SplitRock") ){
+                        if(assetInList.getName().equals("SplitRock") || assetInList.getName().equals("Rock")){
+                            double angleRock1 = asset.getImageView().getRotate();
+                            double angleRock2 = assetInList.getImageView().getRotate();
+                            double speedRock1 = asset.getMoveSpeed();
+                            double speedRock2 = assetInList.getMoveSpeed();
+                            assetInList.setMoveSpeed(speedRock2 * 0.9 );
+                            asset.setMoveSpeed(speedRock1 * 0.9 );
+                            assetInList.getImageView().setRotate(angleRock1);
+                            asset.getImageView().setRotate(angleRock2);
+                        }
                     }
 
 

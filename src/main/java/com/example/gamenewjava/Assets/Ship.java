@@ -60,13 +60,9 @@ public class Ship extends DefaultAsset{
         updateRotation(degreeOfRotation, false);
     }
 
-    public void moveForward(){
-        amountLeftToMove = 0.3;
-        currentMoveSpeedX = getImageView().getX() + Math.sin(Math.toRadians(getImageView().getRotate())) * (getMoveSpeed());
-        currentMoveSpeedY = getImageView().getY() - Math.cos(Math.toRadians(getImageView().getRotate())) * (getMoveSpeed());
-        getImageView().setY(currentMoveSpeedY);
-        getImageView().setX(currentMoveSpeedX);
 
+
+    public void increaseAcceleration(){
         if(acceleration < 0){
             acceleration = 0.1;
         }
@@ -76,17 +72,29 @@ public class Ship extends DefaultAsset{
         }
     }
 
-    public void moveBackwards(){
-        amountLeftToMove = -0.3;
-        getImageView().setY(getImageView().getY() + (-1 * ((getImageView().getY() - Math.cos(Math.toRadians(getImageView().getRotate())) * getMoveSpeed()) - getImageView().getY())));
-        getImageView().setX(getImageView().getX() + (-1 * ((getImageView().getX() + Math.sin(Math.toRadians(getImageView().getRotate())) * getMoveSpeed()) - getImageView().getX())));
+    public void decreaseAcceleration(){
         if(acceleration > 0){
             acceleration = -0.1;
         }
         if(acceleration > -2){
             acceleration = acceleration-0.1;
         }
+    }
 
+    public void moveForward(){
+        amountLeftToMove = 0.3;
+        currentMoveSpeedX = getImageView().getX() + Math.sin(Math.toRadians(getImageView().getRotate())) * (getMoveSpeed());
+        currentMoveSpeedY = getImageView().getY() - Math.cos(Math.toRadians(getImageView().getRotate())) * (getMoveSpeed());
+        getImageView().setY(currentMoveSpeedY);
+        getImageView().setX(currentMoveSpeedX);
+        increaseAcceleration();
+    }
+
+    public void moveBackwards(){
+        amountLeftToMove = -0.3;
+        getImageView().setY(getImageView().getY() + (-1 * ((getImageView().getY() - Math.cos(Math.toRadians(getImageView().getRotate())) * getMoveSpeed()) - getImageView().getY())));
+        getImageView().setX(getImageView().getX() + (-1 * ((getImageView().getX() + Math.sin(Math.toRadians(getImageView().getRotate())) * getMoveSpeed()) - getImageView().getX())));
+        decreaseAcceleration();
     }
 
     public Projectile fireBasicProjectile() throws FileNotFoundException {
