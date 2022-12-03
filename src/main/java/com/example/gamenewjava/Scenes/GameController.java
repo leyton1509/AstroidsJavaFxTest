@@ -83,7 +83,7 @@ public class GameController {
     /**
      * The main pane for the game
      */
-    private Pane newBox = new Pane();
+    private final Pane newBox = new Pane();
 
     /**
      * The players ship
@@ -93,7 +93,7 @@ public class GameController {
     /**
      * A linked list of assets that are on screen
      */
-    private LinkedList<DefaultAsset> assetsList = new LinkedList<>();
+    private final LinkedList<DefaultAsset> assetsList = new LinkedList<>();
 
     /**
      * The FXML scene
@@ -123,7 +123,7 @@ public class GameController {
     /**
      * The graphical interface overlay components
      */
-    private GraphicInterface gi = new GraphicInterface(LEVEL_WIDTH,LEVEL_HEIGHT);
+    private final GraphicInterface gi = new GraphicInterface(LEVEL_WIDTH,LEVEL_HEIGHT);
 
     /**
      * The enemy ships controller
@@ -133,7 +133,7 @@ public class GameController {
     /**
      * An arraylist of split astroids
      */
-    private ArrayList<Rock> splitAstroids = new ArrayList<>();
+    private final ArrayList<Rock> splitAstroids = new ArrayList<>();
 
     /**
      * Exits the stage
@@ -146,9 +146,8 @@ public class GameController {
     /**
      * Sets up the scene and all initial assets
      * Creates ship and initial astroids
-     * @throws FileNotFoundException if a file cant be loaded
      */
-    public void initialSetUpOfScene() throws FileNotFoundException {
+    public void initialSetUpOfScene(){
         // Gets the scene from the button
         // Creates the background and initialises astroid controller
         Stage stage = (Stage) startButton.getScene().getWindow();  //Pulls in the details of the current stage using the location
@@ -236,10 +235,9 @@ public class GameController {
      * Main game play loop
      * Handles key presses
      * Handles game ticks
-     * @throws FileNotFoundException ex
      */
     @FXML
-    protected void play() throws FileNotFoundException {
+    protected void play(){
         // Sets up scene
         initialSetUpOfScene();
 
@@ -440,7 +438,7 @@ public class GameController {
                             }
                         }
 
-                        // If an enemy ship needs to be created create it
+                        // If an enemy ship needs to be created, create it
                         if (enemyShipC.getCurrentAmountOfEnemyShips() < enemyShipC.getMaxNumberOfEnemyShips()) {
                             try {
                                 EnemyShip s = enemyShipC.createNewShip();
@@ -505,113 +503,117 @@ public class GameController {
                 // If the asset is collided with the looped asset
                 if(asset.getImageView().intersects(assetInList.getImageView().getBoundsInLocal())){
                     // If it's a bullet
-                    if(asset.getName().equals("Bullet")){
-                        // If the bullet collides with a rock
-                        // Decrease the rock health
-                        // Check if it dies and removes it if it does, adds to score and decreases astroid count
-                        // Adds any rocks created from destroying it to the split astroid array
-                        // Removes the bullet from scene
-                        if(assetInList.getName().equals("Rock")){
-                            assetInList.decreaseHealth(asset.getDamage());
-                            if(assetInList.getHealth() <= 0){
-                                removeViews.add(assetInList.getImageView());
-                                removeAssets.add(assetInList);
-                                astroidController.decreaseAstroidCount();
-                                userScore = userScore + assetInList.getWidth();
-                                splitAstroids.addAll(astroidController.checkForSplitAstroid((Rock) assetInList)) ;
-                            }
-                            removeViews.add(asset.getImageView());
-                            removeAssets.add(asset);
-
-                        }
-                        // If the bullet collides with an enemy ship
-                        // Decrease the shi[ health
-                        // Check if it dies and removes it if it does, adds to score and decreases ship count
-                        // Removes the bullet from scene
-                        else if (assetInList.getName().equals("EnemyShip")) {
-                            assetInList.decreaseHealth(asset.getDamage());
-                            if (assetInList.getHealth() <= 0) {
-                                removeViews.add(assetInList.getImageView());
-                                removeAssets.add(assetInList);
-                                userScore = userScore + assetInList.getWidth();
-                                enemyShipC.shipDestroyed();
-                            }
-                            removeViews.add(asset.getImageView());
-                            removeAssets.add(asset);
-                        }
-                        // If it's a split rock
-                        // Damage it and remove if dead
-                        // Don't decrease astroid count
-                        // Removes bullet
-                        else if(assetInList.getName().equals("SplitRock")){
-                            assetInList.decreaseHealth(asset.getDamage());
-                            if(assetInList.getHealth() <= 0){
-                                removeViews.add(assetInList.getImageView());
-                                removeAssets.add(assetInList);
-                                userScore = userScore + assetInList.getWidth();
-                                splitAstroids.addAll(astroidController.checkForSplitAstroid((Rock) assetInList)) ;
-                            }
-                            removeViews.add(asset.getImageView());
-                            removeAssets.add(asset);
-                        }
-                        // If it hits enemy bullet, remove the bullet
-                        else if(assetInList.getName().equals("EnemyBullet")){
-                            removeViews.add(assetInList.getImageView());
-                            removeAssets.add(assetInList);
-                        }
-                    // If it's the ship
-                    } else if (asset.getName().equals("Ship")) {
-                        // See if it collides with rock
-                        if(assetInList.getName().equals("Rock") || assetInList.getName().equals("SplitRock")){
-                            // Only allow collisions every 0.7 seconds
-                            // Takes damage
-                            // returns false if dead
-                            // Sets the rock on a new collision
-                            if(System.currentTimeMillis() > (asset.getTimeLast() + (0.7*1000))){
-
-                                asset.decreaseHealth(assetInList.getDamage());
-                                damageTaken();
-                                if(asset.getHealth() <= 0){
-                                    return false;
+                    switch (asset.getName()) {
+                        case "Bullet":
+                            // If the bullet collides with a rock
+                            // Decrease the rock health
+                            // Check if it dies and removes it if it does, adds to score and decreases astroid count
+                            // Adds any rocks created from destroying it to the split astroid array
+                            // Removes the bullet from scene
+                            switch (assetInList.getName()) {
+                                case "Rock" -> {
+                                    assetInList.decreaseHealth(asset.getDamage());
+                                    if (assetInList.getHealth() <= 0) {
+                                        removeViews.add(assetInList.getImageView());
+                                        removeAssets.add(assetInList);
+                                        astroidController.decreaseAstroidCount();
+                                        userScore = userScore + assetInList.getWidth();
+                                        splitAstroids.addAll(astroidController.checkForSplitAstroid((Rock) assetInList));
+                                    }
+                                    removeViews.add(asset.getImageView());
+                                    removeAssets.add(asset);
                                 }
-                                assetInList.setMoveSpeed(assetInList.getMoveSpeed() * 2 );
-                                double angleOfCollisionRad = Math.atan2(assetInList.getImageView().getY() - ship.getImageView().getY(), assetInList.getImageView().getX() - ship.getImageView().getX());
-                                angleOfCollisionRad += Math.PI/2.0;
-                                double angleOfCollision = Math.toDegrees(angleOfCollisionRad);
-                                if (angleOfCollision < 0) {
-                                    angleOfCollision += 360;
+                                // If the bullet collides with an enemy ship
+                                // Decrease the shi[ health
+                                // Check if it dies and removes it if it does, adds to score and decreases ship count
+                                // Removes the bullet from scene
+                                case "EnemyShip" -> {
+                                    assetInList.decreaseHealth(asset.getDamage());
+                                    if (assetInList.getHealth() <= 0) {
+                                        removeViews.add(assetInList.getImageView());
+                                        removeAssets.add(assetInList);
+                                        userScore = userScore + assetInList.getWidth();
+                                        enemyShipC.shipDestroyed();
+                                    }
+                                    removeViews.add(asset.getImageView());
+                                    removeAssets.add(asset);
                                 }
-                                assetInList.getImageView().setRotate(angleOfCollision);
-                                asset.setTimeLast(System.currentTimeMillis());
-
-                                if(assetInList.getWidth() < 16){
+                                // If it's a split rock
+                                // Damage it and remove if dead
+                                // Don't decrease astroid count
+                                // Removes bullet
+                                case "SplitRock" -> {
+                                    assetInList.decreaseHealth(asset.getDamage());
+                                    if (assetInList.getHealth() <= 0) {
+                                        removeViews.add(assetInList.getImageView());
+                                        removeAssets.add(assetInList);
+                                        userScore = userScore + assetInList.getWidth();
+                                        splitAstroids.addAll(astroidController.checkForSplitAstroid((Rock) assetInList));
+                                    }
+                                    removeViews.add(asset.getImageView());
+                                    removeAssets.add(asset);
+                                }
+                                // If it hits enemy bullet, remove the bullet
+                                case "EnemyBullet" -> {
                                     removeViews.add(assetInList.getImageView());
                                     removeAssets.add(assetInList);
                                 }
-
                             }
-                        }
-                        // If it collides with enemy ship
-                        // Take damage and destroy enemy ship
-                        else if (assetInList.getName().equals("EnemyShip") || assetInList.getName().equals("EnemyBullet")) {
-                            asset.decreaseHealth(assetInList.getDamage());
-                            removeViews.add(assetInList.getImageView());
-                            removeAssets.add(assetInList);
-                            damageTaken();
-                        }
+                            // If it's the ship
+                            break;
+                        case "Ship":
+                            // See if it collides with rock
+                            if (assetInList.getName().equals("Rock") || assetInList.getName().equals("SplitRock")) {
+                                // Only allow collisions every 0.7 seconds
+                                // Takes damage
+                                // returns false if dead
+                                // Sets the rock on a new collision
+                                if (System.currentTimeMillis() > (asset.getTimeLast() + (0.7 * 1000))) {
 
-                    }
-                    // If two rocks collide use collision circle method
-                    else if (asset.getName().equals("Rock") ){
-                        if(assetInList.getName().equals("Rock")){
-                            circleCollision((Rock)asset, (Rock) assetInList);
-                        }
-                    }
-                    // If two rocks collide use collision circle method
-                    else if (asset.getName().equals("SplitRock") ){
-                        if(assetInList.getName().equals("SplitRock") || assetInList.getName().equals("Rock")){
-                            circleCollision((Rock)asset, (Rock) assetInList);
-                        }
+                                    asset.decreaseHealth(assetInList.getDamage());
+                                    damageTaken();
+                                    if (asset.getHealth() <= 0) {
+                                        return false;
+                                    }
+                                    assetInList.setMoveSpeed(assetInList.getMoveSpeed() * 2);
+                                    double angleOfCollisionRad = Math.atan2(assetInList.getImageView().getY() - ship.getImageView().getY(), assetInList.getImageView().getX() - ship.getImageView().getX());
+                                    angleOfCollisionRad += Math.PI / 2.0;
+                                    double angleOfCollision = Math.toDegrees(angleOfCollisionRad);
+                                    if (angleOfCollision < 0) {
+                                        angleOfCollision += 360;
+                                    }
+                                    assetInList.getImageView().setRotate(angleOfCollision);
+                                    asset.setTimeLast(System.currentTimeMillis());
+
+                                    if (assetInList.getWidth() < 16) {
+                                        removeViews.add(assetInList.getImageView());
+                                        removeAssets.add(assetInList);
+                                    }
+
+                                }
+                            }
+                            // If it collides with enemy ship
+                            // Take damage and destroy enemy ship
+                            else if (assetInList.getName().equals("EnemyShip") || assetInList.getName().equals("EnemyBullet")) {
+                                asset.decreaseHealth(assetInList.getDamage());
+                                removeViews.add(assetInList.getImageView());
+                                removeAssets.add(assetInList);
+                                damageTaken();
+                            }
+
+                            break;
+                        // If two rocks collide use collision circle method
+                        case "Rock":
+                            if (assetInList.getName().equals("Rock")) {
+                                circleCollision((Rock) asset, (Rock) assetInList);
+                            }
+                            break;
+                        // If two rocks collide use collision circle method
+                        case "SplitRock":
+                            if (assetInList.getName().equals("SplitRock") || assetInList.getName().equals("Rock")) {
+                                circleCollision((Rock) asset, (Rock) assetInList);
+                            }
+                            break;
                     }
 
 

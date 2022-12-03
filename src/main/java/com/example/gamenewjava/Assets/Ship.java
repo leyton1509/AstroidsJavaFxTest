@@ -25,15 +25,9 @@ public class Ship extends DefaultAsset{
     private long timeSinceLastFiredAdvanced = System.currentTimeMillis();
 
     /**
-     * The previous angle of ship
-     */
-    private double lastAngle = 0;
-
-    /**
      * The amount left to move used in moving after key release
      */
     private double amountLeftToMove = 0;
-
 
     /**
      * The acceleration of ship
@@ -86,7 +80,6 @@ public class Ship extends DefaultAsset{
      */
     public void rotateRight(){
         getImageView().setRotate(getImageView().getRotate() + degreeOfRotation);
-        lastAngle = degreeOfRotation;
         updateRotation(degreeOfRotation, true);
     }
 
@@ -95,7 +88,6 @@ public class Ship extends DefaultAsset{
      */
     public void rotateLeft(){
         getImageView().setRotate(getImageView().getRotate() - degreeOfRotation);
-        lastAngle = degreeOfRotation;
         updateRotation(degreeOfRotation, false);
     }
 

@@ -29,7 +29,7 @@ public class EnemyShipController {
     /**
      * The players ship
      */
-    private Ship playerShip;
+    private final Ship playerShip;
 
     /**
      * The width of the level

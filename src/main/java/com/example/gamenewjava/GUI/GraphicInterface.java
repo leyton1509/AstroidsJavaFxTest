@@ -24,22 +24,22 @@ public class GraphicInterface {
     /**
      * Rectangle for health bar
      */
-    private Rectangle healthBarRed;
+    private final Rectangle healthBarRed;
 
     /**
      * Rectangle for health bar
      */
-    private Rectangle healthBarWhite;
+    private final Rectangle healthBarWhite;
 
     /**
      * The text to display user score
      */
-    private Text userScoreText = new Text("0");
+    private final Text userScoreText = new Text("0");
 
     /**
      * The max width of the bar
      */
-    private double maxWidth;
+    private final double maxWidth;
 
     /**
      * @return Max width of bar

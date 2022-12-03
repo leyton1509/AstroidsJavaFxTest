@@ -11,33 +11,33 @@ public class DefaultAsset {
     /**
      *
      */
-    private String name;
+    private final String name;
 
     /**
      *
      */
-    private int height;
+    private final int height;
 
     /**
      *
      */
-    private int width;
+    private final int width;
 
     /**
      *
      */
-    private Image image;
+    private final Image image;
 
     /**
      *
      */
-    private String filePath;
+    private final String filePath;
 
 
     /**
      * The image view of the asset
      */
-    private ImageView imageView;
+    private final ImageView imageView;
 
     /**
      * The moving speed of asset
@@ -214,8 +214,9 @@ public class DefaultAsset {
      * @param moveSpeed Sets the move speed and makes sure it cant be negative
      */
     public void setMoveSpeed(double moveSpeed) {
-        if(moveSpeed !=0 && moveSpeed > 0.1) {
-            this.moveSpeed = moveSpeed;
-        }
+        if (moveSpeed != 0)
+            if (moveSpeed > 0.1) {
+                this.moveSpeed = moveSpeed;
+            }
     }
 }

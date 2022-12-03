@@ -60,13 +60,13 @@ public class EnemyShip extends DefaultAsset{
     }
 
     /**
-     * Generates a random start position out off screen
+     * Generates a random start position out off-screen
      * @param LEVEL_WIDTH The height of level
      * @param LEVEL_HEIGHT The width of level
      */
     private void getRandomStartPosition(int LEVEL_WIDTH, int LEVEL_HEIGHT){
-        int ranX = 0;
-        int ranY = 0;
+        int ranX;
+        int ranY;
 
         ranX = (int) (Math.random() * ((LEVEL_WIDTH + 100) - (-100)) + (-100) );
 
