@@ -386,6 +386,9 @@ public class TitleScreenController {
                             }
                             removeViews.add(asset.getImageView());
                             removeAssets.add(asset);
+                        }if(assetInList.getName().equals("EnemyBullet")){
+                            removeViews.add(assetInList.getImageView());
+                            removeAssets.add(assetInList);
                         }
 
 
@@ -407,6 +410,11 @@ public class TitleScreenController {
                                 }
                                 assetInList.getImageView().setRotate(angleOfCollision);
                                 asset.setTimeLast(System.currentTimeMillis());
+
+                                if(assetInList.getWidth() < 16){
+                                    removeViews.add(assetInList.getImageView());
+                                    removeAssets.add(assetInList);
+                                }
 
                             }
                         } else if (assetInList.getName().equals("EnemyShip") || assetInList.getName().equals("EnemyBullet")) {
