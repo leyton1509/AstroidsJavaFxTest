@@ -243,10 +243,22 @@ public class TitleScreenController {
                                     removeAssets.add(asset);
                                     if (asset.getName().equals("Rock")) {
                                         astroidController.decreaseAstroidCount();
-                                        System.out.println("Astroid num creation : " + astroidController.getCurrentAmountOfAstroids());
                                         userScore++;
                                     }
                                 }
+                            } else if (asset.getName().equals("Ship")) {
+
+                                    if(asset.getImageView().getX() < -70){
+                                        asset.getImageView().setX(LEVEL_WIDTH+30);
+                                    }else if(asset.getImageView().getX() > LEVEL_WIDTH + 50){
+                                        asset.getImageView().setX(-40);
+                                    }
+
+                                    if(asset.getImageView().getY() < -50){
+                                        asset.getImageView().setY(LEVEL_HEIGHT+30);
+                                    }else if(asset.getImageView().getY() > LEVEL_HEIGHT + 50){
+                                        asset.getImageView().setY(-30);
+                                    }
                             }
 
                             if(asset.getName().equals("EnemyShip")){
