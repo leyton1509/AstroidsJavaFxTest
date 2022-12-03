@@ -5,10 +5,20 @@ import java.io.FileNotFoundException;
 public class Ship extends DefaultAsset{
 
 
-    private int degreeOfRotation = 10;
+    private final int degreeOfRotation = 8;
     private double amountRotated = 0;
 
     private long timeSinceLastFiredAdvanced = System.currentTimeMillis();
+
+    private double lastAngle = 0;
+
+    private double amountLeftToMove = 0;
+    private double currentMoveSpeedX = 0;
+    private double currentMoveSpeedY = 0;
+
+    private double acceleration = 0.1;
+
+
 
 
     public Ship(String _name, int _height, int _width, String _filepath, int _startX, int _startY, double _moveSpeed) throws FileNotFoundException {
@@ -40,22 +50,43 @@ public class Ship extends DefaultAsset{
 
     public void rotateRight(){
         getImageView().setRotate(getImageView().getRotate() + degreeOfRotation);
+        lastAngle = degreeOfRotation;
         updateRotation(degreeOfRotation, true);
     }
 
     public void rotateLeft(){
         getImageView().setRotate(getImageView().getRotate() - degreeOfRotation);
+        lastAngle = degreeOfRotation;
         updateRotation(degreeOfRotation, false);
     }
 
     public void moveForward(){
-        getImageView().setY(getImageView().getY() - Math.cos(Math.toRadians(getImageView().getRotate())) * getMoveSpeed());
-        getImageView().setX(getImageView().getX() + Math.sin(Math.toRadians(getImageView().getRotate())) * getMoveSpeed());
+        amountLeftToMove = 0.3;
+        currentMoveSpeedX = getImageView().getX() + Math.sin(Math.toRadians(getImageView().getRotate())) * (getMoveSpeed());
+        currentMoveSpeedY = getImageView().getY() - Math.cos(Math.toRadians(getImageView().getRotate())) * (getMoveSpeed());
+        getImageView().setY(currentMoveSpeedY);
+        getImageView().setX(currentMoveSpeedX);
+
+        if(acceleration < 0){
+            acceleration = 0.1;
+        }
+
+        if(acceleration < 2){
+            acceleration = acceleration+0.1;
+        }
     }
 
     public void moveBackwards(){
+        amountLeftToMove = -0.3;
         getImageView().setY(getImageView().getY() + (-1 * ((getImageView().getY() - Math.cos(Math.toRadians(getImageView().getRotate())) * getMoveSpeed()) - getImageView().getY())));
         getImageView().setX(getImageView().getX() + (-1 * ((getImageView().getX() + Math.sin(Math.toRadians(getImageView().getRotate())) * getMoveSpeed()) - getImageView().getX())));
+        if(acceleration > 0){
+            acceleration = -0.1;
+        }
+        if(acceleration > -2){
+            acceleration = acceleration-0.1;
+        }
+
     }
 
     public Projectile fireBasicProjectile() throws FileNotFoundException {
@@ -74,6 +105,32 @@ public class Ship extends DefaultAsset{
 
     public long getTimeSinceLastFiredAdvanced(){
         return timeSinceLastFiredAdvanced;
+    }
+
+    public void onGameTick(){
+        if(amountLeftToMove > 0){
+            getImageView().setY(getImageView().getY() - Math.cos(Math.toRadians(getImageView().getRotate())) * (amountLeftToMove + acceleration));
+            getImageView().setX(getImageView().getX() + Math.sin(Math.toRadians(getImageView().getRotate())) * (amountLeftToMove + acceleration));
+            amountLeftToMove = amountLeftToMove -0.0002;
+            if(acceleration > 0){
+                acceleration = acceleration-0.005;
+            }
+            else{
+                acceleration = 0;
+            }
+
+        } else if (amountLeftToMove < 0) {
+            getImageView().setY(getImageView().getY() - Math.cos(Math.toRadians(getImageView().getRotate())) * (amountLeftToMove + acceleration));
+            getImageView().setX(getImageView().getX() + Math.sin(Math.toRadians(getImageView().getRotate())) * (amountLeftToMove + acceleration));
+            amountLeftToMove = amountLeftToMove +0.0002;
+            if(acceleration < 0){
+                acceleration = acceleration+0.005;
+            }
+            else{
+                acceleration = 0;
+            }
+        }
+
     }
 
 
