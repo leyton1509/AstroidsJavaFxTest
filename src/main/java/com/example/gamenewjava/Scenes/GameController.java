@@ -599,6 +599,9 @@ public class GameController {
                                 removeViews.add(assetInList.getImageView());
                                 removeAssets.add(assetInList);
                                 damageTaken();
+                                if (asset.getHealth() <= 0) {
+                                    return false;
+                                }
                             }
 
                             break;
