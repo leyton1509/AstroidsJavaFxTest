@@ -9,11 +9,11 @@ Survive
 
 Controls:
 
-UP ARROW : Move forward
-DOWN ARROW : Move backward
-LEFT ARROW : Rotate left
-RIGHT ARROW : Rotate right
-SPACE : Shoot basic projectile
-SHIFT : Shoot advanced projectile, has slight cooldown
+| UP ARROW : Move forward |
+| DOWN ARROW : Move backward |
+| LEFT ARROW : Rotate left |
+| RIGHT ARROW : Rotate right | 
+| SPACE : Shoot basic projectile | 
+| SHIFT : Shoot advanced projectile, has slight cooldown | 
 
 My highscore was just about 25,000, so have fun!
