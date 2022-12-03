@@ -68,4 +68,6 @@ public class GraphicInterface {
         healthBarWhite.setY(LEVEL_HEIGHT * 0.95);
     }
 
+
+
 }

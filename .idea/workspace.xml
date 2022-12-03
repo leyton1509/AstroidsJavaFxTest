@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="10a141b0-295e-45e1-b942-d47de3b9e986" name="Changes" comment="Put a lot of the GUI into a class called GraphicalInterface">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/EnemyShip.java" afterDir="false" />
+    <list default="true" id="10a141b0-295e-45e1-b942-d47de3b9e986" name="Changes" comment="Added an enemy ship that tracks user and fires bullets, needs tweaking">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/DefaultAsset.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/DefaultAsset.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/GraphicInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/GraphicInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Scenes/TitleScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Scenes/TitleScreenController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -86,7 +87,7 @@
       <workItem from="1670008644593" duration="776000" />
       <workItem from="1670009429216" duration="86000" />
       <workItem from="1670009522584" duration="13000" />
-      <workItem from="1670009544063" duration="5300000" />
+      <workItem from="1670009544063" duration="14422000" />
     </task>
     <task id="LOCAL-00001" summary="Renamed classes, initial commit, created a title scene">
       <created>1669822735281</created>
@@ -256,7 +257,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670011577420</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Added an enemy ship that tracks user and fires bullets, needs tweaking">
+      <created>1670015271806</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1670015271806</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -274,7 +282,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Removes the bullets once out of bonds but does cause an exception (does not crash)" />
     <MESSAGE value="Added some rocks that are going to serve as the enemy" />
     <MESSAGE value="Rocks now move around the screen and are different colours" />
     <MESSAGE value="Fixed the error of concurrent removing" />
@@ -299,7 +306,8 @@
     <MESSAGE value="New astroids generated now only generate off screen and move inwards" />
     <MESSAGE value="Made the title screen nicer" />
     <MESSAGE value="Put a lot of the GUI into a class called GraphicalInterface" />
-    <option name="LAST_COMMIT_MESSAGE" value="Put a lot of the GUI into a class called GraphicalInterface" />
+    <MESSAGE value="Added an enemy ship that tracks user and fires bullets, needs tweaking" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added an enemy ship that tracks user and fires bullets, needs tweaking" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -82,7 +82,7 @@ public class TitleScreenController {
             astroids = astroidController.generateRandomAstroids(astroidController.getMaxNumberOfAstroids());
             astroidController.setCurrentAmountOfAstroids(astroidController.getCurrentAmountOfAstroids() + astroidController.getMaxNumberOfAstroids());
             System.out.println("Astroid num creation : " + astroidController.getCurrentAmountOfAstroids());
-            es = new EnemyShip("EnemyShip", 75, 75, "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\enemyShip.png", 3, ship, LEVEL_WIDTH, LEVEL_HEIGHT);
+            es = new EnemyShip("EnemyShip", 25, 25, "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\enemyShip.png", 0.3, ship, LEVEL_WIDTH, LEVEL_HEIGHT);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -117,7 +117,7 @@ public class TitleScreenController {
 
     public EventHandler<ActionEvent> returnToTileScreen() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Driver.class.getResource("TitleScreen.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 900, 600);
+        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         Stage stage = new Stage();
         stage.setTitle("Hello!");
         stage.setScene(scene);
@@ -278,6 +278,9 @@ public class TitleScreenController {
 
                         gi.updateScoreText(userScore);
 
+
+
+
                         if (System.currentTimeMillis() > astroidController.getTimeSinceLastAstroidIncrease() + (15 * 1000)) {
                             astroidController.increaseMaxNumberOfAstroids();
                             astroidController.setTimeSinceLastAstroidIncrease(System.currentTimeMillis());
@@ -290,6 +293,15 @@ public class TitleScreenController {
         //}
     }
 
+    public void damageTaken(){
+        if(ship.getHealth() <= 0){
+            gi.getHealthBarRed().setWidth(0);
+        }
+        else{
+            gi.getHealthBarRed().setWidth((int) gi.getHealthBarRed().getWidth() * (ship.getHealth() / ship.getMaxHealth()));
+        }
+    }
+
 
     public boolean collisionDetection(LinkedList<DefaultAsset> assetList, DefaultAsset asset, LinkedList<ImageView> removeViews, LinkedList<DefaultAsset> removeAssets){
         for (DefaultAsset assetInList: assetList){
@@ -298,6 +310,7 @@ public class TitleScreenController {
                     if(asset.getName().equals("Bullet")){
                         if(assetInList.getName().equals("Rock")){
                             assetInList.setHealth(assetInList.getHealth() - asset.getDamage());
+                            damageTaken();
                             if(assetInList.getHealth() <= 0){
                                 removeViews.add(assetInList.getImageView());
                                 removeAssets.add(assetInList);
@@ -310,7 +323,8 @@ public class TitleScreenController {
                     } else if (asset.getName().equals("Ship")) {
                         if(assetInList.getName().equals("Rock")){
                             if(System.currentTimeMillis() > (asset.getTimeLast() + (0.7*1000))){
-                                asset.setHealth(asset.getHealth() - assetInList.getDamage());
+                                asset.decreaseHealth(assetInList.getDamage());
+                                damageTaken();
                                 if(asset.getHealth() <= 0){
                                     return false;
                                 }
@@ -319,11 +333,15 @@ public class TitleScreenController {
                                 assetInList.setMoveSpeed(assetInList.getMoveSpeed() * 2 );
                                 assetInList.getImageView().setRotate( asset.getImageView().getRotate());
 
-                                gi.getHealthBarRed().setWidth(gi.getHealthBarRed().getWidth() * (asset.getHealth() / asset.getMaxHealth()));
 
                                 asset.setTimeLast(System.currentTimeMillis());
 
                             }
+                        } else if (assetInList.getName().equals("EnemyShip")) {
+                            asset.decreaseHealth(assetInList.getDamage());
+                            removeViews.add(assetInList.getImageView());
+                            removeAssets.add(assetInList);
+                            
                         }
                     }
                     else if (asset.getName().equals("Rock")){

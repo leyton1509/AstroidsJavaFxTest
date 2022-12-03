@@ -54,8 +54,12 @@ public class DefaultAsset {
         return maxHealth;
     }
 
-    public void setMaxHealth(double health) {
-        this.maxHealth = health;
+    public void setMaxHealth(double _maxHealth){
+        maxHealth = _maxHealth;
+    }
+
+    public void decreaseHealth(double health) {
+        this.health = this.health - health;
     }
 
     public DefaultAsset(String _name, int _height, int _width, String _filepath, int _startX, int _startY) throws FileNotFoundException {
