@@ -150,9 +150,7 @@ public class AstroidController {
             }
 
         }
-
         Rock rock =  new Rock("Rock", ranSize, ranSize, filepath,ranX,ranY,  0.5);
-
         // Sets the rotation to go into the player view
 
         if(ranX < LEVEL_WIDTH/2 && ranY < LEVEL_HEIGHT / 2){

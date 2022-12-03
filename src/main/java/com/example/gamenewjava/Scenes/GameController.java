@@ -1,5 +1,6 @@
 package com.example.gamenewjava.Scenes;
 
+import com.example.gamenewjava.AssetControllers.HealthKitController;
 import com.example.gamenewjava.Assets.*;
 import com.example.gamenewjava.AssetControllers.AstroidController;
 import com.example.gamenewjava.Driver;
@@ -121,6 +122,11 @@ public class GameController {
     private AstroidController astroidController;
 
     /**
+     * The controller for the Health Kits
+     */
+    private HealthKitController hkController;
+
+    /**
      * Whether to run or not
      */
     private boolean run = true;
@@ -174,6 +180,8 @@ public class GameController {
         // Initialises enemy ship controller
 
         enemyShipC = new EnemyShipController(ship, LEVEL_WIDTH, LEVEL_HEIGHT);
+
+        hkController = new HealthKitController(LEVEL_WIDTH, LEVEL_HEIGHT);
 
         // Adds the assets to the pane
 
@@ -388,7 +396,7 @@ public class GameController {
 
                             // If the bullets or rocks go out of bounds remove them
 
-                            if (asset.getName().equals("Bullet") || asset.getName().equals("Rock") || asset.getName().equals("EnemyBullet")) {
+                            if (asset.getName().equals("Bullet") || asset.getName().equals("Rock") || asset.getName().equals("EnemyBullet") || asset.getName().equals("HealthKit")) {
                                 if (asset.getImageView().getX() < -100 || asset.getImageView().getX() > LEVEL_WIDTH + 100 || asset.getImageView().getY() < -100 || asset.getImageView().getY() > LEVEL_HEIGHT + 100) {
                                     removeViews.add(asset.getImageView());
                                     removeAssets.add(asset);
@@ -474,6 +482,17 @@ public class GameController {
                                 EnemyShip s = enemyShipC.createNewShip();
                                 assetsList.add(s);
                                 newBox.getChildren().add(s.getImageView());
+                            } catch (FileNotFoundException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+
+                        if (System.currentTimeMillis() > hkController.getTimeSinceLastShipIncrease() + 2 * 10000) {
+                            try {
+                                HealthPack hp = hkController.spawnNewHealthKit();
+                                assetsList.add(hp);
+                                newBox.getChildren().add(hp.getImageView());
+                                hkController.setTimeSinceLastShipIncrease(System.currentTimeMillis());
                             } catch (FileNotFoundException e) {
                                 throw new RuntimeException(e);
                             }
@@ -633,6 +652,14 @@ public class GameController {
                                     return false;
                                 }
                             }
+                            else if (assetInList.getName().equals("HealthKit")){
+                                HealthPack hp = (HealthPack) assetInList;
+                                asset.increaseHealth(hp.getHealthIncrease());
+                                damageTaken();
+                                removeViews.add(assetInList.getImageView());
+                                removeAssets.add(assetInList);
+                            }
+
 
                             break;
                         // If two rocks collide use collision circle method

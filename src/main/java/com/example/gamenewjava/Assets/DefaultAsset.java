@@ -127,6 +127,20 @@ public class DefaultAsset {
         this.health = this.health - _health;
     }
 
+
+    /**
+     * @param _health Increase the health by x
+     */
+    public void increaseHealth(double _health) {
+        if(health + _health < maxHealth){
+            health = health + _health;
+
+        }
+        else{
+            health = maxHealth;
+        }
+    }
+
     /**
      * @param _name The name of asset
      * @param _height The height of asset
