@@ -21,6 +21,6 @@ Controls:
 
 | SHIFT : Shoot advanced projectile, has slight cooldown | 
 
-| X : Ultimate, 5 second cooldown |
+| Z : Ultimate, 6 second cooldown |
 
 My highscore was just about 25,000, so have fun!
