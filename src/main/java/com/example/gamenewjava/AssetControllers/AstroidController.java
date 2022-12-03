@@ -1,4 +1,4 @@
-package com.example.gamenewjava;
+package com.example.gamenewjava.AssetControllers;
 
 import com.example.gamenewjava.Assets.Rock;
 import com.example.gamenewjava.Assets.SplitAstroid;

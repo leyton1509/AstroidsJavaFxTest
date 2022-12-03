@@ -19,6 +19,8 @@ public class EnemyShip extends DefaultAsset{
         this.timeSinceLastFire = timeSinceLastFire;
     }
 
+    private final int ranBullet;
+
     public EnemyShip(String _name, int _height, int _width, String _filepath, double _moveSpeed, Ship playerShip, int LEVEL_WIDTH, int LEVEL_HEIGHT) throws FileNotFoundException {
         super(_name, _height, _width, _filepath, 0, 0);
         getRandomStartPosition(LEVEL_WIDTH, LEVEL_HEIGHT);
@@ -27,6 +29,7 @@ public class EnemyShip extends DefaultAsset{
         setHealth(getWidth() * 0.8);
         setDamage(getWidth() * 0.4);
         ship = playerShip;
+        ranBullet = (int) (Math.random() * (3) + 0);
     }
 
     private void getRandomStartPosition(int LEVEL_WIDTH, int LEVEL_HEIGHT){
@@ -104,9 +107,17 @@ public class EnemyShip extends DefaultAsset{
         moveForward();
     }
 
+    public String getShipFilePath(){
+        return switch (ranBullet) {
+            case 1 -> "imgs/enemyBullet.png";
+            case 2 -> "imgs/enemyBullet2.png";
+            default -> "imgs/enemyBullet3.png";
+        };
+    }
+
     public Projectile fireBasicProjectile() throws FileNotFoundException {
         double basicProjectileDamage = 4;
-        return new Projectile("EnemyBullet", 12, 5, "imgs/enemybullet.png", (int) (getImageView().getX() + getImageView().getFitWidth()  / 2), (int) (getImageView().getY() + getImageView().getFitHeight() / 2), getImageView().getRotate(), 0.8, basicProjectileDamage);
+        return new Projectile("EnemyBullet", 12, 5, getShipFilePath(), (int) (getImageView().getX() + getImageView().getFitWidth()  / 2), (int) (getImageView().getY() + getImageView().getFitHeight() / 2), getImageView().getRotate(), 0.8, basicProjectileDamage);
     }
 
 }

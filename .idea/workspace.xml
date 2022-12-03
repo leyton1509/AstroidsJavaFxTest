@@ -4,13 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="10a141b0-295e-45e1-b942-d47de3b9e986" name="Changes" comment="Can now destroy bullets and small rocks are deleted upon impact">
+    <list default="true" id="10a141b0-295e-45e1-b942-d47de3b9e986" name="Changes" comment="Removed hard code file paths">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/imgs/basicbullet.png" beforeDir="false" afterPath="$PROJECT_DIR$/imgs/basicbullet.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/EnemyShip.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/EnemyShip.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Ship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Ship.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/AstroidController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/AstroidController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/EnemyShipController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/EnemyShipController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/AstroidController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/AssetControllers/AstroidController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/EnemyShipController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/AssetControllers/EnemyShipController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/GraphicInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/GUI/GraphicInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Scenes/TitleScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Scenes/TitleScreenController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +92,7 @@
       <workItem from="1670009429216" duration="86000" />
       <workItem from="1670009522584" duration="13000" />
       <workItem from="1670009544063" duration="14454000" />
-      <workItem from="1670065200427" duration="15803000" />
+      <workItem from="1670065200427" duration="18297000" />
     </task>
     <task id="LOCAL-00001" summary="Renamed classes, initial commit, created a title scene">
       <created>1669822735281</created>
@@ -351,7 +353,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670080817131</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="Removed hard code file paths">
+      <created>1670081104469</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1670081104469</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -369,7 +378,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added a score to the game" />
     <MESSAGE value="Program now ends and shows the users core returns to title screen" />
     <MESSAGE value="Seperated out get astroid filepath to its own method" />
     <MESSAGE value="Removed the two lines of code which stopped generating as the stage.close() covers this" />
@@ -394,7 +402,8 @@
     <MESSAGE value="Fixced glitch between health bar" />
     <MESSAGE value="PNGS" />
     <MESSAGE value="Can now destroy bullets and small rocks are deleted upon impact" />
-    <option name="LAST_COMMIT_MESSAGE" value="Can now destroy bullets and small rocks are deleted upon impact" />
+    <MESSAGE value="Removed hard code file paths" />
+    <option name="LAST_COMMIT_MESSAGE" value="Removed hard code file paths" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

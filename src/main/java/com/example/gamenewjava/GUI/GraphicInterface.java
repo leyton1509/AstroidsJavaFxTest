@@ -1,4 +1,4 @@
-package com.example.gamenewjava;
+package com.example.gamenewjava.GUI;
 
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;

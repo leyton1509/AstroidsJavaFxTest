@@ -1,16 +1,15 @@
 package com.example.gamenewjava.Scenes;
 
 import com.example.gamenewjava.Assets.*;
-import com.example.gamenewjava.AstroidController;
+import com.example.gamenewjava.AssetControllers.AstroidController;
 import com.example.gamenewjava.Driver;
-import com.example.gamenewjava.EnemyShipController;
-import com.example.gamenewjava.GraphicInterface;
+import com.example.gamenewjava.AssetControllers.EnemyShipController;
+import com.example.gamenewjava.GUI.GraphicInterface;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,10 +18,6 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -372,6 +367,7 @@ public class TitleScreenController {
                                 removeViews.add(assetInList.getImageView());
                                 removeAssets.add(assetInList);
                                 userScore = userScore + assetInList.getWidth();
+                                enemyShipC.shipDestroyed();
                             }
                             removeViews.add(asset.getImageView());
                             removeAssets.add(asset);

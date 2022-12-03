@@ -1,4 +1,4 @@
-package com.example.gamenewjava;
+package com.example.gamenewjava.AssetControllers;
 
 import com.example.gamenewjava.Assets.EnemyShip;
 import com.example.gamenewjava.Assets.Ship;
@@ -32,12 +32,22 @@ public class EnemyShipController {
     public int getMaxNumberOfEnemyShips() {
         return maxNumberOfEnemyShips;
     }
+    public String getShipFilePath(){
+        int ranShip = (int) (Math.random() * (4) + 0);
+        return switch (ranShip) {
+            case 1 -> "imgs/enemyShip.png";
+            case 2 -> "imgs/enemyShip1.png";
+            case 3 -> "imgs/enemyShip2.png";
+            default -> "imgs/enemyShip3.png";
+        };
+    }
+
 
     public EnemyShip createNewShip() throws FileNotFoundException {
         currentAmountOfEnemyShips++;
         Random r = new Random();
         double randomSpeed = currentMoveSpeed + (currentMaxMoveSpeed - currentMoveSpeed) * r.nextDouble();
-        return new EnemyShip("EnemyShip", 25, 25, "imgs/enemyShip.png", randomSpeed, playerShip, LEVEL_WIDTH, LEVEL_HEIGHT);
+        return new EnemyShip("EnemyShip", 25, 25, getShipFilePath(), randomSpeed, playerShip, LEVEL_WIDTH, LEVEL_HEIGHT);
 
     }
 
@@ -54,8 +64,8 @@ public class EnemyShipController {
     }
 
     public void increaseMaxShips(){
-        if(maxNumberOfEnemyShips < 9){
-            currentMaxMoveSpeed = currentMaxMoveSpeed + 0.1;
+        if(maxNumberOfEnemyShips < 7){
+            currentMaxMoveSpeed = currentMaxMoveSpeed + 0.05;
             maxNumberOfEnemyShips++;
         }
 
