@@ -150,19 +150,26 @@ public class AstroidController {
 
     public ArrayList<SplitAstroid> checkForSplitAstroid(Rock astroid) throws FileNotFoundException {
         ArrayList<SplitAstroid> splitRocks = new ArrayList<>();
+        double astroidX = astroid.getImageView().getX();
+        double astroidY = astroid.getImageView().getY();
+        if((astroid.getSize() - (int)astroid.getSize() / minSplitAstroidSize * 4)   > minSplitAstroidSize){
+            splitRocks.add(generateSplitAstroid(270.0, (int) (astroidX - astroid.getSize()/3),(int) astroidY - astroid.getSize()/3, (int) (astroid.getSize() * 0.5), 0.4, astroid.getFilePath()));
+            splitRocks.add(generateSplitAstroid(90, (int) astroidX + astroid.getSize()/3, (int) astroidY + astroid.getSize()/3, (int) (astroid.getSize() * 0.5) , 0.4, astroid.getFilePath()));
+            splitRocks.add(generateSplitAstroid(0, (int) (astroidX - astroid.getSize()/3),(int) astroidY + astroid.getSize()/3, (int) (astroid.getSize() * 0.5), 0.4, astroid.getFilePath()));
+            splitRocks.add(generateSplitAstroid(180, (int) astroidX + astroid.getSize()/3, (int) astroidY - astroid.getSize()/3, (int) (astroid.getSize() * 0.5) , 0.4, astroid.getFilePath()));
 
-        if(((int)astroid.getSize() / minSplitAstroidSize * 4)   > 0){
+        } else if ((astroid.getSize() - (int)astroid.getSize() / minSplitAstroidSize * 3)   > minSplitAstroidSize-5) {
+            splitRocks.add(generateSplitAstroid(240, (int) (astroidX - astroid.getSize()/2),(int) astroidY - astroid.getSize()/2, (int) (astroid.getSize() * 0.6), 0.3, astroid.getFilePath()));
+            splitRocks.add(generateSplitAstroid(120, (int) astroidX + astroid.getSize()/2, (int) astroidY + astroid.getSize()/2, (int) (astroid.getSize() * 0.6) , 0.3, astroid.getFilePath()));
+            splitRocks.add(generateSplitAstroid(0, (int) (astroidX - astroid.getSize()/2),(int) astroidY + astroid.getSize()/2, (int) (astroid.getSize() * 0.6), 0.3, astroid.getFilePath()));
 
-            double astroidX = astroid.getImageView().getX();
-            double astroidY = astroid.getImageView().getY();
-
-            double speed = 0.4;
-
-            splitRocks.add(generateSplitAstroid(270.0, (int) (astroidX - astroid.getSize()/4),(int) astroidY - astroid.getSize()/4, (int) (astroid.getSize() * 0.8), speed, astroid.getFilePath()));
-            splitRocks.add(generateSplitAstroid(90, (int) astroidX + astroid.getSize()/4, (int) astroidY + astroid.getSize()/4, (int) (astroid.getSize() * 0.8) , speed, astroid.getFilePath()));
-
+        }else if ((astroid.getSize() - (int)astroid.getSize() / minSplitAstroidSize * 2)   > minSplitAstroidSize-10) {
+            splitRocks.add(generateSplitAstroid(240, (int) (astroidX - astroid.getSize()/2),(int) astroidY - astroid.getSize()/2, (int) (astroid.getSize() * 0.7), 0.2, astroid.getFilePath()));
+            splitRocks.add(generateSplitAstroid(120, (int) astroidX + astroid.getSize()/2, (int) astroidY + astroid.getSize()/2, (int) (astroid.getSize() * 0.7) , 0.2, astroid.getFilePath()));
+            splitRocks.add(generateSplitAstroid(0, (int) (astroidX - astroid.getSize()/2),(int) astroidY + astroid.getSize()/2, (int) (astroid.getSize() * 0.7), 0.2, astroid.getFilePath()));
 
         }
+
 
         return splitRocks;
     }

@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="10a141b0-295e-45e1-b942-d47de3b9e986" name="Changes" comment="Ship now moves with gravity">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/SplitAstroid.java" afterDir="false" />
+    <list default="true" id="10a141b0-295e-45e1-b942-d47de3b9e986" name="Changes" comment="Added the splitting of astroids, need to work on collision between them">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Rock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Rock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Ship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Ship.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/AstroidController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/AstroidController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Scenes/TitleScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Scenes/TitleScreenController.java" afterDir="false" />
     </list>
@@ -90,7 +88,7 @@
       <workItem from="1670009429216" duration="86000" />
       <workItem from="1670009522584" duration="13000" />
       <workItem from="1670009544063" duration="14454000" />
-      <workItem from="1670065200427" duration="10325000" />
+      <workItem from="1670065200427" duration="11380000" />
     </task>
     <task id="LOCAL-00001" summary="Renamed classes, initial commit, created a title scene">
       <created>1669822735281</created>
@@ -302,7 +300,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670071496647</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Added the splitting of astroids, need to work on collision between them">
+      <created>1670075605131</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1670075605131</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -320,7 +325,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Collision detection working for bullets" />
     <MESSAGE value="Ship now takes damage from astroids relative to the size of the astroid" />
     <MESSAGE value="Has a working health bar" />
     <MESSAGE value="Added an advanced missle thats fired every 1.5 seconds" />
@@ -345,7 +349,8 @@
     <MESSAGE value="Added collision for enemy bullet and can now shoot enemy ship" />
     <MESSAGE value="added an enemy ship controller which generates enemy ships" />
     <MESSAGE value="Ship now moves with gravity" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ship now moves with gravity" />
+    <MESSAGE value="Added the splitting of astroids, need to work on collision between them" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added the splitting of astroids, need to work on collision between them" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 public class Rock extends DefaultAsset {
 
     private final int size;
-
     private final String filepath;
 
     public Rock(String _name, int _height, int _width, String _filepath, int _startX, int _startY,double _moveSpeed) throws FileNotFoundException {

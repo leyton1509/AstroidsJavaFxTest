@@ -403,7 +403,6 @@ public class TitleScreenController {
                     }
                     else if (asset.getName().equals("Rock") ){
                         if(assetInList.getName().equals("Rock")){
-
                             double angleRock1 = asset.getImageView().getRotate();
                             double angleRock2 = assetInList.getImageView().getRotate();
                             double speedRock1 = asset.getMoveSpeed();
