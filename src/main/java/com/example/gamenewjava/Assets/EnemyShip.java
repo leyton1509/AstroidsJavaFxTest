@@ -24,8 +24,8 @@ public class EnemyShip extends DefaultAsset{
         getRandomStartPosition(LEVEL_WIDTH, LEVEL_HEIGHT);
         getImageView().setRotate((Math.random() * (360 - (-360)) + (-360)));
         setMoveSpeed(_moveSpeed);
-        setHealth(getWidth() * 4);
-        setDamage(getWidth() * 5);
+        setHealth(getWidth() * 0.8);
+        setDamage(getWidth() * 0.4);
         ship = playerShip;
     }
 
@@ -105,7 +105,7 @@ public class EnemyShip extends DefaultAsset{
     }
 
     public Projectile fireBasicProjectile() throws FileNotFoundException {
-        double basicProjectileDamage = 40;
+        double basicProjectileDamage = 4;
         return new Projectile("EnemyBullet", 10, 5, "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\basicbullet.png", (int) (getImageView().getX() + getImageView().getFitWidth()  / 2), (int) (getImageView().getY() + getImageView().getFitHeight() / 2), getImageView().getRotate(), 0.8, basicProjectileDamage);
     }
 

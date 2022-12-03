@@ -8,8 +8,8 @@ public class Rock extends DefaultAsset {
         super(_name, _height, _width, _filepath, _startX, _startY);
         getImageView().setRotate((Math.random() * (360 - (-360)) + (-360)));
         setMoveSpeed(_moveSpeed);
-        setHealth(getWidth() * 4);
-        setDamage(getWidth() * 5);
+        setHealth(getWidth() * 0.4);
+        setDamage(getWidth() * 0.5);
     }
 
     public void moveForward(){

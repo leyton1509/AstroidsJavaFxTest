@@ -13,8 +13,8 @@ public class Ship extends DefaultAsset{
 
     public Ship(String _name, int _height, int _width, String _filepath, int _startX, int _startY, double _moveSpeed) throws FileNotFoundException {
         super(_name, _height, _width, _filepath, _startX, _startY,_moveSpeed);
-        setHealth(1000);
-        setMaxHealth(1000);
+        setHealth(100);
+        setMaxHealth(100);
     }
 
 
@@ -59,12 +59,12 @@ public class Ship extends DefaultAsset{
     }
 
     public Projectile fireBasicProjectile() throws FileNotFoundException {
-        double basicProjectileDamage = 40;
+        double basicProjectileDamage = 4;
         return new Projectile("Bullet", 10, 5, "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\basicbullet.png", (int) (getImageView().getX() + getImageView().getFitWidth()  / 2), (int) (getImageView().getY() + getImageView().getFitHeight() / 2), getImageView().getRotate(), 3, basicProjectileDamage);
     }
 
     public Projectile fireAdvancedProjectile() throws FileNotFoundException {
-        double advancedProjectileDamage = 120;
+        double advancedProjectileDamage = 12;
         return new Projectile("Bullet", 25, 12, "L:\\Novus\\Code\\JFX\\GameNewJava\\imgs\\advancedbullet.png", (int) (getImageView().getX() + getImageView().getFitWidth()  / 2), (int) (getImageView().getY() + getImageView().getFitHeight() / 2), getImageView().getRotate(), 1.5, advancedProjectileDamage);
     }
 

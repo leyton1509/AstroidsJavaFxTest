@@ -309,8 +309,7 @@ public class TitleScreenController {
                 if(asset.getImageView().intersects(assetInList.getImageView().getBoundsInLocal())){
                     if(asset.getName().equals("Bullet")){
                         if(assetInList.getName().equals("Rock")){
-                            assetInList.setHealth(assetInList.getHealth() - asset.getDamage());
-                            damageTaken();
+                            assetInList.decreaseHealth(asset.getDamage());
                             if(assetInList.getHealth() <= 0){
                                 removeViews.add(assetInList.getImageView());
                                 removeAssets.add(assetInList);
@@ -341,7 +340,8 @@ public class TitleScreenController {
                             asset.decreaseHealth(assetInList.getDamage());
                             removeViews.add(assetInList.getImageView());
                             removeAssets.add(assetInList);
-                            
+                            damageTaken();
+
                         }
                     }
                     else if (asset.getName().equals("Rock")){
