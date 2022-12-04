@@ -4,13 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="10a141b0-295e-45e1-b942-d47de3b9e986" name="Changes" comment="Added bosses to the game">
+    <list default="true" id="10a141b0-295e-45e1-b942-d47de3b9e986" name="Changes" comment="Added javadoc to bosses">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/AssetControllers/PowerUpsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/PowerUps/BasePowerUp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/PowerUps/TripleBullets.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/AssetControllers/BossController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/AssetControllers/BossController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Bosses/BossOne.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Bosses/BossOne.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Bosses/BossShip.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Bosses/BossShip.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Bosses/BossThree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Bosses/BossThree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Bosses/BossTwo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Bosses/BossTwo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Ship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Ship.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Scenes/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Scenes/GameController.java" afterDir="false" />
     </list>
@@ -97,14 +95,7 @@
       <workItem from="1670009522584" duration="13000" />
       <workItem from="1670009544063" duration="14454000" />
       <workItem from="1670065200427" duration="39011000" />
-      <workItem from="1670151324050" duration="15273000" />
-    </task>
-    <task id="LOCAL-00012" summary="Adds new astroids to the map once one clears, need to do it so it doesnt just spawn in the middle">
-      <created>1669925209466</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1669925209466</updated>
+      <workItem from="1670151324050" duration="16099000" />
     </task>
     <task id="LOCAL-00013" summary="Will now add one more astroid every 15 seconds">
       <created>1669925614781</created>
@@ -442,7 +433,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670165456306</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="Added javadoc to bosses">
+      <created>1670167135661</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1670167135661</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -460,7 +458,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Better collisionm between ship and astroid" />
     <MESSAGE value="Fixced glitch between health bar" />
     <MESSAGE value="PNGS" />
     <MESSAGE value="Can now destroy bullets and small rocks are deleted upon impact" />
@@ -485,7 +482,8 @@
     <MESSAGE value="Added boolean values to whether to generate new enemies or not" />
     <MESSAGE value="Changed the values of when the ship goes out of bounds as the ship is now smaller" />
     <MESSAGE value="Added bosses to the game" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added bosses to the game" />
+    <MESSAGE value="Added javadoc to bosses" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added javadoc to bosses" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

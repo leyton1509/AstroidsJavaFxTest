@@ -907,7 +907,6 @@ public class GameController {
                             break;
                     }
 
-
                 }
             }
         }
