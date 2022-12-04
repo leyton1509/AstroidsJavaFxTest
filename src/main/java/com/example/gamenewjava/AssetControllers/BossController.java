@@ -156,9 +156,9 @@ public class BossController {
      */
     public int getShipDamage(int selectWhichBossToUse){
         return switch (selectWhichBossToUse) {
-            case 1 -> 10;
-            case 2 -> 12;
-            case 3 -> 13;
+            case 1 -> 9;
+            case 2 -> 10;
+            case 3 -> 11;
             default -> 11;
         };
     }

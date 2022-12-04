@@ -38,21 +38,21 @@ public class BossTwo extends BossShip{
         int y = (int) (getImageView().getY() + (getImageView().getFitHeight() / 2.5));
 
         for (int i = 60; i < 300; i = i+8) {
-            projs.add(new Projectile("EnemyBullet", 20, 8, filePath, x, y, i, 2.5, 12));
+            projs.add(new Projectile("EnemyBullet", 20, 8, filePath, x, y, i, 2.5, 8));
         }
 
         x = (int) (getImageView().getX() + (getImageView().getFitWidth()  / 2) + (getImageView().getFitWidth() *0.19) );
 
         y = (int) (getImageView().getY() + (getImageView().getFitHeight() / 1.7));
 
-        projs.add(new Projectile("EnemyBullet", 20, 8, filePath, x, y, getAngleToPlayer(x,y), 6, 15));
-        projs.add(new Projectile("EnemyBullet", 20, 8, filePath, x, y, getAngleToPlayer(x,y), 6, 15));
+        projs.add(new Projectile("EnemyBullet", 20, 8, filePath, x, y, getAngleToPlayer(x,y), 5, 8));
+        projs.add(new Projectile("EnemyBullet", 20, 8, filePath, x, y, getAngleToPlayer(x,y), 5, 8));
 
 
         x = (int) (getImageView().getX() + (getImageView().getFitWidth()  / 2) - (getImageView().getFitWidth() *0.19));
 
-        projs.add(new Projectile("EnemyBullet", 20, 8, filePath, x, y, getAngleToPlayer(x,y), 6, 4));
-        projs.add(new Projectile("EnemyBullet", 20, 8, filePath, x, y, getAngleToPlayer(x,y), 6, 4));
+        projs.add(new Projectile("EnemyBullet", 20, 8, filePath, x, y, getAngleToPlayer(x,y), 5, 4));
+        projs.add(new Projectile("EnemyBullet", 20, 8, filePath, x, y, getAngleToPlayer(x,y), 5, 4));
 
     }
 }
