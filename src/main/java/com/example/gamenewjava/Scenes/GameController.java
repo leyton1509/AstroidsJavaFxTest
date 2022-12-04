@@ -1,15 +1,13 @@
 package com.example.gamenewjava.Scenes;
 
-import com.example.gamenewjava.AssetControllers.BossController;
-import com.example.gamenewjava.AssetControllers.HealthKitController;
+import com.example.gamenewjava.AssetControllers.*;
 import com.example.gamenewjava.Assets.*;
-import com.example.gamenewjava.AssetControllers.AstroidController;
 import com.example.gamenewjava.Assets.Bosses.BossOne;
 import com.example.gamenewjava.Assets.Bosses.BossShip;
 import com.example.gamenewjava.Assets.Bosses.BossThree;
 import com.example.gamenewjava.Assets.Bosses.BossTwo;
+import com.example.gamenewjava.Assets.PowerUps.BasePowerUp;
 import com.example.gamenewjava.Driver;
-import com.example.gamenewjava.AssetControllers.EnemyShipController;
 import com.example.gamenewjava.GUI.GraphicInterface;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
@@ -150,6 +148,11 @@ public class GameController {
      * The enemy ships controller
      */
     private EnemyShipController enemyShipC;
+
+    /**
+     * The power ups ships controller
+     */
+    private PowerUpsController powerUpsController = new PowerUpsController(LEVEL_WIDTH, LEVEL_HEIGHT);
 
     /**
      * An arraylist of split astroids
@@ -447,7 +450,7 @@ public class GameController {
 
                             // If the bullets or rocks go out of bounds remove them
 
-                            if (asset.getName().equals("Bullet") || asset.getName().equals("Rock") || asset.getName().equals("EnemyBullet") || asset.getName().equals("HealthKit")) {
+                            if (asset.getName().equals("Bullet") || asset.getName().equals("Rock") || asset.getName().equals("EnemyBullet") || asset.getName().equals("HealthKit") || asset.getName().equals("PowerUp")) {
                                 if (asset.getImageView().getX() < -100 || asset.getImageView().getX() > LEVEL_WIDTH + 100 || asset.getImageView().getY() < -100 || asset.getImageView().getY() > LEVEL_HEIGHT + 100) {
                                     removeViews.add(asset.getImageView());
                                     removeAssets.add(asset);
@@ -529,6 +532,22 @@ public class GameController {
                             asset.onGameTick();
                         }
 
+                        if(ship.isTripleBullet()){
+                            if (System.currentTimeMillis() > (ship.getTimeSinceBasicBulletFired() + (0.25 * 1000))) {
+                                try {
+                                    ArrayList<Projectile> asp = ship.tripleFire();
+                                    for (Projectile proj : asp) {
+                                        assetsList.add(proj);
+                                        newBox.getChildren().add(proj.getImageView());
+                                    }
+                                } catch (FileNotFoundException e) {
+                                    throw new RuntimeException(e);
+                                }
+                                ship.setTimeSinceBasicBulletFired(System.currentTimeMillis());
+                            }
+                        }
+
+
                         // Creates a list for removing any counted split rocks
                         ArrayList<Projectile> removeBossProjectiles = new ArrayList<>();
 
@@ -595,6 +614,17 @@ public class GameController {
                                 assetsList.add(hp);
                                 newBox.getChildren().add(hp.getImageView());
                                 hkController.setTimeSinceLastHealthKit(System.currentTimeMillis());
+                            } catch (FileNotFoundException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+
+                        if (System.currentTimeMillis() > powerUpsController.getTimeSinceLastPowerUp() + (35 * 1000)) {
+                            try {
+                                BasePowerUp pu = powerUpsController.spawnNewPowerUp();
+                                assetsList.add(pu);
+                                newBox.getChildren().add(pu.getImageView());
+                                powerUpsController.setTimeSinceLastPowerUp(System.currentTimeMillis());
                             } catch (FileNotFoundException e) {
                                 throw new RuntimeException(e);
                             }
@@ -867,6 +897,13 @@ public class GameController {
                                 removeViews.add(assetInList.getImageView());
                                 removeAssets.add(assetInList);
                             }
+                            else if (assetInList.getName().equals("PowerUp")){
+                                BasePowerUp bpu = (BasePowerUp) assetInList;
+                                ship.updatePowerUp(bpu);
+                                removeViews.add(assetInList.getImageView());
+                                removeAssets.add(assetInList);
+                            }
+
                             else if (assetInList.getName().equals("BossShip")){
                                 if (System.currentTimeMillis() > (asset.getTimeLast() + (0.4 * 1000))) {
                                     asset.decreaseHealth(15);

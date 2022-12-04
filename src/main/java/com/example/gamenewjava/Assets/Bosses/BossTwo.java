@@ -51,8 +51,8 @@ public class BossTwo extends BossShip{
 
         x = (int) (getImageView().getX() + (getImageView().getFitWidth()  / 2) - (getImageView().getFitWidth() *0.19));
 
-        projs.add(new Projectile("EnemyBullet", 20, 8, filePath, x, y, getAngleToPlayer(x,y), 6, 15));
-        projs.add(new Projectile("EnemyBullet", 20, 8, filePath, x, y, getAngleToPlayer(x,y), 6, 15));
+        projs.add(new Projectile("EnemyBullet", 20, 8, filePath, x, y, getAngleToPlayer(x,y), 6, 11));
+        projs.add(new Projectile("EnemyBullet", 20, 8, filePath, x, y, getAngleToPlayer(x,y), 6, 11));
 
     }
 }

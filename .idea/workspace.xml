@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="10a141b0-295e-45e1-b942-d47de3b9e986" name="Changes" comment="Started adding functionality for power ups but ship health needed changing">
+    <list default="true" id="10a141b0-295e-45e1-b942-d47de3b9e986" name="Changes" comment="Score dissapears when boss spawns, more balance tweaking">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/AssetControllers/EnemyShipController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/AssetControllers/EnemyShipController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/AssetControllers/HealthKitController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/AssetControllers/HealthKitController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/AssetControllers/PowerUpsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/AssetControllers/PowerUpsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Bosses/BossTwo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Bosses/BossTwo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/PowerUps/BasePowerUp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/PowerUps/BasePowerUp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/PowerUps/TripleBullets.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/PowerUps/TripleBullets.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Ship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Ship.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Scenes/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Scenes/GameController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -94,14 +96,7 @@
       <workItem from="1670009522584" duration="13000" />
       <workItem from="1670009544063" duration="14454000" />
       <workItem from="1670065200427" duration="39011000" />
-      <workItem from="1670151324050" duration="17792000" />
-    </task>
-    <task id="LOCAL-00014" summary="Creates a pop up upon death with the users score">
-      <created>1669928181973</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1669928181973</updated>
+      <workItem from="1670151324050" duration="21291000" />
     </task>
     <task id="LOCAL-00015" summary="Added a score to the game">
       <created>1669939093078</created>
@@ -439,7 +434,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670167971549</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="Score dissapears when boss spawns, more balance tweaking">
+      <created>1670169733732</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1670169733732</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -457,7 +459,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="PNGS" />
     <MESSAGE value="Can now destroy bullets and small rocks are deleted upon impact" />
     <MESSAGE value="Removed hard code file paths" />
     <MESSAGE value="Added new ships and bullet colours, tweaked the game diff" />
@@ -482,7 +483,8 @@
     <MESSAGE value="Added bosses to the game" />
     <MESSAGE value="Added javadoc to bosses" />
     <MESSAGE value="Started adding functionality for power ups but ship health needed changing" />
-    <option name="LAST_COMMIT_MESSAGE" value="Started adding functionality for power ups but ship health needed changing" />
+    <MESSAGE value="Score dissapears when boss spawns, more balance tweaking" />
+    <option name="LAST_COMMIT_MESSAGE" value="Score dissapears when boss spawns, more balance tweaking" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

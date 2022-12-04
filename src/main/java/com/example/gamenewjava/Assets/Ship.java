@@ -1,5 +1,7 @@
 package com.example.gamenewjava.Assets;
 
+import com.example.gamenewjava.Assets.PowerUps.BasePowerUp;
+
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
@@ -45,6 +47,20 @@ public class Ship extends DefaultAsset{
      * The time since last basic fired
      */
     private long timeSinceBasicBulletFired = System.currentTimeMillis() - 30 * 1000;
+
+    /**
+     * Whether triple bullets is active
+     */
+    private boolean tripleBullet = false;
+
+    /**
+     * The time since last basic fired
+     */
+    private long powerUpTimeActivation = -1;
+
+
+
+
 
 
     /**
@@ -210,6 +226,41 @@ public class Ship extends DefaultAsset{
             }
         }
 
+        if(powerUpTimeActivation != -1){
+            if(powerUpTimeActivation > 0){
+                powerUpTimeActivation = (long) (powerUpTimeActivation - 10);
+            }
+            else{
+                tripleBullet = false;
+                powerUpTimeActivation = -1;
+            }
+        }
+
+
+    }
+
+    public boolean isTripleBullet() {
+        return tripleBullet;
+    }
+
+    public void setTripleBullet(boolean tripleBullet) {
+        this.tripleBullet = tripleBullet;
+    }
+
+    public void updatePowerUp(BasePowerUp bpu){
+        if(bpu.getPowerUpName().equals("TripleBullet")){
+            tripleBullet = true;
+            powerUpTimeActivation = 10 * 1000;
+        }
+    }
+
+    public ArrayList<Projectile> tripleFire() throws FileNotFoundException {
+        ArrayList<Projectile> projs = new ArrayList<>();
+        projs.add(new Projectile("Bullet", 10, 4, "imgs/basicbulletult.png", (int) (getImageView().getX() + getImageView().getFitWidth()  / 2), (int) (getImageView().getY() + getImageView().getFitHeight() / 2), getImageView().getRotate() , 1.5, 5));
+        projs.add(new Projectile("Bullet", 10, 4, "imgs/basicbulletult.png", (int) (getImageView().getX() + getImageView().getFitWidth()  / 2), (int) (getImageView().getY() + getImageView().getFitHeight() / 2), getImageView().getRotate() - 30 , 1.5, 5));
+        projs.add(new Projectile("Bullet", 10, 4, "imgs/basicbulletult.png", (int) (getImageView().getX() + getImageView().getFitWidth()  / 2), (int) (getImageView().getY() + getImageView().getFitHeight() / 2), getImageView().getRotate() + 30 , 1.5, 5));
+
+        return  projs;
     }
 
     /**

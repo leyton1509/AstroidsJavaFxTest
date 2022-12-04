@@ -24,21 +24,21 @@ public class PowerUpsController {
     }
 
 
-    private long timeSinceLastHealthPack = System.currentTimeMillis() + 15000;
+    private long timeSinceLastPowerUp = System.currentTimeMillis() + 15000;
 
 
     /**
-     * @return Gets the time since last health pack generated.
+     * @return Gets the time since last power pack generated.
      */
-    public long getTimeSinceLastShipIncrease() {
-        return timeSinceLastHealthPack;
+    public long getTimeSinceLastPowerUp() {
+        return timeSinceLastPowerUp;
     }
 
     /**
-     * @param _timeSinceLastHealthPack The time to set the time since
+     * @param _timeSinceLastPowerUp The time to set the time since
      */
-    public void setTimeSinceLastShipIncrease(long _timeSinceLastHealthPack) {
-        this.timeSinceLastHealthPack = _timeSinceLastHealthPack;
+    public void setTimeSinceLastPowerUp(long _timeSinceLastPowerUp) {
+        this.timeSinceLastPowerUp = _timeSinceLastPowerUp;
     }
 
     public BasePowerUp spawnNewPowerUp() throws FileNotFoundException {
@@ -80,8 +80,5 @@ public class PowerUpsController {
         return pu;
     }
 
-    public void effect(){
-
-    }
 
     }
