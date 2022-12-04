@@ -532,6 +532,8 @@ public class GameController {
                             asset.onGameTick();
                         }
 
+                        // if triple bullet is active then fire 3 projectiles every 0.25 seconds
+
                         if(ship.isTripleBullet()){
                             if (System.currentTimeMillis() > (ship.getTimeSinceBasicBulletFired() + (0.25 * 1000))) {
                                 try {
@@ -547,7 +549,6 @@ public class GameController {
                             }
                         }
 
-
                         // Creates a list for removing any counted split rocks
                         ArrayList<Projectile> removeBossProjectiles = new ArrayList<>();
 
@@ -560,8 +561,6 @@ public class GameController {
                         }
 
                         bossProjectiles.removeAll(removeBossProjectiles);
-
-
 
                         // Creates a list for removing any counted split rocks
                         ArrayList<Rock> removeAstroidList = new ArrayList<>();
@@ -608,6 +607,8 @@ public class GameController {
                             }
                         }
 
+                        // Spawns new med kit every 25 s
+
                         if (System.currentTimeMillis() > hkController.getTimeSinceLastHealthKit() + (25 * 1000)) {
                             try {
                                 HealthPack hp = hkController.spawnNewHealthKit();
@@ -619,6 +620,8 @@ public class GameController {
                             }
                         }
 
+                        // Spawns new power ups every 35 s
+
                         if (System.currentTimeMillis() > powerUpsController.getTimeSinceLastPowerUp() + (35 * 1000)) {
                             try {
                                 BasePowerUp pu = powerUpsController.spawnNewPowerUp();
@@ -629,8 +632,6 @@ public class GameController {
                                 throw new RuntimeException(e);
                             }
                         }
-
-
 
                         // Updates user score
 
@@ -678,7 +679,6 @@ public class GameController {
                         }
 
                         // Spawns the second boss after 190 seconds
-
 
                         if(System.currentTimeMillis() > bossController.getTimeCreated() + (190 * 1000) && !secondBossSpawned && firstBossKilled){
                             BossShip bs;

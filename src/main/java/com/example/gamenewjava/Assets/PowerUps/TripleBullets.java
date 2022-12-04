@@ -2,6 +2,9 @@ package com.example.gamenewjava.Assets.PowerUps;
 
 import java.io.FileNotFoundException;
 
+/**
+ * Triple bullets power up
+ */
 public class TripleBullets extends BasePowerUp {
 
     /**
@@ -16,7 +19,7 @@ public class TripleBullets extends BasePowerUp {
      */
 
     public TripleBullets(String _name, int _height, int _width, String _filepath, int _startX, int _startY, double _moveSpeed) throws FileNotFoundException {
-        super(_name, _height, _width, _filepath, _startX, _startY, _moveSpeed, "TripleBullet", 10);
+        super(_name, _height, _width, _filepath, _startX, _startY, _moveSpeed, "TripleBullet");
     }
 
 

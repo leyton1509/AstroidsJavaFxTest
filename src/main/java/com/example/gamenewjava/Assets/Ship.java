@@ -54,12 +54,9 @@ public class Ship extends DefaultAsset{
     private boolean tripleBullet = false;
 
     /**
-     * The time since last basic fired
+     * The time of power up duration
      */
     private long powerUpTimeActivation = -1;
-
-
-
 
 
 
@@ -226,6 +223,8 @@ public class Ship extends DefaultAsset{
             }
         }
 
+        // Decreases the power up duration
+
         if(powerUpTimeActivation != -1){
             if(powerUpTimeActivation > 0){
                 powerUpTimeActivation = (long) (powerUpTimeActivation - 10);
@@ -239,13 +238,13 @@ public class Ship extends DefaultAsset{
 
     }
 
+    /**
+     * @return Whether power up is active
+     */
     public boolean isTripleBullet() {
         return tripleBullet;
     }
 
-    public void setTripleBullet(boolean tripleBullet) {
-        this.tripleBullet = tripleBullet;
-    }
 
     public void updatePowerUp(BasePowerUp bpu){
         if(bpu.getPowerUpName().equals("TripleBullet")){

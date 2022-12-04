@@ -18,12 +18,19 @@ public class PowerUpsController {
     private final int LEVEL_HEIGHT;
 
 
+    /**
+     * @param width Width
+     * @param height Height
+     */
     public PowerUpsController(int width, int height) {
         LEVEL_WIDTH = width;
         LEVEL_HEIGHT = height;
     }
 
 
+    /**
+     * Time since last power up generated
+     */
     private long timeSinceLastPowerUp = System.currentTimeMillis() + 15000;
 
 
@@ -41,6 +48,10 @@ public class PowerUpsController {
         this.timeSinceLastPowerUp = _timeSinceLastPowerUp;
     }
 
+    /**
+     * @return A power up, spawns it in out of view
+     * @throws FileNotFoundException e
+     */
     public BasePowerUp spawnNewPowerUp() throws FileNotFoundException {
         int ranX;
         int ranY;
