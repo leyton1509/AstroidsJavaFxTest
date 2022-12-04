@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="10a141b0-295e-45e1-b942-d47de3b9e986" name="Changes" comment="Added power ups to the game">
+    <list default="true" id="10a141b0-295e-45e1-b942-d47de3b9e986" name="Changes" comment="All javadoc and tweaked, working game">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/AssetControllers/PowerUpsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/AssetControllers/PowerUpsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/PowerUps/BasePowerUp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/PowerUps/BasePowerUp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/PowerUps/TripleBullets.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/PowerUps/TripleBullets.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Ship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Ship.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Scenes/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Scenes/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Bosses/BossTwo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/gamenewjava/Assets/Bosses/BossTwo.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,21 +91,7 @@
       <workItem from="1670009522584" duration="13000" />
       <workItem from="1670009544063" duration="14454000" />
       <workItem from="1670065200427" duration="39011000" />
-      <workItem from="1670151324050" duration="21568000" />
-    </task>
-    <task id="LOCAL-00016" summary="Program now ends and shows the users core returns to title screen">
-      <created>1669984166165</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1669984166165</updated>
-    </task>
-    <task id="LOCAL-00017" summary="Seperated out get astroid filepath to its own method">
-      <created>1669997876946</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1669997876946</updated>
+      <workItem from="1670151324050" duration="22182000" />
     </task>
     <task id="LOCAL-00018" summary="Removed the two lines of code which stopped generating as the stage.close() covers this">
       <created>1669998043350</created>
@@ -440,7 +422,21 @@
       <option name="project" value="LOCAL" />
       <updated>1670173159876</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="All javadoc and tweaked, working game">
+      <created>1670173442206</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1670173442206</updated>
+    </task>
+    <task id="LOCAL-00066" summary="All javadoc and tweaked, working game">
+      <created>1670173465935</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1670173465935</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -458,7 +454,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Removed hard code file paths" />
     <MESSAGE value="Added new ships and bullet colours, tweaked the game diff" />
     <MESSAGE value="Added javadoc to all files, tweaks to make game better" />
     <MESSAGE value="Fixed all warnings, removed unused classes" />
@@ -483,7 +478,8 @@
     <MESSAGE value="Started adding functionality for power ups but ship health needed changing" />
     <MESSAGE value="Score dissapears when boss spawns, more balance tweaking" />
     <MESSAGE value="Added power ups to the game" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added power ups to the game" />
+    <MESSAGE value="All javadoc and tweaked, working game" />
+    <option name="LAST_COMMIT_MESSAGE" value="All javadoc and tweaked, working game" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
