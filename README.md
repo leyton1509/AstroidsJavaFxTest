@@ -7,6 +7,10 @@ GOAL:
 
 Survive
 
+There is 3 bosses in the game as the time goes on, see if you can beat them all
+
+Health packs and Power Ups are used by crashing into them
+
 Controls:
 
 | UP ARROW : Move forward | 
@@ -23,4 +27,3 @@ Controls:
 
 | Z : Ultimate, 6 second cooldown |
 
-My highscore was just about 25,000, so have fun!
