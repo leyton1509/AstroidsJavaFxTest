@@ -59,8 +59,8 @@ public class Ship extends DefaultAsset{
      */
     public Ship(String _name, int _height, int _width, String _filepath, int _startX, int _startY, double _moveSpeed) throws FileNotFoundException {
         super(_name, _height, _width, _filepath, _startX, _startY,_moveSpeed);
-        setHealth(100);
-        setMaxHealth(100);
+        setHealth(150);
+        setMaxHealth(150);
     }
 
 

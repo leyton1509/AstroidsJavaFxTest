@@ -102,9 +102,9 @@ public class EnemyShipController {
      * @throws FileNotFoundException e
      */
     public EnemyShip createNewShip() throws FileNotFoundException {
-        currentAmountOfEnemyShips++;
         Random r = new Random();
         double randomSpeed = currentMoveSpeed + (currentMaxMoveSpeed - currentMoveSpeed) * r.nextDouble();
+        currentAmountOfEnemyShips++;
         return new EnemyShip("EnemyShip", 35, 35, getShipFilePath(), randomSpeed, playerShip, LEVEL_WIDTH, LEVEL_HEIGHT);
 
     }
@@ -134,7 +134,7 @@ public class EnemyShipController {
      * Increases number of ship as long as it's less than max ships
      */
     public void increaseMaxShips(){
-        if(maxNumberOfEnemyShips < 7){
+        if(maxNumberOfEnemyShips < 9 && shouldGenerateShips){
             currentMaxMoveSpeed = currentMaxMoveSpeed + 0.05;
             maxNumberOfEnemyShips++;
         }

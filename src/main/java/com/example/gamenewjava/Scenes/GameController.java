@@ -1,8 +1,13 @@
 package com.example.gamenewjava.Scenes;
 
+import com.example.gamenewjava.AssetControllers.BossController;
 import com.example.gamenewjava.AssetControllers.HealthKitController;
 import com.example.gamenewjava.Assets.*;
 import com.example.gamenewjava.AssetControllers.AstroidController;
+import com.example.gamenewjava.Assets.Bosses.BossOne;
+import com.example.gamenewjava.Assets.Bosses.BossShip;
+import com.example.gamenewjava.Assets.Bosses.BossThree;
+import com.example.gamenewjava.Assets.Bosses.BossTwo;
 import com.example.gamenewjava.Driver;
 import com.example.gamenewjava.AssetControllers.EnemyShipController;
 import com.example.gamenewjava.GUI.GraphicInterface;
@@ -137,6 +142,11 @@ public class GameController {
     private final GraphicInterface gi = new GraphicInterface(LEVEL_WIDTH,LEVEL_HEIGHT);
 
     /**
+     * The graphical interface overlay components
+     */
+    private final BossController bossController = new BossController(LEVEL_WIDTH,LEVEL_HEIGHT);
+
+    /**
      * The enemy ships controller
      */
     private EnemyShipController enemyShipC;
@@ -145,6 +155,47 @@ public class GameController {
      * An arraylist of split astroids
      */
     private final ArrayList<Rock> splitAstroids = new ArrayList<>();
+
+    /**
+     * An arraylist of boss projectiles
+     */
+    private final ArrayList<Projectile> bossProjectiles = new ArrayList<>();
+
+
+    /**
+     * Check to see if first boss has been spawned
+     */
+    private boolean firstBossSpawned = false;
+
+
+    /**
+     * Check to see if first boss killed
+     */
+    private boolean firstBossKilled = false;
+
+    /**
+     * Check to see if second boss has been spawned
+     */
+    private boolean secondBossSpawned = false;
+
+
+    /**
+     * Check to see if second boss killed
+     */
+    private boolean secondBossKilled = false;
+
+    /**
+     * Check to see if third boss killed
+     */
+    private boolean thirdBossSpawned = false;
+
+
+    /**
+     * Check to see if third boss killed
+     */
+    private boolean thirdBossKilled = false;
+
+
 
     /**
      * Exits the stage
@@ -437,10 +488,62 @@ public class GameController {
                                 }
                             }
 
+                            if(asset.getName().equals("BossShip")){
+                                assert asset instanceof BossShip;
+                                BossShip bossShip = (BossShip) asset;
+                                if(bossShip.getBossNumber() == 1){
+                                    BossOne bs = (BossOne) asset;
+                                    if(System.currentTimeMillis() > bs.getTimeSinceLastFire() + 1.2 * 1000 && bs.isShouldFire()){
+                                        try {
+                                            bs.shoot(bossProjectiles);
+                                        } catch (FileNotFoundException e) {
+                                            throw new RuntimeException(e);
+                                        }
+                                        bs.setTimeSinceLastFire(System.currentTimeMillis());
+                                    }
+                                }
+                                if(bossShip.getBossNumber() == 2){
+                                    BossTwo bs = (BossTwo) asset;
+                                    if(System.currentTimeMillis() > bs.getTimeSinceLastFire() + 0.8 * 1000 && bs.isShouldFire()){
+                                        try {
+                                            bs.shoot(bossProjectiles);
+                                        } catch (FileNotFoundException e) {
+                                            throw new RuntimeException(e);
+                                        }
+                                        bs.setTimeSinceLastFire(System.currentTimeMillis());
+                                    }
+                                }
+                                if(bossShip.getBossNumber() == 3){
+                                    BossThree bs = (BossThree) asset;
+                                    if(System.currentTimeMillis() > bs.getTimeSinceLastFire() + 1000 && bs.isShouldFire()){
+                                        try {
+                                            bs.shoot(bossProjectiles);
+                                        } catch (FileNotFoundException e) {
+                                            throw new RuntimeException(e);
+                                        }
+                                        bs.setTimeSinceLastFire(System.currentTimeMillis());
+                                    }
+                                }
+
+
+                            }
                             // runs the game tick of that class
                             asset.onGameTick();
-
                         }
+
+                        // Creates a list for removing any counted split rocks
+                        ArrayList<Projectile> removeBossProjectiles = new ArrayList<>();
+
+                        // Adds the rocks to the scene and removes them
+
+                        for(Projectile pr : bossProjectiles) {
+                            assetsList.add(pr);
+                            newBox.getChildren().addAll(pr.getImageView());
+                            removeBossProjectiles.add(pr);
+                        }
+
+                        bossProjectiles.removeAll(removeBossProjectiles);
+
 
 
                         // Creates a list for removing any counted split rocks
@@ -479,6 +582,7 @@ public class GameController {
                         // If an enemy ship needs to be created, create it
                         if (enemyShipC.getCurrentAmountOfEnemyShips() < enemyShipC.getMaxNumberOfEnemyShips() && enemyShipC.isShouldGenerateShips()) {
                             try {
+
                                 EnemyShip s = enemyShipC.createNewShip();
                                 assetsList.add(s);
                                 newBox.getChildren().add(s.getImageView());
@@ -498,6 +602,8 @@ public class GameController {
                             }
                         }
 
+
+
                         // Updates user score
 
                         gi.updateScoreText(userScore);
@@ -509,9 +615,70 @@ public class GameController {
                             astroidController.setTimeSinceLastAstroidIncrease(System.currentTimeMillis());
                         }
 
-                        if (System.currentTimeMillis() > enemyShipC.getTimeSinceLastShipIncrease() + (10 * 1000)) {
+                        if (System.currentTimeMillis() > enemyShipC.getTimeSinceLastShipIncrease() + (20 * 1000)) {
                             enemyShipC.increaseMaxShips();
                             enemyShipC.setTimeSinceLastShipIncrease(System.currentTimeMillis());
+
+
+                        }
+
+                        if(System.currentTimeMillis() > bossController.getTimeCreated() + (50 * 1000) && !firstBossSpawned){
+                            BossOne bs;
+                            try {
+                                bs = bossController.createBossShipOne();
+                            } catch (FileNotFoundException e) {
+                                throw new RuntimeException(e);
+                            }
+                            assetsList.add(bs);
+                            newBox.getChildren().add(bs.getImageView());
+                            firstBossSpawned = true;
+                            astroidController.setShouldGenerateAsteroids(false);
+                            enemyShipC.setShouldGenerateShips(false);
+                        }
+
+                        if(firstBossKilled && !astroidController.isShouldGenerateAsteroids()){
+                            astroidController.setShouldGenerateAsteroids(true);
+                            enemyShipC.setShouldGenerateShips(true);
+
+                        }
+
+
+                        if(System.currentTimeMillis() > bossController.getTimeCreated() + (190 * 1000) && !secondBossSpawned){
+                            BossShip bs;
+                            try {
+                                bs = bossController.createBossShipTwo(ship);
+                            } catch (FileNotFoundException e) {
+                                throw new RuntimeException(e);
+                            }
+                            assetsList.add(bs);
+                            newBox.getChildren().add(bs.getImageView());
+                            secondBossSpawned = true;
+                            astroidController.setShouldGenerateAsteroids(false);
+                            enemyShipC.setShouldGenerateShips(false);
+                        }
+
+                        if(secondBossKilled && !astroidController.isShouldGenerateAsteroids()){
+                            astroidController.setShouldGenerateAsteroids(true);
+                            enemyShipC.setShouldGenerateShips(true);
+                        }
+
+                        if(System.currentTimeMillis() > bossController.getTimeCreated() + (390 * 1000) && !thirdBossSpawned){
+                            BossShip bs;
+                            try {
+                                bs = bossController.createBossShipThree(ship);
+                            } catch (FileNotFoundException e) {
+                                throw new RuntimeException(e);
+                            }
+                            assetsList.add(bs);
+                            newBox.getChildren().add(bs.getImageView());
+                            thirdBossSpawned = true;
+                            astroidController.setShouldGenerateAsteroids(false);
+                            enemyShipC.setShouldGenerateShips(false);
+                        }
+
+                        if(thirdBossKilled && !astroidController.isShouldGenerateAsteroids()){
+                            astroidController.setShouldGenerateAsteroids(true);
+                            enemyShipC.setShouldGenerateShips(true);
                         }
 
                         lastUpdate = currentNanoTime;
@@ -607,7 +774,32 @@ public class GameController {
                                     removeViews.add(assetInList.getImageView());
                                     removeAssets.add(assetInList);
                                 }
+                                case "BossShip" -> {
+                                    assetInList.decreaseHealth(asset.getDamage());
+                                    if (assetInList.getHealth() <= 0) {
+                                        removeViews.add(assetInList.getImageView());
+                                        removeAssets.add(assetInList);
+
+                                        BossShip bs = (BossShip) assetInList;
+                                        if(bs.getBossNumber() == 1){
+                                            firstBossKilled = true;
+                                            userScore = userScore + 3000;
+                                        }else if(bs.getBossNumber() == 2){
+                                            secondBossKilled = true;
+                                            userScore = userScore + 5000;
+                                        }
+                                        else if(bs.getBossNumber() == 3){
+                                            thirdBossKilled = true;
+                                            userScore = userScore + 10000;
+                                        }
+
+                                    }
+                                    removeViews.add(asset.getImageView());
+                                    removeAssets.add(asset);
+                                }
                             }
+
+
                             // If it's the ship
                             break;
                         case "Ship":
@@ -617,7 +809,7 @@ public class GameController {
                                 // Takes damage
                                 // returns false if dead
                                 // Sets the rock on a new collision
-                                if (System.currentTimeMillis() > (asset.getTimeLast() + (0.7 * 1000))) {
+                                if (System.currentTimeMillis() > (asset.getTimeLast() + (0.5 * 1000))) {
 
                                     asset.decreaseHealth(assetInList.getDamage());
                                     damageTaken();
@@ -659,6 +851,24 @@ public class GameController {
                                 removeViews.add(assetInList.getImageView());
                                 removeAssets.add(assetInList);
                             }
+                            else if (assetInList.getName().equals("BossShip")){
+                                if (System.currentTimeMillis() > (asset.getTimeLast() + (0.4 * 1000))) {
+                                    asset.decreaseHealth(15);
+                                    damageTaken();
+                                    if (asset.getHealth() <= 0) {
+                                        return false;
+                                    }
+                                    double angleOfCollisionRad = Math.atan2(ship.getImageView().getY() - assetInList.getImageView().getY(), ship.getImageView().getX() - assetInList.getImageView().getX());
+                                    angleOfCollisionRad += Math.PI / 2.0;
+                                    double angleOfCollision = Math.toDegrees(angleOfCollisionRad);
+                                    if (angleOfCollision < 0) {
+                                        angleOfCollision += 360;
+                                    }
+                                    ship.getImageView().setRotate(angleOfCollision);
+                                    asset.setTimeLast(System.currentTimeMillis());
+                                }
+
+                            }
 
 
                             break;
@@ -667,11 +877,19 @@ public class GameController {
                             if (assetInList.getName().equals("Rock")) {
                                 circleCollision((Rock) asset, (Rock) assetInList);
                             }
+                            else if(assetInList.getName().equals("BossShip")){
+                                removeViews.add(asset.getImageView());
+                                removeAssets.add(asset);
+                            }
                             break;
                         // If two rocks collide use collision circle method
                         case "SplitRock":
                             if (assetInList.getName().equals("SplitRock") || assetInList.getName().equals("Rock")) {
                                 circleCollision((Rock) asset, (Rock) assetInList);
+                            }
+                            else if(assetInList.getName().equals("BossShip")){
+                                removeViews.add(asset.getImageView());
+                                removeAssets.add(asset);
                             }
                             break;
                     }

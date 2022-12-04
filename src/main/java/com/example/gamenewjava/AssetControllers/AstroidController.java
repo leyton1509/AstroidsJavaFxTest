@@ -57,7 +57,7 @@ public class AstroidController {
      * Increase the max number of astroids
      */
     public void increaseMaxNumberOfAstroids(){
-        if(maxNumberOfAstroids < 30){
+        if(maxNumberOfAstroids < 30 && shouldGenerateAsteroids){
             maxNumberOfAstroids++;
         }
 
