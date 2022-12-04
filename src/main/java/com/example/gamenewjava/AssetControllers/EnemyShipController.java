@@ -130,6 +130,10 @@ public class EnemyShipController {
         currentAmountOfEnemyShips--;
     }
 
+    public void setMaxNumberOfEnemyShips(int maxNumberOfEnemyShips) {
+        this.maxNumberOfEnemyShips = maxNumberOfEnemyShips;
+    }
+
     /**
      * Increases number of ship as long as it's less than max ships
      */
@@ -138,7 +142,6 @@ public class EnemyShipController {
             currentMaxMoveSpeed = currentMaxMoveSpeed + 0.05;
             maxNumberOfEnemyShips++;
         }
-
     }
 
 

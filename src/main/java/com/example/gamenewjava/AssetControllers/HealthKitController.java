@@ -30,14 +30,14 @@ public class HealthKitController {
     /**
      * @return Gets the time since last health pack generated.
      */
-    public long getTimeSinceLastShipIncrease() {
+    public long getTimeSinceLastHealthKit() {
         return timeSinceLastHealthPack;
     }
 
     /**
      * @param _timeSinceLastHealthPack The time to set the time since
      */
-    public void setTimeSinceLastShipIncrease(long _timeSinceLastHealthPack) {
+    public void setTimeSinceLastHealthKit(long _timeSinceLastHealthPack) {
         this.timeSinceLastHealthPack = _timeSinceLastHealthPack;
     }
 

@@ -524,8 +524,6 @@ public class GameController {
                                         bs.setTimeSinceLastFire(System.currentTimeMillis());
                                     }
                                 }
-
-
                             }
                             // runs the game tick of that class
                             asset.onGameTick();
@@ -591,12 +589,12 @@ public class GameController {
                             }
                         }
 
-                        if (System.currentTimeMillis() > hkController.getTimeSinceLastShipIncrease() + 2 * 10000) {
+                        if (System.currentTimeMillis() > hkController.getTimeSinceLastHealthKit() + (25 * 1000)) {
                             try {
                                 HealthPack hp = hkController.spawnNewHealthKit();
                                 assetsList.add(hp);
                                 newBox.getChildren().add(hp.getImageView());
-                                hkController.setTimeSinceLastShipIncrease(System.currentTimeMillis());
+                                hkController.setTimeSinceLastHealthKit(System.currentTimeMillis());
                             } catch (FileNotFoundException e) {
                                 throw new RuntimeException(e);
                             }
@@ -615,7 +613,7 @@ public class GameController {
                             astroidController.setTimeSinceLastAstroidIncrease(System.currentTimeMillis());
                         }
 
-                        if (System.currentTimeMillis() > enemyShipC.getTimeSinceLastShipIncrease() + (20 * 1000)) {
+                        if (System.currentTimeMillis() > enemyShipC.getTimeSinceLastShipIncrease() + (25 * 1000)) {
                             enemyShipC.increaseMaxShips();
                             enemyShipC.setTimeSinceLastShipIncrease(System.currentTimeMillis());
 
@@ -634,11 +632,13 @@ public class GameController {
                             } catch (FileNotFoundException e) {
                                 throw new RuntimeException(e);
                             }
+                            enemyShipC.setMaxNumberOfEnemyShips(3);
                             assetsList.add(bs);
                             newBox.getChildren().add(bs.getImageView());
                             firstBossSpawned = true;
                             astroidController.setShouldGenerateAsteroids(false);
                             enemyShipC.setShouldGenerateShips(false);
+                            gi.getUserScoreText().setVisible(false);
                         }
 
                         // Sets the generators back one once boss is dead
@@ -662,6 +662,7 @@ public class GameController {
                             secondBossSpawned = true;
                             astroidController.setShouldGenerateAsteroids(false);
                             enemyShipC.setShouldGenerateShips(false);
+                            gi.getUserScoreText().setVisible(false);
                         }
 
                         // Sets the generators back one once boss is dead
@@ -685,6 +686,7 @@ public class GameController {
                             thirdBossSpawned = true;
                             astroidController.setShouldGenerateAsteroids(false);
                             enemyShipC.setShouldGenerateShips(false);
+                            gi.getUserScoreText().setVisible(false);
                         }
 
                         // Sets the generators back one once boss is dead
@@ -792,7 +794,8 @@ public class GameController {
                                     if (assetInList.getHealth() <= 0) {
                                         removeViews.add(assetInList.getImageView());
                                         removeAssets.add(assetInList);
-
+                                        enemyShipC.setMaxNumberOfEnemyShips(3);
+                                        gi.getUserScoreText().setVisible(true);
                                         BossShip bs = (BossShip) assetInList;
                                         if(bs.getBossNumber() == 1){
                                             firstBossKilled = true;
