@@ -49,6 +49,11 @@ public class BossController {
     }
 
 
+    /**
+     * Creates a boss ship
+     * @return Boss ship one
+     * @throws FileNotFoundException e
+     */
     public BossOne createBossShipOne() throws FileNotFoundException {
         int bossNum = 1;
         String filepath = getShipFilePath(bossNum);
@@ -60,6 +65,12 @@ public class BossController {
         return bs;
     }
 
+    /**
+     * Creates a boss ship
+     * @return Boss ship two
+     * @param _playerShip the ship of the player
+     * @throws FileNotFoundException e
+     */
     public BossTwo createBossShipTwo(Ship _playerShip) throws FileNotFoundException {
         int bossNum = 2;
         String filepath = getShipFilePath(bossNum);
@@ -71,6 +82,12 @@ public class BossController {
         return bs;
     }
 
+    /**
+     * Creates a boss ship
+     * @return Boss ship three
+     * @param _playerShip the ship of the player
+     * @throws FileNotFoundException e
+     */
     public BossThree createBossShipThree(Ship _playerShip) throws FileNotFoundException {
         int bossNum = 3;
         String filepath = getShipFilePath(bossNum);
@@ -94,6 +111,10 @@ public class BossController {
         };
     }
 
+    /**
+     * @param selectWhichBossToUse The boss to use
+     * @return The height of the ship
+     */
     public int getShipHeight(int selectWhichBossToUse){
         return switch (selectWhichBossToUse) {
             case 1 -> 170;
@@ -103,6 +124,10 @@ public class BossController {
         };
     }
 
+    /**
+     * @param selectWhichBossToUse The boss to use
+     * @return The width of the ship
+     */
     public int getShipWidth(int selectWhichBossToUse){
         return switch (selectWhichBossToUse) {
             case 1 -> 573;
@@ -112,6 +137,10 @@ public class BossController {
         };
     }
 
+    /**
+     * @param selectWhichBossToUse The boss to use
+     * @return The health of the ship
+     */
     public int getShipHealth(int selectWhichBossToUse){
         return switch (selectWhichBossToUse) {
             case 1 -> 2500;
@@ -121,6 +150,10 @@ public class BossController {
         };
     }
 
+    /**
+     * @param selectWhichBossToUse The boss to use
+     * @return The damage of the ship
+     */
     public int getShipDamage(int selectWhichBossToUse){
         return switch (selectWhichBossToUse) {
             case 1 -> 10;

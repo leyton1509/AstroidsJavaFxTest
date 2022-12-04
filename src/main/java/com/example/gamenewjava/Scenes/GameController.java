@@ -619,10 +619,15 @@ public class GameController {
                             enemyShipC.increaseMaxShips();
                             enemyShipC.setTimeSinceLastShipIncrease(System.currentTimeMillis());
 
-
                         }
 
+                        // Spawns the first boss after 50 seconds
+
                         if(System.currentTimeMillis() > bossController.getTimeCreated() + (50 * 1000) && !firstBossSpawned){
+                            // Loads the boss ship
+                            // Adds the ship to the array lists and scene
+                            // Sets spawned to true
+                            // And turns off generating new astroids and ships
                             BossOne bs;
                             try {
                                 bs = bossController.createBossShipOne();
@@ -636,14 +641,16 @@ public class GameController {
                             enemyShipC.setShouldGenerateShips(false);
                         }
 
-                        if(firstBossKilled && !astroidController.isShouldGenerateAsteroids()){
+                        // Sets the generators back one once boss is dead
+                        if(firstBossKilled && !astroidController.isShouldGenerateAsteroids() && !secondBossSpawned && !thirdBossSpawned){
                             astroidController.setShouldGenerateAsteroids(true);
                             enemyShipC.setShouldGenerateShips(true);
-
                         }
 
+                        // Spawns the second boss after 190 seconds
 
-                        if(System.currentTimeMillis() > bossController.getTimeCreated() + (190 * 1000) && !secondBossSpawned){
+
+                        if(System.currentTimeMillis() > bossController.getTimeCreated() + (190 * 1000) && !secondBossSpawned && firstBossKilled){
                             BossShip bs;
                             try {
                                 bs = bossController.createBossShipTwo(ship);
@@ -657,12 +664,16 @@ public class GameController {
                             enemyShipC.setShouldGenerateShips(false);
                         }
 
-                        if(secondBossKilled && !astroidController.isShouldGenerateAsteroids()){
+                        // Sets the generators back one once boss is dead
+
+                        if(secondBossKilled && !astroidController.isShouldGenerateAsteroids() && !thirdBossSpawned){
                             astroidController.setShouldGenerateAsteroids(true);
                             enemyShipC.setShouldGenerateShips(true);
                         }
 
-                        if(System.currentTimeMillis() > bossController.getTimeCreated() + (390 * 1000) && !thirdBossSpawned){
+                        // Spawns the third boss after 390 seconds
+
+                        if(System.currentTimeMillis() > bossController.getTimeCreated() + (390 * 1000) && !thirdBossSpawned && secondBossKilled){
                             BossShip bs;
                             try {
                                 bs = bossController.createBossShipThree(ship);
@@ -675,6 +686,8 @@ public class GameController {
                             astroidController.setShouldGenerateAsteroids(false);
                             enemyShipC.setShouldGenerateShips(false);
                         }
+
+                        // Sets the generators back one once boss is dead
 
                         if(thirdBossKilled && !astroidController.isShouldGenerateAsteroids()){
                             astroidController.setShouldGenerateAsteroids(true);

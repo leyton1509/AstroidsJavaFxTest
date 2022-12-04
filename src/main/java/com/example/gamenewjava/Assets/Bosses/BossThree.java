@@ -6,6 +6,9 @@ import com.example.gamenewjava.Assets.Ship;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
+/**
+ * Boss three
+ */
 public class BossThree extends BossShip{
 
     /**
@@ -23,6 +26,11 @@ public class BossThree extends BossShip{
         super(_name, _height, _width, _filepath, _moveSpeed, health, damage, _bossNumber, _playerShip);
     }
 
+    /**
+     * Adds the projectiles to the fire projectiles array list
+     * @param projs The array of projectiles to add to
+     * @throws FileNotFoundException e
+     */
     public void shoot(ArrayList<Projectile> projs) throws FileNotFoundException {
         String filePath = getShipFilePath();
 
